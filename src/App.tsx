@@ -1,5 +1,11 @@
+import Counter from "./examples/use-reducer/Counter";
+
 function App() {
-  return null;
+  return (
+    <main className="container">
+      <Counter />
+    </main>
+  );
 }
 
 export default App;
