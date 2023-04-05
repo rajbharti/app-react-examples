@@ -1,0 +1,80 @@
+@import "normalize.css";
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 20px;
+}
+
+button,
+input {
+  margin: 2px 6px 2px 0;
+  padding: 2px 4px;
+  min-width: 30px;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding-left: 16px;
+}
+li {
+  margin: 4px 0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.tags {
+  margin: 10px 0;
+
+  button {
+    margin-right: 10px;
+    text-decoration: none;
+    background-color: #eee;
+    padding: 4px 6px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    &.active-tag,
+    &:hover {
+      background-color: #e3dc9f;
+      border-color: #bbb;
+    }
+  }
+}
+
+.inline-tags span {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: normal;
+  color: rgb(33, 84, 237);
+  padding: 2px;
+}
+
+.todos {
+  li {
+    cursor: default;
+  }
+
+  .filter {
+    margin: 4px 0 8px;
+    font-size: 14px;
+
+    button {
+      text-transform: capitalize;
+    }
+
+    .active-filter {
+      background-color: antiquewhite;
+    }
+  }
+
+  .completed {
+    text-decoration: line-through;
+  }
+}
