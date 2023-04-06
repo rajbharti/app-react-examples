@@ -28,7 +28,7 @@ hr {
   margin: 10px 0;
 }
 
-.tags {
+.tags-filter {
   margin: 10px 0;
 
   button {
@@ -42,18 +42,18 @@ hr {
 
     &.active-tag,
     &:hover {
-      background-color: #e3dc9f;
-      border-color: #bbb;
+      color: white;
+      background-color: deepskyblue;
+      border-color: deepskyblue;
     }
   }
 }
 
-.inline-tags span {
-  display: inline-block;
-  font-size: 13px;
+.tags {
+  font-family: monospace;
+  font-size: 14px;
   font-weight: normal;
   color: rgb(33, 84, 237);
-  padding: 2px;
 }
 
 .todos {

@@ -13,28 +13,26 @@ export default function Filter({
   setActiveFilter,
   todos,
 }: PropsInterface) {
-  function handleClick(selectedFilter: FilterType) {
+  function handleClick(clickedFilter: FilterType) {
     setActiveFilter((prevState: FilterType) =>
-      prevState === selectedFilter ? null : selectedFilter
+      prevState === clickedFilter ? null : clickedFilter
     );
   }
 
-  function getFilterCount(selectedFilter: FilterType) {
-    return selectedFilter
-      ? todos.filter(FILTERS_LOGIC[selectedFilter]).length
-      : 0;
+  function getFilterCount(filter: FilterType) {
+    return filter ? todos.filter(FILTERS_LOGIC[filter]).length : 0;
   }
 
   return (
     <div className="filter">
       Filter:{" "}
-      {Object.keys(FILTERS_LOGIC).map((key: string) => (
+      {Object.keys(FILTERS_LOGIC).map((filter: string) => (
         <button
-          key={key.toString()}
-          onClick={() => handleClick(key as FilterType)}
-          className={clsx(activeFilter === key && "active-filter")}
+          key={filter.toString()}
+          onClick={() => handleClick(filter as FilterType)}
+          className={clsx(activeFilter === filter && "active-filter")}
         >
-          {key} ({getFilterCount(key as FilterType)})
+          {filter} ({getFilterCount(filter as FilterType)})
         </button>
       ))}
     </div>

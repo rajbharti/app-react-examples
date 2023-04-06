@@ -8,14 +8,14 @@ import type {
 interface PropsInterface {
   formOperationType: FormOperationType;
   dispatch: React.Dispatch<ActionInterface>;
-  onToggleForm?: (toggle: boolean) => void;
+  setToggleForm?: (toggle: boolean) => void;
   task?: TodoInterface;
 }
 
 export default function AddTodo({
   formOperationType,
   dispatch,
-  onToggleForm,
+  setToggleForm,
   task,
 }: PropsInterface) {
   const [text, setText] = useState(
@@ -59,7 +59,7 @@ export default function AddTodo({
   }
 
   function handleCancel() {
-    onToggleForm?.(false);
+    setToggleForm?.(false);
   }
 
   return (

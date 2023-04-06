@@ -36,7 +36,7 @@ export default function Todo({ task, dispatch }: PropsInterface) {
         <Form
           dispatch={dispatch}
           formOperationType="edit"
-          onToggleForm={setToggleForm}
+          setToggleForm={setToggleForm}
           task={task}
         />
       ) : (

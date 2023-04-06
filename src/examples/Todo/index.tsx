@@ -1,21 +1,20 @@
 import { useReducer } from "react";
 import { reducer, initialState } from "./reducer";
+import type { TagsInterface } from "../../types";
 import Form from "./Form";
 import Todos from "./Todos";
+import Tags from "../../components/Tags";
 
-export default function TodoApp() {
+export default function TodoApp({ tags }: TagsInterface) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <div className="todos">
+    <section className="todos">
       <h3>
-        Todo{" "}
-        <span className="inline-tags">
-          <span>#useState</span> <span>#useReducer</span>
-        </span>
+        Todo <Tags tags={tags} />
       </h3>
       <Form formOperationType="add" dispatch={dispatch} />
       <Todos todos={state} dispatch={dispatch} />
-    </div>
+    </section>
   );
 }

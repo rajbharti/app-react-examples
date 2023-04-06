@@ -1,4 +1,6 @@
 import { useReducer } from "react";
+import type { TagsInterface } from "../types";
+import Tags from "../components/Tags";
 
 interface StateInterface {
   count: number;
@@ -25,16 +27,13 @@ function reducer(
   }
 }
 
-export default function Counter() {
+export default function Counter({ tags }: TagsInterface) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <>
       <h3>
-        Counter{" "}
-        <span className="inline-tags">
-          <span>#useReducer</span>
-        </span>
+        Counter <Tags tags={tags} />
       </h3>
       <div>
         Count: {state.count}{" "}
