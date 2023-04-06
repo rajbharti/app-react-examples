@@ -1,9 +1,9 @@
-export type TagsFilterType = string;
+export type TagType = string;
 
 export interface TagsInterface {
-  tags: TagsFilterType[];
+  tags: TagType[];
 }
 
 export type CompType = (props: TagsInterface) => JSX.Element;
 
-export type ActiveTagsFilterType = TagsFilterType | null;
+export type ActiveTagType = TagType | null;

@@ -1,7 +1,7 @@
-import type { CompType } from "./types";
+import type { TagType, CompType } from "./types";
 import { mapTagToComps } from "./App";
 
-export function getComponentTags(Comp: CompType) {
+export function getCompTags(Comp: CompType): TagType[] {
   const list = [];
 
   for (const tag in mapTagToComps) {
@@ -11,4 +11,8 @@ export function getComponentTags(Comp: CompType) {
   }
 
   return list;
+}
+
+export function getActiveTagCompsCount(tag: TagType) {
+  return mapTagToComps[tag]?.length || 0;
 }

@@ -1,9 +1,7 @@
-import type { TagsFilterType, TagsInterface } from "../types";
+import type { TagType, TagsInterface } from "../types";
 
 export default function Tags({ tags }: TagsInterface) {
   return tags.length > 0 ? (
-    <span className="tags">
-      {tags.map((tag: TagsFilterType) => `#${tag} `)}
-    </span>
+    <span className="tags">{tags.map((tag: TagType) => `#${tag} `)}</span>
   ) : null;
 }

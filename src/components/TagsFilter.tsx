@@ -1,46 +1,37 @@
 import clsx from "clsx";
-import type { TagsFilterType, ActiveTagsFilterType } from "../types";
-import { mapTagToComps } from "../App";
+import type { TagType, ActiveTagType } from "../types";
+import { getActiveTagCompsCount } from "../utils";
 
 interface TagsPropsInterface {
-  activeTag: ActiveTagsFilterType;
-  setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagsFilterType>>;
+  tags: TagType[];
+  activeTag: ActiveTagType;
+  setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
 }
 
-const tags: Set<TagsFilterType> = new Set([
-  "useState",
-  "useEffect",
-  "useReducer",
-  "useRef",
-  "useMemo",
-]);
-
 export default function TagsFilter({
+  tags,
   activeTag,
   setActiveTag,
 }: TagsPropsInterface) {
-  function handleTagClick(clickedTag: TagsFilterType) {
-    setActiveTag((prevState: ActiveTagsFilterType) => {
+  function handleTagClick(clickedTag: TagType) {
+    setActiveTag((prevState: ActiveTagType) => {
       return prevState === clickedTag ? null : clickedTag;
     });
   }
 
-  function getTagsCount(tag: TagsFilterType) {
-    return mapTagToComps[tag]?.length || 0;
-  }
-
   return (
     <div className="tags-filter">
-      Tags:{" "}
-      {[...tags].map((tag: TagsFilterType) => (
+      <b>Tags</b>:{" "}
+      {tags.map((tag: TagType) => (
         <button
           key={tag.toString()}
           onClick={() => handleTagClick(tag)}
           className={clsx(activeTag === tag && "active-tag")}
         >
-          {tag} ({getTagsCount(tag)})
+          {tag} ({getActiveTagCompsCount(tag)})
         </button>
       ))}
+      <hr />
     </div>
   );
 }

@@ -40,11 +40,16 @@ export default function Todo({ task, dispatch }: PropsInterface) {
           task={task}
         />
       ) : (
-        <div className={clsx(isCompleted && "completed")}>
-          <span onClick={() => handleToggle(id)}>{text}</span>{" "}
+        <>
+          <span
+            onClick={() => handleToggle(id)}
+            className={clsx(isCompleted && "completed")}
+          >
+            {text}
+          </span>{" "}
           <button onClick={() => handleEdit()}>Edit</button>
           <button onClick={() => handleDelete(id)}>Delete</button>
-        </div>
+        </>
       )}
     </li>
   );
