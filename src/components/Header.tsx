@@ -1,15 +1,13 @@
-import type { TagType } from "../types";
 import Tags from "./Tags";
 
 interface PropsInterface {
   title: string;
-  tags: TagType[];
 }
 
-export default function Header({ title, tags }: PropsInterface) {
+export default function Header({ title }: PropsInterface) {
   return (
     <h3>
-      {title} <Tags tags={tags} />
+      {title} <Tags />
     </h3>
   );
 }

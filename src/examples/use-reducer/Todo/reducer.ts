@@ -1,8 +1,6 @@
 import { nanoid } from "nanoid";
 import type { TodoInterface, ActionInterface } from "./types";
 
-export const initialState: [] = [];
-
 export function reducer(
   state: TodoInterface[],
   action: ActionInterface

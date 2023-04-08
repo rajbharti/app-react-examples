@@ -1,5 +1,4 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
-import type { TagsInterface } from "../../types";
 import Header from "../../components/Header";
 
 const counterSlice = createSlice({
@@ -30,10 +29,10 @@ const store = configureStore({
 
 store.subscribe(() => console.log(store.getState()));
 
-export default function Counter({ tags }: TagsInterface) {
+export default function Counter() {
   return (
     <section>
-      <Header title="Counter" tags={tags} />
+      <Header title="Counter" />
       {/* Count {count} */}
       <button onClick={() => store.dispatch(decrement())}>-</button>
       <button onClick={() => store.dispatch(increment())}>+</button>

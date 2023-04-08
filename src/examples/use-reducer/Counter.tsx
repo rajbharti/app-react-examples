@@ -1,5 +1,4 @@
 import { useReducer } from "react";
-import type { TagsInterface } from "../../types";
 import Header from "../../components/Header";
 
 interface StateInterface {
@@ -27,12 +26,12 @@ function reducer(
   }
 }
 
-export default function Counter({ tags }: TagsInterface) {
+export default function Counter() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <section>
-      <Header title="Counter" tags={tags} />
+      <Header title="Counter" />
       <div>
         Count: {state.count}{" "}
         <button onClick={() => dispatch({ type: "increment" })}>+</button>

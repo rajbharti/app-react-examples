@@ -1,14 +1,20 @@
 import type { TagType, CompType } from "./types";
 import { mapTagToComps } from "./App";
 
-export function getCompTags(Comp: CompType): TagType[] {
+export function getCompTags(Comp: CompType, activeTag: TagType): TagType[] {
   const list = [];
 
   for (const tag in mapTagToComps) {
     if (mapTagToComps[tag].find((c: CompType) => c === Comp)) {
-      list.push(tag);
+      // insert all other tags except activeTag
+      if (tag !== activeTag) {
+        list.push(tag);
+      }
     }
   }
+
+  // insert activeTag at beginning
+  list.unshift(activeTag);
 
   return list;
 }

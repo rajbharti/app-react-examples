@@ -1,5 +1,4 @@
 import { legacy_createStore as createStore } from "redux";
-import type { TagsInterface } from "../../types";
 import Header from "../../components/Header";
 
 interface ActionInterface {
@@ -24,10 +23,10 @@ function counterReducer(state = initialState, action: ActionInterface) {
 const store = createStore(counterReducer);
 store.subscribe(() => console.log(store.getState()));
 
-export default function Counter({ tags }: TagsInterface) {
+export default function Counter() {
   return (
     <section>
-      <Header title="Counter" tags={tags} />
+      <Header title="Counter" />
       {/* Count {count} */}
       <button onClick={() => store.dispatch({ type: "decrement" })}>-</button>
       <button onClick={() => store.dispatch({ type: "increment" })}>+</button>

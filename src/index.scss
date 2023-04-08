@@ -32,6 +32,7 @@ hr {
   margin: 10px 0;
 
   button {
+    cursor: pointer;
     margin-right: 10px;
     margin-bottom: 8px;
     text-decoration: none;
@@ -55,14 +56,30 @@ hr {
   font-size: 14px;
   font-weight: normal;
   color: rgb(33, 84, 237);
+  line-height: 15px;
+
+  span {
+    cursor: pointer;
+    display: inline-block;
+    background-color: aliceblue;
+    border: 1px solid #abd8ff;
+    padding: 2px 6px;
+    border-radius: 12px;
+    margin-right: 6px;
+  }
 }
 
 .todos {
+  .list {
+    height: 253px;
+    overflow-y: auto;
+  }
+
   li {
     cursor: default;
   }
 
-  .filter {
+  .filters {
     margin: 4px 0 8px;
     font-size: 14px;
 
@@ -76,6 +93,7 @@ hr {
   }
 
   .completed {
+    color: #999;
     text-decoration: line-through;
   }
 }

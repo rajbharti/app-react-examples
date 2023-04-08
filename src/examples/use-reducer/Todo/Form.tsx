@@ -35,20 +35,16 @@ export default function AddTodo({
       return;
     }
 
-    switch (formOperationType) {
-      case "add":
-        dispatch({
-          type: formOperationType,
-          payload: { text },
-        });
-        break;
-      case "edit":
-        dispatch({
-          type: formOperationType,
-          payload: { id: task?.id, text },
-        });
-        handleCancel();
-        break;
+    const payload =
+      formOperationType === "add" ? { text } : { id: task?.id, text };
+
+    dispatch({
+      type: formOperationType,
+      payload,
+    });
+
+    if (formOperationType === "edit") {
+      handleCancel();
     }
 
     setText("");
