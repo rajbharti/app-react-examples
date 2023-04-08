@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import clsx from "clsx";
 import type {
   TodoInterface,
   ActionInterface,
@@ -18,6 +19,7 @@ export default function AddTodo({
   setToggleForm,
   task,
 }: PropsInterface) {
+  const [hasError, setHasError] = useState(false);
   const [text, setText] = useState(
     formOperationType === "add" ? "" : task?.text
   );
@@ -32,6 +34,8 @@ export default function AddTodo({
     event.preventDefault();
 
     if (!text?.trim().length) {
+      setHasError(true);
+      inputRef.current?.focus();
       return;
     }
 
@@ -51,7 +55,13 @@ export default function AddTodo({
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setText(event.currentTarget.value);
+    const value = event.currentTarget.value;
+
+    if (hasError && value.trim().length === 1) {
+      setHasError(false);
+    }
+
+    setText(value);
   }
 
   function handleCancel() {
@@ -60,7 +70,13 @@ export default function AddTodo({
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={text} onChange={handleChange} ref={inputRef} />
+      <input
+        type="text"
+        value={text}
+        onChange={handleChange}
+        ref={inputRef}
+        className={clsx(hasError && "error-field")}
+      />
 
       {formOperationType === "add" ? (
         <input type="submit" value="Add" />

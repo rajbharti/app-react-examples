@@ -34,6 +34,7 @@ interface TagsFilterPropsInterface {
   activeTag: ActiveTagType;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
 }
+
 export default function TagsFilter({
   tags,
   activeTag,

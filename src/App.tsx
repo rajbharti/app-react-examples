@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { TagType, ActiveTagType, CompType } from "./types";
-import { getCompTags } from "./utils";
-import { TagsContext } from "./context";
 import TagsFilter from "./components/TagsFilter";
+import RenderComp from "./components/RenderComp";
+import MemoEx from "./examples/use-memo/MemoEx";
 import ReducerCounter from "./examples/use-reducer/Counter";
 import ReducerTodo from "./examples/use-reducer/Todo";
 import ReduxCounter from "./examples/redux/Counter";
@@ -15,12 +15,13 @@ interface MapTagToCompsInterface {
 export const mapTagToComps: MapTagToCompsInterface = {
   // useState: [],
   // useEffect: [],
-  useReducer: [ReducerCounter, ReducerTodo],
-  // useContext: [],
-  useMemo: [ReducerTodo],
+  useRef: [],
   // useCallback: [],
-  // useId: [],
+  useMemo: [MemoEx],
+  useContext: [ReducerTodo],
+  useReducer: [ReducerCounter, ReducerTodo],
   // "Custom Hooks": []
+  // useId: [],
   "State Management with Hooks": [],
   "Redux - Deprecated": [ReduxCounter],
   "Redux Toolkit": [ReduxToolkitCounter],
@@ -41,18 +42,14 @@ export default function App() {
       />
 
       {activeTag &&
-        mapTagToComps[activeTag]?.map((Comp: CompType, i: number) => {
-          const compTags: TagType[] = getCompTags(Comp, activeTag);
-
-          return (
-            <section key={activeTag + i.toString()}>
-              <TagsContext.Provider value={{ compTags, setActiveTag }}>
-                <Comp />
-              </TagsContext.Provider>
-              <hr />
-            </section>
-          );
-        })}
+        mapTagToComps[activeTag]?.map((Comp: CompType, i: number) => (
+          <RenderComp
+            key={activeTag + i.toString()}
+            Comp={Comp}
+            activeTag={activeTag}
+            setActiveTag={setActiveTag}
+          />
+        ))}
     </main>
   );
 }

@@ -28,6 +28,30 @@ hr {
   margin: 10px 0;
 }
 
+.parent-comp {
+  background-color: lightgoldenrodyellow;
+}
+
+.parent-comp,
+.child-comp {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+
+  h4 {
+    margin: 6px 0;
+    padding: 0;
+  }
+}
+
+.child-comp {
+  margin: 20px;
+  background-color: white;
+}
+
+.error-field {
+  border-color: red;
+}
+
 .tags-filter {
   margin: 10px 0;
 
@@ -71,7 +95,7 @@ hr {
 
 .todos {
   .list {
-    height: 253px;
+    max-height: 253px;
     overflow-y: auto;
   }
 

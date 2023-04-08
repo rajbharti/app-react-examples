@@ -8,7 +8,7 @@ export default function Tags() {
     <span className="tags">
       {compTags.map((tag: TagType) => (
         <span key={tag} onClick={() => setActiveTag(tag)}>
-          #{tag}{" "}
+          {tag}
         </span>
       ))}
     </span>
