@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import Header from "../../components/Header";
 import { nanoid } from "nanoid";
+import Header from "../../components/Header";
 
 interface TodoInterface {
   id: string;
@@ -8,12 +8,13 @@ interface TodoInterface {
   isCompleted: boolean;
 }
 
-function generateRandomNumber() {
+function getRandomNum() {
+  // 1 to 10
   return Math.floor(Math.random() * 10) + 1;
 }
 
 export default function UseStateEx() {
-  const [randomNum, setRandomNum] = useState(() => generateRandomNumber()); // computing initial state
+  const [randomNum, setRandomNum] = useState(() => getRandomNum()); // computing initial state
 
   const [user, setUser] = useState({
     name: "user 1",
@@ -30,8 +31,8 @@ export default function UseStateEx() {
     inputRef.current?.focus();
   }, []);
 
-  function handleGenerateRandomNumber() {
-    setRandomNum(generateRandomNumber()); // 1 to 10
+  function handleGenerateRandomNum() {
+    setRandomNum(getRandomNum());
   }
 
   function handleUser() {
@@ -60,7 +61,7 @@ export default function UseStateEx() {
       <Header title="useState Example" />
 
       <div>
-        <button onClick={handleGenerateRandomNumber}>
+        <button onClick={handleGenerateRandomNum}>
           Generate Random Number
         </button>
         <span>: {randomNum}</span>

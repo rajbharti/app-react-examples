@@ -3,6 +3,8 @@ import type { TagType, ActiveTagType, CompType } from "./types";
 import TagsFilter from "./components/TagsFilter";
 import RenderComp from "./components/RenderComp";
 import UseStateEx from "./examples/use-state/UseStateEx";
+import UseEffectEx from "./examples/use-effect/UseEffectEx";
+import UseRefEx from "./examples/use-ref/UseRefEx";
 import UseMemoEx from "./examples/use-memo/UseMemoEx";
 import UseReducerCounter from "./examples/use-reducer/Counter";
 import UseReducerTodo from "./examples/use-reducer/Todo";
@@ -15,11 +17,11 @@ interface MapTagToCompsInterface {
 
 export const mapTagToComps: MapTagToCompsInterface = {
   useState: [UseStateEx],
-  // useEffect: [],
-  useRef: [],
+  useEffect: [UseEffectEx],
+  useRef: [UseRefEx],
   // useCallback: [],
   useMemo: [UseMemoEx],
-  useContext: [UseReducerTodo],
+  // useContext: [UseReducerTodo],
   useReducer: [UseReducerCounter, UseReducerTodo],
   // "Custom Hooks": []
   // useId: [],
