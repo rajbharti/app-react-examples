@@ -18,7 +18,7 @@ export default function UseRefEx() {
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.currentTarget.value);
 
-    if (countRef.current % 2 === 0) {
+    if (countRef.current > 1 && countRef.current % 2 === 0) {
       const randomIndex = Math.floor(Math.random() * COLORS.length);
       (inputRef.current as HTMLInputElement).style.color = COLORS[randomIndex];
     }
@@ -43,9 +43,8 @@ export default function UseRefEx() {
       <p>Your Name: {name}</p>
       <button onClick={setFocus}>Set input Focus</button>
       <br />
-      <button onClick={handleClick}>
-        Click me for random input color while typing when count is even
-      </button>
+      <button onClick={handleClick}>Click me</button> for random input color
+      while typing when number of clicks are a Even number
     </section>
   );
 }

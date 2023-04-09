@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { nanoid } from "nanoid";
 import Header from "../../components/Header";
 
@@ -24,12 +24,6 @@ export default function UseStateEx() {
 
   const [task, setTask] = useState(""); // initial state
   const [todos, setTodos] = useState<TodoInterface[]>([]); // initial state
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
   function handleGenerateRandomNum() {
     setRandomNum(getRandomNum());
@@ -75,12 +69,7 @@ export default function UseStateEx() {
       <div>
         <h4>Set Todos</h4>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={task}
-            onChange={handleInputChange}
-            ref={inputRef}
-          />
+          <input type="text" value={task} onChange={handleInputChange} />
           <button type="submit">Add</button>
         </form>
 
