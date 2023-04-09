@@ -1,10 +1,10 @@
 import Header from "../../../components/Header";
 import ParentComp from "./ParentComp";
 
-export default function MemoEx() {
+export default function UseMemoEx() {
   return (
     <section>
-      <Header title="Memo Example" />
+      <Header title="useMemo Example" />
       <ParentComp />
     </section>
   );

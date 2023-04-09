@@ -2,9 +2,10 @@ import { useState } from "react";
 import type { TagType, ActiveTagType, CompType } from "./types";
 import TagsFilter from "./components/TagsFilter";
 import RenderComp from "./components/RenderComp";
-import MemoEx from "./examples/use-memo/MemoEx";
-import ReducerCounter from "./examples/use-reducer/Counter";
-import ReducerTodo from "./examples/use-reducer/Todo";
+import UseStateEx from "./examples/use-state/UseStateEx";
+import UseMemoEx from "./examples/use-memo/UseMemoEx";
+import UseReducerCounter from "./examples/use-reducer/Counter";
+import UseReducerTodo from "./examples/use-reducer/Todo";
 import ReduxCounter from "./examples/redux/Counter";
 import ReduxToolkitCounter from "./examples/redux-toolkit/Counter";
 
@@ -13,17 +14,17 @@ interface MapTagToCompsInterface {
 }
 
 export const mapTagToComps: MapTagToCompsInterface = {
-  // useState: [],
+  useState: [UseStateEx],
   // useEffect: [],
   useRef: [],
   // useCallback: [],
-  useMemo: [MemoEx],
-  useContext: [ReducerTodo],
-  useReducer: [ReducerCounter, ReducerTodo],
+  useMemo: [UseMemoEx],
+  useContext: [UseReducerTodo],
+  useReducer: [UseReducerCounter, UseReducerTodo],
   // "Custom Hooks": []
   // useId: [],
   "State Management with Hooks": [],
-  "Redux - Deprecated": [ReduxCounter],
+  Redux: [ReduxCounter],
   "Redux Toolkit": [ReduxToolkitCounter],
 };
 

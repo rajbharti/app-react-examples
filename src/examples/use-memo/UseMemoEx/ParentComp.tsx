@@ -11,6 +11,23 @@ export default function ParentComp() {
   // not on also when setCubeResult() set the state
   const squareResult = useMemo(() => squareCal(num), [num]);
 
+  // another example of useMemo with non-primitive type. they work by ref.
+  // as on every re-render same object is created but have different ref.
+  // without useMemo, it will be created again and again
+  // check useEffect() which can log it with or without useMemo
+  const userInfo = useMemo(
+    () => ({
+      name: "User 1",
+      age: 28,
+      expertise: ["react", "next", "node", "docker"],
+    }),
+    []
+  );
+
+  useEffect(() => {
+    console.log("userInfo");
+  }, [userInfo]);
+
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
