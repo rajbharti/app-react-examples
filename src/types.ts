@@ -1,3 +1,4 @@
+export type FeatureCategoryLabel = string;
 export type TagType = string;
 
 export type CompType = () => JSX.Element;

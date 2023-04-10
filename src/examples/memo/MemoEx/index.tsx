@@ -1,16 +1,11 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { squareCal } from "../../../utils";
 import Header from "../../../components/Header";
 import ChildComp from "./ChildComp";
 
-export default function ParentComp() {
+export default function MemoEx() {
   const [num, setNum] = useState<number>(0);
-  const [cubeResult, setCubeResult] = useState<number>(0);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  // now squareCal() only be invoked when setNum() set the state
-  // not on also when setCubeResult() set the state
-  const squareResult = useMemo(() => squareCal(num), [num]);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -21,13 +16,9 @@ export default function ParentComp() {
     setNum(input === "" ? 0 : parseInt(input));
   }
 
-  function handleCubeCal() {
-    setCubeResult(num ** 3);
-  }
-
   return (
     <section>
-      <Header title="useMemo Example" />
+      <Header title="memo Example" />
       <div className="parent-comp">
         <h4>Parent Comp</h4>
         <input
@@ -36,11 +27,9 @@ export default function ParentComp() {
           onChange={handleChange}
           ref={inputRef}
         />
-        <span>Square the number: {squareResult}</span>
-        <span className="comments">memoized value</span>
+        <span>Square the number: {squareCal(num)}</span>
         <br />
-        <button onClick={handleCubeCal}>Cube the number</button> {cubeResult}
-        <ChildComp square={squareResult} cube={cubeResult} />
+        <ChildComp />
       </div>
     </section>
   );

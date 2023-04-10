@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { getEvenNumbers, getSumOfSquareAndCube } from "./utils";
+import { getEvenNumbers, getSumOfSquareAndCube } from "../../../utils";
 
 interface PropsInterface {
   square: number;
@@ -17,7 +17,7 @@ export default function ChildComp({ square, cube }: PropsInterface) {
     <div className="child-comp">
       <h4>Child Comp</h4>
       <p>Even numbers from 1 to 10</p>
-      {evenNums.join(", ")}
+      {evenNums.join(", ")} <span className="comments">memoized value</span>
       <hr />
       <p>Some of Square and Cube</p>
       {sum}

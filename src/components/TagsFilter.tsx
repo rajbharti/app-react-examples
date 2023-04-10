@@ -1,16 +1,22 @@
 import { useMemo } from "react";
 import clsx from "clsx";
-import type { TagType, ActiveTagType } from "../types";
+import type { TagType, ActiveTagType, FeatureCategoryLabel } from "../types";
 import { getActiveTagCompsCount } from "../utils";
 
 interface TagFilterPropsInterface {
+  label: FeatureCategoryLabel;
   tag: TagType;
   activeTag: ActiveTagType;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
 }
 
-function TagFilter({ tag, activeTag, setActiveTag }: TagFilterPropsInterface) {
-  const count = useMemo(() => getActiveTagCompsCount(tag), [tag]);
+function TagFilter({
+  label,
+  tag,
+  activeTag,
+  setActiveTag,
+}: TagFilterPropsInterface) {
+  const count = useMemo(() => getActiveTagCompsCount(label, tag), [label, tag]);
 
   function handleTagClick(clickedTag: TagType) {
     setActiveTag((prevState: ActiveTagType) => {
@@ -20,7 +26,6 @@ function TagFilter({ tag, activeTag, setActiveTag }: TagFilterPropsInterface) {
 
   return (
     <button
-      key={tag}
       onClick={() => handleTagClick(tag)}
       className={clsx(activeTag === tag && "active-tag")}
     >
@@ -30,28 +35,30 @@ function TagFilter({ tag, activeTag, setActiveTag }: TagFilterPropsInterface) {
 }
 
 interface TagsFilterPropsInterface {
+  label: FeatureCategoryLabel;
   tags: TagType[];
   activeTag: ActiveTagType;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
 }
 
 export default function TagsFilter({
+  label,
   tags,
   activeTag,
   setActiveTag,
 }: TagsFilterPropsInterface) {
   return (
     <div className="tags-filter">
-      <b>Tags</b>:{" "}
+      <span className="tags-label">{label}</span>:{" "}
       {tags.map((tag: TagType) => (
         <TagFilter
           key={tag}
+          label={label}
           tag={tag}
           activeTag={activeTag}
           setActiveTag={setActiveTag}
         />
       ))}
-      <hr />
     </div>
   );
 }
