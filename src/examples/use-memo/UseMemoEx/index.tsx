@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { squareCal } from "../../../utils";
-import Header from "../../../components/Header";
+import { squareCal } from "src/utils";
+import Header from "src/components/Header";
 import ChildComp from "./ChildComp";
 
 export default function ParentComp() {

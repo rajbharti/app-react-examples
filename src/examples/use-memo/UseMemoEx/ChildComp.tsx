@@ -1,14 +1,14 @@
 import { useMemo } from "react";
-import { getEvenNumbers, getSumOfSquareAndCube } from "../../../utils";
+import { getEvenNumbers, getSumOfSquareAndCube } from "src/utils";
 
-interface PropsInterface {
+interface ChildCompProps {
   square: number;
   cube: number;
 }
 
-export default function ChildComp({ square, cube }: PropsInterface) {
+export default function ChildComp({ square, cube }: ChildCompProps) {
   // now getEvenNumbers() will not be invoked when Parent Component is updated
-  const evenNums = useMemo(() => getEvenNumbers(), []);
+  const evenNums = useMemo(() => [...getEvenNumbers()], []);
 
   // HERE, useMemo() WILL NOT WORK AS THE ARGUMENTS ALWAYS CHANGE
   const sum = getSumOfSquareAndCube(square, cube);

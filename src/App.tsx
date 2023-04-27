@@ -15,14 +15,14 @@ import UseCallbackEx from "./examples/use-callback/UseCallbackEx";
 import UseReducerCounter from "./examples/use-reducer/Counter";
 import UseReducerTodo from "./examples/use-reducer/Todo";
 import ReduxCounter from "./examples/redux/Counter";
-import ReduxToolkitCounter from "./examples/redux-toolkit/Counter";
+import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
 import MemoEx from "./examples/memo/MemoEx";
 
-interface MapTagToCompsInterface {
+interface MapTagToComps {
   [index: FeatureCategoryLabel]: Record<string, CompType[]>;
 }
 
-export const mapTagToComps: MapTagToCompsInterface = {
+export const mapTagToComps: MapTagToComps = {
   hooks: {
     useState: [UseStateEx],
     useEffect: [UseEffectEx],

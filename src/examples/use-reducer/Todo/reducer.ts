@@ -1,9 +1,9 @@
 import { nanoid } from "nanoid";
-import type { TodoInterface, ActionInterface } from "./types";
+import type { TodoInterface, Action } from "./types";
 
 export function reducer(
   state: TodoInterface[],
-  action: ActionInterface
+  action: Action
 ): TodoInterface[] {
   switch (action.type) {
     case "add":

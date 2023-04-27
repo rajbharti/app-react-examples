@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/Header";
+import Header from "src/components/Header";
 
-type ResourceTypeType = string | null;
+type ResourceType = string | null;
 
 export default function UseEffectEx() {
-  const [resourceType, setResourceType] = useState<ResourceTypeType>(null);
+  const [resourceType, setResourceType] = useState<ResourceType>(null);
   const [response, setResponse] = useState([]);
 
   useEffect(() => {

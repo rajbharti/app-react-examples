@@ -1,14 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
-import type {
-  TodoInterface,
-  ActionInterface,
-  FormOperationType,
-} from "./types";
+import type { TodoInterface, Action, FormOperationType } from "./types";
 
 interface PropsInterface {
   formOperationType: FormOperationType;
-  dispatch: React.Dispatch<ActionInterface>;
+  dispatch: React.Dispatch<Action>;
   setToggleForm?: (toggle: boolean) => void;
   task?: TodoInterface;
 }

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import Header from "../../components/Header";
+import Header from "src/components/Header";
 
-interface TodoInterface {
+interface Todo {
   id: string;
   text: string;
   isCompleted: boolean;
@@ -23,7 +23,7 @@ export default function UseStateEx() {
   }); // initial state
 
   const [task, setTask] = useState(""); // initial state
-  const [todos, setTodos] = useState<TodoInterface[]>([]); // initial state
+  const [todos, setTodos] = useState<Todo[]>([]); // initial state
 
   function handleGenerateRandomNum() {
     setRandomNum(getRandomNum());

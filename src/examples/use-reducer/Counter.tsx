@@ -1,24 +1,21 @@
 import { useReducer } from "react";
-import Header from "../../components/Header";
+import Header from "src/components/Header";
 
-interface StateInterface {
+interface State {
   count: number;
 }
-interface ActionInterface {
+interface Action {
   type: "increment" | "decrement" | "reset";
 }
 
 const initialState = { count: 0 };
 
-function reducer(
-  state: StateInterface,
-  action: ActionInterface
-): StateInterface {
+function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "increment":
-      return { count: state.count + 1 };
+      return { ...state, count: state.count + 1 };
     case "decrement":
-      return { count: state.count - 1 };
+      return { ...state, count: state.count - 1 };
     case "reset":
       return initialState;
     default:

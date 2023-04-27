@@ -43,17 +43,14 @@ export function getSumOfSquareAndCube(square: number, cube: number) {
   return square + cube;
 }
 
-export function getEvenNumbers() {
+export function* getEvenNumbers() {
   console.log("getEvenNumbers is invoked");
 
-  const result = [];
   for (let i = 1; i <= 10; i++) {
     if (i % 2 === 0) {
-      result.push(i);
+      yield i;
     }
   }
-
-  return result;
 }
 
 export function getPrimeNums() {
@@ -77,4 +74,10 @@ export function getPrimeNums() {
   }
 
   return result;
+}
+
+export function fetchCount(amount = 1) {
+  return new Promise<{ data: number }>((resolve) =>
+    setTimeout(() => resolve({ data: amount }), 1000)
+  );
 }

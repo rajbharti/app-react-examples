@@ -1,11 +1,11 @@
 import { useState } from "react";
 import clsx from "clsx";
 import Form from "./Form";
-import type { TodoInterface, ActionInterface } from "./types";
+import type { TodoInterface, Action } from "./types";
 
 interface PropsInterface {
   task: TodoInterface;
-  dispatch: React.Dispatch<ActionInterface>;
+  dispatch: React.Dispatch<Action>;
 }
 
 export default function Todo({ task, dispatch }: PropsInterface) {

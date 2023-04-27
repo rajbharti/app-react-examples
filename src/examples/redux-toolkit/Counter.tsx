@@ -1,42 +1,26 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
-import Header from "../../components/Header";
-
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: { count: 0 },
-  reducers: {
-    increment(state) {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.count += 1;
-    },
-    decrement(state) {
-      state.count -= 1;
-    },
-    reset(state) {
-      state.count = 0;
-    },
-  },
-});
-
-const { increment, decrement, reset } = counterSlice.actions;
-
-const store = configureStore({
-  reducer: counterSlice.reducer,
-});
-
-store.subscribe(() => console.log(store.getState()));
+import { useAppDispatch, useAppSelector } from "./hooks";
+import {
+  increment,
+  incrementAsync,
+  decrement,
+  reset,
+  selectCount,
+} from "./reducer";
+import Header from "src/components/Header";
 
 export default function Counter() {
+  const count = useAppSelector(selectCount);
+  const dispatch = useAppDispatch();
+
   return (
     <section>
       <Header title="Counter" />
-      {/* Count {count} */}
-      <button onClick={() => store.dispatch(decrement())}>-</button>
-      <button onClick={() => store.dispatch(increment())}>+</button>
-      <button onClick={() => store.dispatch(reset())}>Reset</button>
+      Count {count} <button onClick={() => dispatch(decrement())}>-</button>
+      <button onClick={() => dispatch(increment())}>+</button>
+      <button onClick={() => dispatch(incrementAsync(2))}>
+        Async increment by 2
+      </button>
+      <button onClick={() => dispatch(reset())}>Reset</button>
     </section>
   );
 }

@@ -1,10 +1,10 @@
 import Tags from "./Tags";
 
-interface PropsInterface {
+interface HeaderProps {
   title: string;
 }
 
-export default function Header({ title }: PropsInterface) {
+export default function Header({ title }: HeaderProps) {
   return (
     <h3>
       {title} <Tags />

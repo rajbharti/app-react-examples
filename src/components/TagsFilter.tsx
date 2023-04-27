@@ -3,19 +3,14 @@ import clsx from "clsx";
 import type { TagType, ActiveTagType, FeatureCategoryLabel } from "../types";
 import { getActiveTagCompsCount } from "../utils";
 
-interface TagFilterPropsInterface {
+interface TagFilterProps {
   label: FeatureCategoryLabel;
   tag: TagType;
   activeTag: ActiveTagType;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
 }
 
-function TagFilter({
-  label,
-  tag,
-  activeTag,
-  setActiveTag,
-}: TagFilterPropsInterface) {
+function TagFilter({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
   const count = useMemo(() => getActiveTagCompsCount(label, tag), [label, tag]);
 
   function handleTagClick(clickedTag: TagType) {
@@ -34,7 +29,7 @@ function TagFilter({
   );
 }
 
-interface TagsFilterPropsInterface {
+interface TagsFilterProps {
   label: FeatureCategoryLabel;
   tags: TagType[];
   activeTag: ActiveTagType;
@@ -46,7 +41,7 @@ export default function TagsFilter({
   tags,
   activeTag,
   setActiveTag,
-}: TagsFilterPropsInterface) {
+}: TagsFilterProps) {
   return (
     <div className="tags-filter">
       <span className="tags-label">{label}</span>:{" "}

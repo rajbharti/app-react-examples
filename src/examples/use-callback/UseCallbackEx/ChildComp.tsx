@@ -1,10 +1,10 @@
 import { memo } from "react";
 
-interface PropsInterface {
+interface ChildCompProps {
   showPrimeNums(): number[];
 }
 
-export default memo(function ChildComp({ showPrimeNums }: PropsInterface) {
+export default memo(function ChildComp({ showPrimeNums }: ChildCompProps) {
   return (
     <div className="child-comp">
       <h4>

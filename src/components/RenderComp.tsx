@@ -3,7 +3,7 @@ import type { TagType, ActiveTagType, CompType } from "../types";
 import { getCompTags } from "../utils";
 import { TagsContext } from "../context";
 
-interface PropsInterface {
+interface RenderCompProps {
   Comp: CompType;
   activeTag: NonNullable<ActiveTagType>;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
@@ -13,7 +13,7 @@ export default function RenderComp({
   Comp,
   activeTag,
   setActiveTag,
-}: PropsInterface) {
+}: RenderCompProps) {
   const compTags: TagType[] = getCompTags(Comp, activeTag);
 
   const value = useMemo(

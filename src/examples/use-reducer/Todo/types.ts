@@ -4,7 +4,7 @@ export interface TodoInterface {
   isCompleted: boolean;
 }
 
-export interface ActionInterface {
+export interface Action {
   type: "add" | "edit" | "delete" | "toggle";
   payload: Partial<TodoInterface>;
 }

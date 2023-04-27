@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { squareCal, getPrimeNums } from "../../../utils";
-import Header from "../../../components/Header";
+import { squareCal, getPrimeNums } from "src/utils";
+import Header from "src/components/Header";
 import ChildComp from "./ChildComp";
 
 export default function UseCallbackEx() {

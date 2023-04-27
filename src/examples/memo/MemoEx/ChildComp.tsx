@@ -1,5 +1,5 @@
 import { useCallback, memo } from "react";
-import { getPrimeNums } from "../../../utils";
+import { getPrimeNums } from "src/utils";
 
 export default memo(function ChildComp() {
   const showPrimeNums = useCallback(getPrimeNums, []);

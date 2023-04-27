@@ -1,9 +1,9 @@
-import type { TodoInterface, ActionInterface } from "./types";
+import type { TodoInterface, Action } from "./types";
 import Todo from "./Todo";
 
 interface PropsInterface {
   todos: TodoInterface[];
-  dispatch: React.Dispatch<ActionInterface>;
+  dispatch: React.Dispatch<Action>;
 }
 
 export default function Todos({ todos, dispatch }: PropsInterface) {

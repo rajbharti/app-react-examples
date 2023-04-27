@@ -1,22 +1,26 @@
 import { legacy_createStore as createStore } from "redux";
-import Header from "../../components/Header";
+import Header from "src/components/Header";
 
-interface ActionInterface {
+interface State {
+  count: number;
+}
+
+interface Action {
   type: "increment" | "decrement" | "reset";
 }
 
 const initialState = { count: 0 };
 
-function counterReducer(state = initialState, action: ActionInterface) {
+function counterReducer(state = initialState, action: Action): State {
   switch (action.type) {
     case "increment":
-      return { count: state.count + 1 };
+      return { ...state, count: state.count + 1 };
     case "decrement":
-      return { count: state.count - 1 };
+      return { ...state, count: state.count - 1 };
     case "reset":
       return initialState;
     default:
-      state;
+      return state;
   }
 }
 
