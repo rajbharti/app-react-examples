@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import type {
   FeatureCategoryLabel,
   TagType,
@@ -8,12 +8,13 @@ import type {
 import TagsFilter from "./components/TagsFilter";
 import RenderComp from "./components/RenderComp";
 import UseStateEx from "./examples/use-state/UseStateEx";
-import UseEffectEx from "./examples/use-effect/UseEffectEx";
-import UseRefEx from "./examples/use-ref/UseRefEx";
-import UseMemoEx from "./examples/use-memo/UseMemoEx";
-import UseCallbackEx from "./examples/use-callback/UseCallbackEx";
 import UseReducerCounter from "./examples/use-reducer/Counter";
 import UseReducerTodo from "./examples/use-reducer/Todo";
+import UseRefEx from "./examples/use-ref/UseRefEx";
+import UseEffectEx from "./examples/use-effect/UseEffectEx";
+import UseMemoEx from "./examples/use-memo/UseMemoEx";
+import UseCallbackEx from "./examples/use-callback/UseCallbackEx";
+import UseTransitionEx from "./examples/use-transition/UseTransitionEx";
 import ReduxCounter from "./examples/redux/Counter";
 import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
 import MemoEx from "./examples/memo/MemoEx";
@@ -25,15 +26,16 @@ interface MapTagToComps {
 export const mapTagToComps: MapTagToComps = {
   hooks: {
     useState: [UseStateEx],
-    useEffect: [UseEffectEx],
+    useReducer: [UseReducerCounter, UseReducerTodo],
+    // useContext: [],
     useRef: [UseRefEx],
+    useEffect: [UseEffectEx],
     useMemo: [UseMemoEx],
     useCallback: [UseCallbackEx],
-    // useContext: [],
-    useReducer: [UseReducerCounter, UseReducerTodo],
+    useTransition: [UseTransitionEx],
     // "Custom Hooks": []
     // useId: [],
-    "State Management with Hooks": [],
+    // "State Management with Hooks": [],
   },
   apis: {
     memo: [MemoEx, UseCallbackEx],
@@ -65,8 +67,10 @@ export default function App() {
           />
         );
       })}
+
       <hr />
 
+      {/* Todo: optimize below: store category in state along with activeTag */}
       {categories.map(
         (category: string) =>
           activeTag &&
