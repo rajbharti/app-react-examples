@@ -3,7 +3,14 @@ import Header from "src/components/Header";
 
 const ChildComp = memo(function Child({ num }: { num: number }) {
   console.log("Child render");
-  return <>{num}</>;
+  return (
+    <div className="child-comp">
+      <h4>
+        Child Comp<span className="comments">memoized component</span>
+      </h4>
+      {num}
+    </div>
+  );
 });
 
 export default function Parent() {
@@ -20,17 +27,19 @@ export default function Parent() {
   return (
     <section>
       <Header title="memo Example" />
-      <button onClick={handleClick}>Generate Random Number</button>
-      <pre>
-        {previousNumRef.current === num ? (
-          <i>Same Number</i>
-        ) : (
-          <b>New Number</b>
-        )}{" "}
-        : <ChildComp num={num} />
-        <br />
-        num: {num}, previousNum: {previousNumRef.current}
-      </pre>
+      <div className="parent-comp">
+        <h4>Parent Comp</h4>
+        <button onClick={handleClick}>Generate Random Number</button>
+        <ChildComp num={num} />
+        <pre>
+          {previousNumRef.current === num ? (
+            <i>Same Number</i>
+          ) : (
+            <b>New Number</b>
+          )}{" "}
+          (num: {num}, previousNum: {previousNumRef.current})
+        </pre>
+      </div>
     </section>
   );
 }
