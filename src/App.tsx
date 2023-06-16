@@ -1,4 +1,4 @@
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import type {
   FeatureCategoryLabel,
   TagType,
@@ -17,10 +17,11 @@ import UseCallbackEx from "./examples/use-callback/UseCallbackEx";
 import UseTransitionEx from "./examples/use-transition/UseTransitionEx";
 import ReduxCounter from "./examples/redux/Counter";
 import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
-import MemoEx from "./examples/memo/MemoEx";
+import MemoInputChange from "./examples/memo/MemoInputChange";
+import MemoButtonClick from "./examples/memo/MemoButtonClick";
 
 interface MapTagToComps {
-  [index: FeatureCategoryLabel]: Record<string, CompType[]>;
+  [key: FeatureCategoryLabel]: Record<string, CompType[]>;
 }
 
 export const mapTagToComps: MapTagToComps = {
@@ -38,7 +39,7 @@ export const mapTagToComps: MapTagToComps = {
     // "State Management with Hooks": [],
   },
   apis: {
-    memo: [MemoEx, UseCallbackEx],
+    memo: [MemoButtonClick, MemoInputChange, UseCallbackEx],
   },
   components: {},
   redux: {

@@ -9,7 +9,7 @@ interface Action {
   type: "increment" | "decrement" | "reset";
 }
 
-const initialState = { count: 0 };
+const initialState: State = { count: 0 };
 
 function counterReducer(state = initialState, action: Action): State {
   switch (action.type) {
