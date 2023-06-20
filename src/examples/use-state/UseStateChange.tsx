@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import Header from "src/components/Header";
+import Example from "src/components/Example";
 
 interface Todo {
   id: string;
@@ -13,7 +13,7 @@ function getRandomNum() {
   return Math.floor(Math.random() * 10) + 1;
 }
 
-export default function UseStateEx() {
+export default function UseStateChange() {
   const [randomNum, setRandomNum] = useState(() => getRandomNum()); // computing initial state
 
   const [user, setUser] = useState({
@@ -51,9 +51,10 @@ export default function UseStateEx() {
   }
 
   return (
-    <section>
-      <Header title="useState Example" />
-
+    <Example
+      hasNestedComp={false}
+      title="State change for primitive and non-primitive"
+    >
       <div>
         <button onClick={handleGenerateRandomNum}>
           Generate Random Number
@@ -75,6 +76,6 @@ export default function UseStateEx() {
 
         <pre>{JSON.stringify(todos, null, 2)}</pre>
       </div>
-    </section>
+    </Example>
   );
 }

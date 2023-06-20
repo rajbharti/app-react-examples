@@ -1,5 +1,5 @@
 import { legacy_createStore as createStore } from "redux";
-import Header from "src/components/Header";
+import Example from "src/components/Example";
 
 interface State {
   count: number;
@@ -29,12 +29,11 @@ store.subscribe(() => console.log(store.getState()));
 
 export default function Counter() {
   return (
-    <section>
-      <Header title="Counter" />
+    <Example hasNestedComp={false} title="Counter" comments="check console">
       {/* Count {count} */}
       <button onClick={() => store.dispatch({ type: "decrement" })}>-</button>
       <button onClick={() => store.dispatch({ type: "increment" })}>+</button>
       <button onClick={() => store.dispatch({ type: "reset" })}>Reset</button>
-    </section>
+    </Example>
   );
 }

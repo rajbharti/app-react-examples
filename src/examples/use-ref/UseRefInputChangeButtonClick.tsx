@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import Header from "src/components/Header";
+import Comments from "src/components/Comments";
+import Example from "src/components/Example";
 
-export default function UseRefEx() {
+export default function UseRefInputChangeButtonClick() {
   const [name, setName] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const countRef = useRef(0);
@@ -31,8 +32,7 @@ export default function UseRefEx() {
   }
 
   return (
-    <section>
-      <Header title="useRef Example" />
+    <Example hasNestedComp={false} title="Input Change and Button Click">
       <input
         type="text"
         value={name}
@@ -43,8 +43,11 @@ export default function UseRefEx() {
       <p>Your Name: {name}</p>
       <button onClick={setFocus}>Set input Focus</button>
       <br />
-      <button onClick={handleClick}>Click me</button> for random input color
-      while typing when number of clicks are a Even number
-    </section>
+      <button onClick={handleClick}>Click me</button>
+      <Comments>
+        Input color will display randomly while typing when the number of clicks
+        are a Even number
+      </Comments>
+    </Example>
   );
 }

@@ -7,18 +7,22 @@ import type {
 } from "./types";
 import TagsFilter from "./components/TagsFilter";
 import RenderComp from "./components/RenderComp";
-import UseStateEx from "./examples/use-state/UseStateEx";
+// Hooks
+import UseStateChange from "./examples/use-state/UseStateChange";
 import UseReducerCounter from "./examples/use-reducer/Counter";
 import UseReducerTodo from "./examples/use-reducer/Todo";
-import UseRefEx from "./examples/use-ref/UseRefEx";
-import UseEffectEx from "./examples/use-effect/UseEffectEx";
-import UseMemoEx from "./examples/use-memo/UseMemoEx";
-import UseCallbackEx from "./examples/use-callback/UseCallbackEx";
-import UseTransitionEx from "./examples/use-transition/UseTransitionEx";
-import ReduxCounter from "./examples/redux/Counter";
-import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
+import UseEffectFetchAPIAndLifeCycleMethods from "./examples/use-effect/UseEffectFetchAPIAndLifeCycleMethods";
+import UseRefInputChangeButtonClick from "./examples/use-ref/UseRefInputChangeButtonClick";
+import UseMemoInputChange from "./examples/use-memo/UseMemoInputChange";
+import UseCallbackInputChange from "./examples/use-callback/UseCallbackInputChange";
+import UseTransitionTabs from "./examples/use-transition/UseTransitionTabs";
+// APIs
 import MemoInputChange from "./examples/memo/MemoInputChange";
 import MemoButtonClick from "./examples/memo/MemoButtonClick";
+// Components
+// Redux
+import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
+import ReduxCounter from "./examples/redux/Counter";
 
 interface MapTagToComps {
   [key: FeatureCategoryLabel]: Record<string, CompType[]>;
@@ -26,25 +30,21 @@ interface MapTagToComps {
 
 export const mapTagToComps: MapTagToComps = {
   hooks: {
-    useState: [UseStateEx],
+    useState: [UseStateChange],
     useReducer: [UseReducerCounter, UseReducerTodo],
-    // useContext: [],
-    useRef: [UseRefEx],
-    useEffect: [UseEffectEx],
-    useMemo: [UseMemoEx],
-    useCallback: [UseCallbackEx],
-    useTransition: [UseTransitionEx],
-    // "Custom Hooks": []
-    // useId: [],
-    // "State Management with Hooks": [],
+    useEffect: [UseEffectFetchAPIAndLifeCycleMethods],
+    useRef: [UseRefInputChangeButtonClick, MemoButtonClick],
+    useMemo: [UseMemoInputChange],
+    useCallback: [UseCallbackInputChange],
+    useTransition: [UseTransitionTabs],
   },
   apis: {
-    memo: [MemoButtonClick, MemoInputChange, UseCallbackEx],
+    memo: [MemoButtonClick, MemoInputChange, UseCallbackInputChange],
   },
   components: {},
   redux: {
-    Redux: [ReduxCounter],
     "Redux Toolkit": [ReduxToolkitCounter],
+    Redux: [ReduxCounter],
   },
 };
 

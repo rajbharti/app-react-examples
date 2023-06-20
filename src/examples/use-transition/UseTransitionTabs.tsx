@@ -1,5 +1,5 @@
-import { useEffect, useState, useTransition } from "react";
-import Header from "src/components/Header";
+import { useState, useTransition } from "react";
+import Example from "src/components/Example";
 
 interface TabButtonProps {
   children: React.ReactNode;
@@ -47,12 +47,11 @@ function TabButton({ children, isActive, onClick }: TabButtonProps) {
   return <button onClick={handleClick}>{children}</button>;
 }
 
-export default function UseTransitionEx() {
+export default function UseTransitionTabs() {
   const [tab, setTab] = useState<TabLabel>("About");
 
   return (
-    <section>
-      <Header title="useTransition Example" />
+    <Example hasNestedComp={false} title="Tabs">
       <div className="tabs-ex">
         {tabLabels.map((label: TabLabel) => (
           <TabButton
@@ -68,6 +67,6 @@ export default function UseTransitionEx() {
         {tab === "Posts" && <PostsContent />}
         {tab === "Contact Us" && <ContactUsContent />}
       </div>
-    </section>
+    </Example>
   );
 }

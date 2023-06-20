@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import Header from "src/components/Header";
+import Example from "src/components/Example";
 
 interface State {
   count: number;
@@ -27,14 +27,11 @@ export default function Counter() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <section>
-      <Header title="Counter" />
-      <div>
-        Count: {state.count}{" "}
-        <button onClick={() => dispatch({ type: "increment" })}>+</button>
-        <button onClick={() => dispatch({ type: "decrement" })}>-</button>
-        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
-      </div>
-    </section>
+    <Example hasNestedComp={false} title="Counter">
+      Count: {state.count}{" "}
+      <button onClick={() => dispatch({ type: "increment" })}>+</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+    </Example>
   );
 }

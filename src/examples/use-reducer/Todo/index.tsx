@@ -2,7 +2,7 @@ import { useState, useReducer } from "react";
 import { reducer } from "./reducer";
 import { type TodoInterface, FilterType } from "./types";
 import { filtersLogic } from "./utils";
-import Header from "src/components/Header";
+import Example from "src/components/Example";
 import Form from "./Form";
 import Filters from "./Filters";
 import Todos from "./Todos";
@@ -18,8 +18,7 @@ export default function App() {
   );
 
   return (
-    <section className="todos">
-      <Header title="Todo" />
+    <Example hasNestedComp={false} title="Todo" className="todos">
       <Form formOperationType="add" dispatch={dispatch} />
       <Filters
         activeFilter={activeFilter}
@@ -27,6 +26,6 @@ export default function App() {
         todos={todos}
       />
       <Todos todos={filteredTodos} dispatch={dispatch} />
-    </section>
+    </Example>
   );
 }

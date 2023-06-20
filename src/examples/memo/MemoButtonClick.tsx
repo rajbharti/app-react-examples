@@ -1,19 +1,16 @@
 import { memo, useRef, useState } from "react";
-import Header from "src/components/Header";
+import Example from "src/components/Example";
 
 const ChildComp = memo(function Child({ num }: { num: number }) {
   console.log("Child render");
   return (
-    <div className="child-comp">
-      <h4>
-        Child Comp<span className="comments">memoized component</span>
-      </h4>
+    <Example isChild comments="memoized component">
       {num}
-    </div>
+    </Example>
   );
 });
 
-export default function Parent() {
+export default function MemoButtonClick() {
   const [num, setNum] = useState(0);
   const previousNumRef = useRef(0);
 
@@ -25,21 +22,17 @@ export default function Parent() {
   }
 
   return (
-    <section>
-      <Header title="memo Example" />
-      <div className="parent-comp">
-        <h4>Parent Comp</h4>
-        <button onClick={handleClick}>Generate Random Number</button>
-        <ChildComp num={num} />
-        <pre>
-          {previousNumRef.current === num ? (
-            <i>Same Number</i>
-          ) : (
-            <b>New Number</b>
-          )}{" "}
-          (num: {num}, previousNum: {previousNumRef.current})
-        </pre>
-      </div>
-    </section>
+    <Example title="Button Click">
+      <button onClick={handleClick}>Generate Random Number</button>
+      <ChildComp num={num} />
+      <pre>
+        {previousNumRef.current === num ? (
+          <i>Same Number</i>
+        ) : (
+          <b>New Number</b>
+        )}{" "}
+        (num: {num}, previousNum: {previousNumRef.current})
+      </pre>
+    </Example>
   );
 }

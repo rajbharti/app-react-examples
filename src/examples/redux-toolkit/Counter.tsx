@@ -6,21 +6,20 @@ import {
   reset,
   selectCount,
 } from "./reducer";
-import Header from "src/components/Header";
+import Example from "src/components/Example";
 
 export default function Counter() {
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
 
   return (
-    <section>
-      <Header title="Counter" />
+    <Example hasNestedComp={false} title="Counter">
       Count {count} <button onClick={() => dispatch(decrement())}>-</button>
       <button onClick={() => dispatch(increment())}>+</button>
       <button onClick={() => dispatch(incrementAsync(2))}>
         Async increment by 2
       </button>
       <button onClick={() => dispatch(reset())}>Reset</button>
-    </section>
+    </Example>
   );
 }

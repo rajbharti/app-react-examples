@@ -33,6 +33,10 @@ hr {
   margin: 10px 0;
 }
 
+.error {
+  margin-top: 5px;
+  color: red;
+}
 .parent-comp {
   background-color: lightgoldenrodyellow;
 }
@@ -98,7 +102,7 @@ hr {
 }
 
 .comments {
-  margin-left: 10px;
+  margin-left: 5px;
   color: #999;
   font-weight: normal;
   &::before {

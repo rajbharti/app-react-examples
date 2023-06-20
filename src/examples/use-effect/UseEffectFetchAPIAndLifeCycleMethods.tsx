@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import Header from "src/components/Header";
+import Example from "src/components/Example";
 
 type ResourceType = string | null;
+type Response = Record<string, any>;
 
-export default function UseEffectEx() {
+export default function UseEffectFetchAPIAndLifeCycleMethods() {
   const [resourceType, setResourceType] = useState<ResourceType>(null);
-  const [response, setResponse] = useState([]);
+  const [response, setResponse] = useState<Response>([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     console.log("onRender");
@@ -25,16 +27,23 @@ export default function UseEffectEx() {
     console.log("onMount and onUpdate"); // componentDidMount and componentDidUpdate
 
     if (resourceType !== null) {
-      fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
-        .then((response) => response.json())
-        .then(setResponse);
+      (async () => {
+        try {
+          let response = await fetch(
+            `https://jsonplaceholder.typicode.com/${resourceType}`
+          );
+          response = await response.json();
+          setError(false);
+          setResponse(response);
+        } catch (e) {
+          setError(true);
+        }
+      })();
     }
   }, [resourceType]);
 
   return (
-    <section>
-      <Header title="useState Example" />
-
+    <Example hasNestedComp={false} title="Fetching APIs and Life Cycle Methods">
       <button onClick={() => setResourceType("posts")}>Posts</button>
       <button onClick={() => setResourceType("comments")}>Comments</button>
       <button onClick={() => setResourceType("albums")}>Albums</button>
@@ -42,9 +51,12 @@ export default function UseEffectEx() {
       <button onClick={() => setResourceType("todos")}>Todos</button>
       <button onClick={() => setResourceType("users")}>Users</button>
 
-      <div>
+      <br />
+      {error ? (
+        <div className="error">Something went wrong. Try again!</div>
+      ) : (
         <pre>{JSON.stringify(response, null, 2)}</pre>
-      </div>
-    </section>
+      )}
+    </Example>
   );
 }
