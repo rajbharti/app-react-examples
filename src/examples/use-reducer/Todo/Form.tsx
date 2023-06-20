@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
-import type { TodoInterface, Action, FormOperationType } from "./types";
+import type { TodoShape, Action, FormOperationType } from "./types";
 
-interface PropsInterface {
+interface Props {
   formOperationType: FormOperationType;
   dispatch: React.Dispatch<Action>;
   setToggleForm?: (toggle: boolean) => void;
-  task?: TodoInterface;
+  task?: TodoShape;
 }
 
 export default function AddTodo({
@@ -14,7 +14,7 @@ export default function AddTodo({
   dispatch,
   setToggleForm,
   task,
-}: PropsInterface) {
+}: Props) {
   const [hasError, setHasError] = useState(false);
   const [text, setText] = useState(
     formOperationType === "add" ? "" : task?.text

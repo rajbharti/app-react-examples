@@ -39,7 +39,7 @@ export default function Example({
     </>
   );
 
-  const ParentOrChild = (
+  const RenderParentOrChild = (
     <div
       className={clsx(
         "border border-gray-300 px-1.5 py-2.5",
@@ -55,11 +55,11 @@ export default function Example({
   );
 
   return isChild ? (
-    ParentOrChild
+    RenderParentOrChild
   ) : (
     <section>
       {title && <Header title={title} />}
-      {hasNestedComp ? ParentOrChild : RenderOnlyParent}
+      {hasNestedComp ? RenderParentOrChild : RenderOnlyParent}
     </section>
   );
 }

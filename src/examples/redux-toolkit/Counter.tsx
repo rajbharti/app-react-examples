@@ -1,4 +1,3 @@
-import { useAppDispatch, useAppSelector } from "./hooks";
 import {
   increment,
   incrementAsync,
@@ -7,6 +6,7 @@ import {
   selectCount,
 } from "./reducer";
 import Example from "src/components/Example";
+import { useAppDispatch, useAppSelector } from "./hooks";
 
 export default function Counter() {
   const count = useAppSelector(selectCount);

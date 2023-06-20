@@ -1,15 +1,15 @@
-import type { TodoInterface, Action } from "./types";
+import type { TodoShape, Action } from "./types";
 import Todo from "./Todo";
 
-interface PropsInterface {
-  todos: TodoInterface[];
+interface Props {
+  todos: TodoShape[];
   dispatch: React.Dispatch<Action>;
 }
 
-export default function Todos({ todos, dispatch }: PropsInterface) {
+export default function Todos({ todos, dispatch }: Props) {
   return (
     <ul className="max-h-253px overflow-y-auto">
-      {todos.map((todo: TodoInterface) => (
+      {todos.map((todo: TodoShape) => (
         <Todo key={todo.id} task={todo} dispatch={dispatch} />
       ))}
     </ul>

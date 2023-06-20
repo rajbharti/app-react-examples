@@ -1,4 +1,4 @@
-export interface TodoInterface {
+export interface TodoShape {
   id: string;
   text: string;
   isCompleted: boolean;
@@ -6,9 +6,9 @@ export interface TodoInterface {
 
 export interface Action {
   type: "add" | "edit" | "delete" | "toggle";
-  payload: Partial<TodoInterface>;
+  payload: Partial<TodoShape>;
 }
 
 export type FormOperationType = "add" | "edit";
 
-export type FilterType = "all" | "active" | "completed" | null;
+export type FilterUnion = "all" | "active" | "completed" | null;

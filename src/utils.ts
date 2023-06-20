@@ -1,4 +1,4 @@
-import type { TagType, CompType, FeatureCategoryLabel } from "./types";
+import type { TagType, CompType, TagsCateoryLabel } from "./types";
 import { mapTagToComps } from "./App";
 
 export function getCompTags(Comp: CompType, activeTag: TagType): TagType[] {
@@ -24,10 +24,7 @@ export function getCompTags(Comp: CompType, activeTag: TagType): TagType[] {
   return list;
 }
 
-export function getActiveTagCompsCount(
-  label: FeatureCategoryLabel,
-  tag: TagType
-) {
+export function getActiveTagCompsCount(label: TagsCateoryLabel, tag: TagType) {
   return mapTagToComps[label][tag]?.length || 0;
 }
 

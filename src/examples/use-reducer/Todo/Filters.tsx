@@ -1,28 +1,17 @@
 import { useMemo } from "react";
 import clsx from "clsx";
 import { filtersLogic, getFilterCount } from "./utils";
-import type { FilterType, TodoInterface } from "./types";
+import type { FilterUnion, TodoShape } from "./types";
 
-interface FiltersPropsInterface {
-  todos: TodoInterface[];
-  activeFilter: FilterType;
-  setActiveFilter: React.Dispatch<React.SetStateAction<FilterType>>;
+interface FilterProps extends Props {
+  filter: FilterUnion;
 }
 
-interface FilterPropsInterface extends FiltersPropsInterface {
-  filter: FilterType;
-}
-
-function Filter({
-  todos,
-  filter,
-  activeFilter,
-  setActiveFilter,
-}: FilterPropsInterface) {
+function Filter({ todos, filter, activeFilter, setActiveFilter }: FilterProps) {
   const count = useMemo(() => getFilterCount(todos, filter), [todos]);
 
-  function handleClick(clickedFilter: FilterType) {
-    setActiveFilter((prevState: FilterType) =>
+  function handleClick(clickedFilter: FilterUnion) {
+    setActiveFilter((prevState: FilterUnion) =>
       prevState === clickedFilter ? null : clickedFilter
     );
   }
@@ -30,19 +19,28 @@ function Filter({
   return (
     <button
       onClick={() => handleClick(filter)}
-      className={clsx("capitalize", activeFilter === filter && "bg-[#7fff00]")}
+      className={clsx(
+        "capitalize",
+        activeFilter === filter && "bg-[#7fff00] hover:bg-[#7fff00]"
+      )}
     >
       {filter} ({count})
     </button>
   );
 }
 
-export default function Filters(props: FiltersPropsInterface) {
+interface Props {
+  todos: TodoShape[];
+  activeFilter: FilterUnion;
+  setActiveFilter: React.Dispatch<React.SetStateAction<FilterUnion>>;
+}
+
+export default function Filters(props: Props) {
   return (
     <div className="mb-2 mt-1 text-sm">
       Filters:{" "}
       {Object.keys(filtersLogic).map((filter: string) => (
-        <Filter key={filter} {...props} filter={filter as FilterType} />
+        <Filter key={filter} {...props} filter={filter as FilterUnion} />
       ))}
     </div>
   );

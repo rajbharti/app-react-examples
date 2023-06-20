@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef, memo } from "react";
-import { squareCal, getPrimeNums } from "src/utils";
 import Example from "src/components/Example";
+import { squareCal, getPrimeNums } from "src/utils";
 
 const ChildComp = memo(function ChildComp() {
   const showPrimeNums = useCallback(getPrimeNums, []);

@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import clsx from "clsx";
-import type { TagType, ActiveTagType, FeatureCategoryLabel } from "../types";
+import type { TagType, ActiveTagType, TagsCateoryLabel } from "../types";
 import { getActiveTagCompsCount } from "../utils";
 
 interface Props {
-  label: FeatureCategoryLabel;
+  label: TagsCateoryLabel;
   tags: TagType[];
   activeTag: ActiveTagType;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
@@ -14,7 +14,7 @@ type TagFilterProps = Omit<Props, "tags"> & {
   tag: TagType;
 };
 
-function TagFilter({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
+function TagCategory({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
   const count = useMemo(() => getActiveTagCompsCount(label, tag), [label, tag]);
 
   function handleTagClick(clickedTag: TagType) {
@@ -38,7 +38,7 @@ function TagFilter({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
   );
 }
 
-export default function TagsFilter({
+export default function TagsCategory({
   label,
   tags,
   activeTag,
@@ -46,9 +46,9 @@ export default function TagsFilter({
 }: Props) {
   return (
     <div className="my-4">
-      <span className="font-bold capitalize">{label}</span>:{" "}
+      <span className="text-base font-bold capitalize">{label}</span>:{" "}
       {tags.map((tag: TagType) => (
-        <TagFilter
+        <TagCategory
           key={tag}
           label={label}
           tag={tag}

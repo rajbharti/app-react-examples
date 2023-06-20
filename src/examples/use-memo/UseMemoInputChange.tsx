@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { squareCal, getEvenNumbers, getSumOfSquareAndCube } from "src/utils";
-import Comments from "src/components/Comments";
 import Example from "src/components/Example";
+import Comments from "src/components/Comments";
+import { squareCal, getEvenNumbers, getSumOfSquareAndCube } from "src/utils";
 
 interface ChildCompProps {
   square: number;

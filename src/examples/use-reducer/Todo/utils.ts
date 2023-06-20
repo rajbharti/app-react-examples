@@ -1,16 +1,16 @@
-import { TodoInterface, FilterType } from "./types";
+import { TodoShape, FilterUnion } from "./types";
 
-type FiltersLogicType = Record<
-  NonNullable<FilterType>,
-  (todo: TodoInterface) => TodoInterface[] | boolean
+type FiltersLogic = Record<
+  NonNullable<FilterUnion>,
+  (todo: TodoShape) => TodoShape[] | boolean
 >;
 
-export const filtersLogic: FiltersLogicType = {
+export const filtersLogic: FiltersLogic = {
   all: () => true,
-  active: (todo: TodoInterface) => !todo.isCompleted,
-  completed: (todo: TodoInterface) => todo.isCompleted,
+  active: (todo: TodoShape) => !todo.isCompleted,
+  completed: (todo: TodoShape) => todo.isCompleted,
 };
 
-export function getFilterCount(todos: TodoInterface[], filter: FilterType) {
+export function getFilterCount(todos: TodoShape[], filter: FilterUnion) {
   return filter ? todos.filter(filtersLogic[filter]).length : 0;
 }

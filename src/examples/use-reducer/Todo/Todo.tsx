@@ -1,14 +1,14 @@
 import { useState } from "react";
 import clsx from "clsx";
 import Form from "./Form";
-import type { TodoInterface, Action } from "./types";
+import type { TodoShape, Action } from "./types";
 
-interface PropsInterface {
-  task: TodoInterface;
+interface Props {
+  task: TodoShape;
   dispatch: React.Dispatch<Action>;
 }
 
-export default function Todo({ task, dispatch }: PropsInterface) {
+export default function Todo({ task, dispatch }: Props) {
   const [toggleForm, setToggleForm] = useState(false);
   const { id, text, isCompleted } = task;
 
@@ -31,7 +31,7 @@ export default function Todo({ task, dispatch }: PropsInterface) {
   }
 
   return (
-    <li className="cursor-pointer">
+    <li className="cursor-default list-disc">
       {toggleForm ? (
         <Form
           dispatch={dispatch}
@@ -43,7 +43,7 @@ export default function Todo({ task, dispatch }: PropsInterface) {
         <>
           <span
             onClick={() => handleToggle(id)}
-            className={clsx(isCompleted && "text-gray-200, line-through")}
+            className={clsx(isCompleted && "text-gray-500 line-through")}
           >
             {text}
           </span>{" "}

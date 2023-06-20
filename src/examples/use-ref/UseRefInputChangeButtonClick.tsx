@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import Comments from "src/components/Comments";
 import Example from "src/components/Example";
+import Comments from "src/components/Comments";
 
 export default function UseRefInputChangeButtonClick() {
   const [name, setName] = useState("");

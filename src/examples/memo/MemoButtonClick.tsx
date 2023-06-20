@@ -1,7 +1,10 @@
 import { memo, useRef, useState } from "react";
 import Example from "src/components/Example";
 
-const ChildComp = memo(function Child({ num }: { num: number }) {
+interface ChildCompProps {
+  num: number;
+}
+const ChildComp = memo(function Child({ num }: ChildCompProps) {
   console.log("Child render");
   return (
     <Example isChild comments="memoized component">

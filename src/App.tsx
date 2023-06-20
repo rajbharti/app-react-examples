@@ -1,11 +1,11 @@
 import { useState } from "react";
 import type {
-  FeatureCategoryLabel,
+  TagsCateoryLabel,
   TagType,
   ActiveTagType,
   CompType,
 } from "./types";
-import TagsFilter from "./components/TagsFilter";
+import TagsCategory from "./components/TagsCategory";
 import RenderComp from "./components/RenderComp";
 // Hooks
 import UseStateChange from "./examples/use-state/UseStateChange";
@@ -25,7 +25,7 @@ import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
 import ReduxCounter from "./examples/redux/Counter";
 
 interface MapTagToComps {
-  [key: FeatureCategoryLabel]: Record<string, CompType[]>;
+  [key: TagsCateoryLabel]: Record<string, CompType[]>;
 }
 
 export const mapTagToComps: MapTagToComps = {
@@ -59,7 +59,7 @@ export default function App() {
         const tags: TagType[] = Object.keys(mapTagToComps[category]);
 
         return (
-          <TagsFilter
+          <TagsCategory
             key={category}
             label={category}
             tags={tags}
