@@ -37,11 +37,11 @@ function TabButton({ children, isActive, onClick }: TabButtonProps) {
   }
 
   if (isActive) {
-    return <b className="tab">{children}</b>;
+    return <b className="mx-1.5">{children}</b>;
   }
 
   if (isPending) {
-    return <b className="tab pending">{children}</b>;
+    return <b className="mx-1.5 text-gray-400">{children}</b>;
   }
 
   return <button onClick={handleClick}>{children}</button>;
@@ -52,21 +52,19 @@ export default function UseTransitionTabs() {
 
   return (
     <Example hasNestedComp={false} title="Tabs">
-      <div className="tabs-ex">
-        {tabLabels.map((label: TabLabel) => (
-          <TabButton
-            key={label}
-            isActive={tab === label}
-            onClick={() => setTab(label)}
-          >
-            {label}
-          </TabButton>
-        ))}
+      {tabLabels.map((label: TabLabel) => (
+        <TabButton
+          key={label}
+          isActive={tab === label}
+          onClick={() => setTab(label)}
+        >
+          {label}
+        </TabButton>
+      ))}
 
-        {tab === "About" && <AboutContent />}
-        {tab === "Posts" && <PostsContent />}
-        {tab === "Contact Us" && <ContactUsContent />}
-      </div>
+      {tab === "About" && <AboutContent />}
+      {tab === "Posts" && <PostsContent />}
+      {tab === "Contact Us" && <ContactUsContent />}
     </Example>
   );
 }

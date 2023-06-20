@@ -53,7 +53,9 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
 
       <br />
       {error ? (
-        <div className="error">Something went wrong. Try again!</div>
+        <div className="mt-1 text-red-500">
+          Something went wrong. Try again!
+        </div>
       ) : (
         <pre>{JSON.stringify(response, null, 2)}</pre>
       )}

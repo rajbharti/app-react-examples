@@ -18,7 +18,7 @@ export default function App() {
   );
 
   return (
-    <Example hasNestedComp={false} title="Todo" className="todos">
+    <Example hasNestedComp={false} title="Todo">
       <Form formOperationType="add" dispatch={dispatch} />
       <Filters
         activeFilter={activeFilter}

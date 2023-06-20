@@ -3,12 +3,16 @@ import clsx from "clsx";
 import type { TagType, ActiveTagType, FeatureCategoryLabel } from "../types";
 import { getActiveTagCompsCount } from "../utils";
 
-interface TagFilterProps {
+interface Props {
   label: FeatureCategoryLabel;
-  tag: TagType;
+  tags: TagType[];
   activeTag: ActiveTagType;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
 }
+
+type TagFilterProps = Omit<Props, "tags"> & {
+  tag: TagType;
+};
 
 function TagFilter({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
   const count = useMemo(() => getActiveTagCompsCount(label, tag), [label, tag]);
@@ -22,18 +26,16 @@ function TagFilter({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
   return (
     <button
       onClick={() => handleTagClick(tag)}
-      className={clsx(activeTag === tag && "active-tag")}
+      className={clsx(
+        "cursor-pointer rounded-full border  px-2 py-1 no-underline hover:border-orange-600 hover:bg-orange-500 hover:text-white",
+        activeTag === tag
+          ? "border-orange-600 bg-orange-500 text-white"
+          : "border-slate-300 bg-slate-100"
+      )}
     >
       {tag} ({count})
     </button>
   );
-}
-
-interface TagsFilterProps {
-  label: FeatureCategoryLabel;
-  tags: TagType[];
-  activeTag: ActiveTagType;
-  setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
 }
 
 export default function TagsFilter({
@@ -41,10 +43,10 @@ export default function TagsFilter({
   tags,
   activeTag,
   setActiveTag,
-}: TagsFilterProps) {
+}: Props) {
   return (
-    <div className="tags-filter">
-      <span className="tags-label">{label}</span>:{" "}
+    <div className="my-4">
+      <span className="font-bold capitalize">{label}</span>:{" "}
       {tags.map((tag: TagType) => (
         <TagFilter
           key={tag}

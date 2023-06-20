@@ -7,7 +7,6 @@ interface Props {
   hasNestedComp?: boolean;
   title?: string;
   comments?: string;
-  className?: string;
   children: React.ReactNode;
 }
 
@@ -25,7 +24,6 @@ export default function Example({
   hasNestedComp = true,
   title,
   comments,
-  className,
   children,
 }: Props) {
   const RenderOnlyParent = (
@@ -42,7 +40,12 @@ export default function Example({
   );
 
   const ParentOrChild = (
-    <div className={isChild ? "child-comp" : "parent-comp"}>
+    <div
+      className={clsx(
+        "border border-gray-300 px-1.5 py-2.5",
+        isChild ? "m-2.5 bg-white" : "bg-[#fafad2]"
+      )}
+    >
       <h4>
         {isChild ? "Child" : "Parent"}
         {comments && <Comments>{comments}</Comments>}
@@ -54,7 +57,7 @@ export default function Example({
   return isChild ? (
     ParentOrChild
   ) : (
-    <section className={clsx(className)}>
+    <section>
       {title && <Header title={title} />}
       {hasNestedComp ? ParentOrChild : RenderOnlyParent}
     </section>

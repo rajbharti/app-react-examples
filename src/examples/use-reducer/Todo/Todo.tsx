@@ -31,7 +31,7 @@ export default function Todo({ task, dispatch }: PropsInterface) {
   }
 
   return (
-    <li>
+    <li className="cursor-pointer">
       {toggleForm ? (
         <Form
           dispatch={dispatch}
@@ -43,7 +43,7 @@ export default function Todo({ task, dispatch }: PropsInterface) {
         <>
           <span
             onClick={() => handleToggle(id)}
-            className={clsx(isCompleted && "completed")}
+            className={clsx(isCompleted && "text-gray-200, line-through")}
           >
             {text}
           </span>{" "}

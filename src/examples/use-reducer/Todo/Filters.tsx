@@ -30,7 +30,7 @@ function Filter({
   return (
     <button
       onClick={() => handleClick(filter)}
-      className={clsx(activeFilter === filter && "active-filter")}
+      className={clsx("capitalize", activeFilter === filter && "bg-[#7fff00]")}
     >
       {filter} ({count})
     </button>
@@ -39,7 +39,7 @@ function Filter({
 
 export default function Filters(props: FiltersPropsInterface) {
   return (
-    <div className="filters">
+    <div className="mb-2 mt-1 text-sm">
       Filters:{" "}
       {Object.keys(filtersLogic).map((filter: string) => (
         <Filter key={filter} {...props} filter={filter as FilterType} />

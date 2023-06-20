@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply m-5 font-sans text-sm;
+  }
+
+  h4 {
+    @apply mx-0 my-1.5 p-0 font-bold;
+  }
+
+  h3 {
+    @apply mx-0 my-3 p-0 text-base font-bold;
+  }
+
+  input,
+  button {
+    @apply my-0.5 ml-0 mr-1.5 min-w-30px border border-gray-400 px-1 py-0.5 focus:outline-1 focus:outline-gray-400;
+  }
+
+  input[type="reset"],
+  input[type="button"],
+  input[type="submit"],
+  button {
+    @apply rounded-sm bg-slate-100 hover:bg-slate-200 active:bg-slate-300;
+  }
+
+  ul,
+  ol {
+    @apply m-0 pl-4;
+  }
+
+  li {
+    @apply m-0 mt-1;
+  }
+
+  hr {
+    @apply mx-0 my-2.5 border-0 border-t border-gray-300;
+  }
+}
