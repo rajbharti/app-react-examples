@@ -1,14 +1,10 @@
 import { useState } from "react";
-import type {
-  TagsCategoryLabel,
-  TagType,
-  ActiveTagType,
-  CompType,
-} from "./types";
+import type { Category, Tag, ActiveTag, ActiveCategory, Comp } from "./types";
 import TagsCategory from "./components/TagsCategory";
 import RenderComp from "./components/RenderComp";
 // Hooks
 import UseStateChange from "./examples/use-state/UseStateChange";
+import UseStateButtonToggle from "./examples/use-state/UseStateButtonToggle";
 import UseReducerCounter from "./examples/use-reducer/Counter";
 import UseReducerTodo from "./examples/use-reducer/Todo";
 import UseEffectFetchAPIAndLifeCycleMethods from "./examples/use-effect/UseEffectFetchAPIAndLifeCycleMethods";
@@ -25,12 +21,12 @@ import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
 import ReduxCounter from "./examples/redux/Counter";
 
 interface MapTagToComps {
-  [key: TagsCategoryLabel]: Record<string, CompType[]>;
+  [key: Category]: Record<string, Comp[]>;
 }
 
 export const mapTagToComps: MapTagToComps = {
   hooks: {
-    useState: [UseStateChange],
+    useState: [UseStateChange, UseStateButtonToggle],
     useReducer: [UseReducerCounter, UseReducerTodo],
     useEffect: [UseEffectFetchAPIAndLifeCycleMethods],
     useRef: [UseRefInputChangeButtonClick, MemoButtonClick],
@@ -49,19 +45,21 @@ export const mapTagToComps: MapTagToComps = {
 };
 
 export default function App() {
-  const [activeTag, setActiveTag] = useState<ActiveTagType>(null);
-  const categories: string[] = Object.keys(mapTagToComps);
+  const [activeTag, setActiveTag] = useState<ActiveTag>(null);
+  const [activeCategory, setActiveCategory] = useState<ActiveCategory>(null);
+  const categories: readonly string[] = Object.keys(mapTagToComps);
 
   return (
     <main>
       <h1>React Examples</h1>
       {categories.map((category: string) => {
-        const tags: TagType[] = Object.keys(mapTagToComps[category]);
+        const tags: Tag[] = Object.keys(mapTagToComps[category]);
 
         return (
           <TagsCategory
             key={category}
-            label={category}
+            category={category}
+            setActiveCategory={setActiveCategory}
             tags={tags}
             activeTag={activeTag}
             setActiveTag={setActiveTag}
@@ -71,21 +69,18 @@ export default function App() {
 
       <hr />
 
-      {/* Todo: optimize below: store category in state along with activeTag */}
-      {categories.map(
-        (category: string) =>
-          activeTag &&
-          mapTagToComps[category][activeTag]?.map(
-            (Comp: CompType, i: number) => (
-              <RenderComp
-                key={activeTag + i.toString()}
-                Comp={Comp}
-                activeTag={activeTag}
-                setActiveTag={setActiveTag}
-              />
-            )
+      {activeTag &&
+        activeCategory &&
+        mapTagToComps[activeCategory][activeTag]?.map(
+          (Comp: Comp, i: number) => (
+            <RenderComp
+              key={activeTag + i.toString()}
+              Comp={Comp}
+              activeTag={activeTag}
+              setActiveTag={setActiveTag}
+            />
           )
-      )}
+        )}
     </main>
   );
 }

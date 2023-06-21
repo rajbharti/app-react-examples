@@ -42,6 +42,7 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
     }
   }, [resourceType]);
 
+  // TODO: create a component to render toggle button
   return (
     <Example hasNestedComp={false} title="Fetching APIs and Life Cycle Methods">
       <button onClick={() => setResourceType("posts")}>Posts</button>

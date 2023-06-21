@@ -1,12 +1,12 @@
 import { useTagsContext } from "../context";
-import type { TagType } from "../types";
+import type { Tag } from "../types";
 
 export default function Tags() {
   const { compTags, setActiveTag } = useTagsContext();
 
   return compTags.length > 0 ? (
     <span className="font-mono text-sm font-normal leading-4 text-purple-500">
-      {compTags.map((tag: TagType) => (
+      {compTags.map((tag: Tag) => (
         <span
           key={tag}
           onClick={() => setActiveTag(tag)}

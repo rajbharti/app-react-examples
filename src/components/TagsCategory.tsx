@@ -1,33 +1,43 @@
 import { useMemo } from "react";
 import clsx from "clsx";
-import type { TagType, ActiveTagType, TagsCategoryLabel } from "../types";
+import type { Tag, ActiveTag, Category, ActiveCategory } from "../types";
 import { getActiveTagCompsCount } from "../utils";
 
 interface Props {
-  label: TagsCategoryLabel;
-  tags: TagType[];
-  activeTag: ActiveTagType;
-  setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
+  category: Category;
+  setActiveCategory: React.Dispatch<React.SetStateAction<ActiveTag>>;
+  tags: Tag[];
+  activeTag: ActiveTag;
+  setActiveTag: React.Dispatch<React.SetStateAction<ActiveCategory>>;
 }
 
 type TagFilterProps = Omit<Props, "tags"> & {
-  tag: TagType;
+  tag: Tag;
 };
 
-function TagCategory({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
-  const count = useMemo(() => getActiveTagCompsCount(label, tag), [label, tag]);
-
-  function handleTagClick(clickedTag: TagType) {
-    setActiveTag((prevState: ActiveTagType) => {
-      return prevState === clickedTag ? null : clickedTag;
-    });
+function TagCategory({
+  category,
+  setActiveCategory,
+  tag,
+  activeTag,
+  setActiveTag,
+}: TagFilterProps) {
+  const count = useMemo(
+    () => getActiveTagCompsCount(category, tag),
+    [category, tag]
+  );
+  function handleTagClick(clickedTag: Tag) {
+    setActiveCategory(category);
+    setActiveTag((prevState: ActiveTag) =>
+      prevState === clickedTag ? null : clickedTag
+    );
   }
 
   return (
     <button
       onClick={() => handleTagClick(tag)}
       className={clsx(
-        "hover:text-orange-900hover:border-orange-600 cursor-pointer rounded-full  border px-2 py-1 no-underline hover:border-orange-600 hover:bg-orange-200 hover:bg-orange-200 hover:text-orange-900",
+        "cursor-pointer rounded-full  border px-2 py-1 no-underline hover:border-orange-600 hover:bg-orange-200 hover:bg-orange-200 hover:text-orange-900 active:bg-orange-300 active:bg-orange-300 active:text-orange-950",
         activeTag === tag
           ? "border-orange-600 bg-orange-200 text-orange-900"
           : "border-slate-300 bg-slate-100"
@@ -39,15 +49,15 @@ function TagCategory({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
 }
 
 export default function TagsCategory(props: Props) {
-  const { label, tags } = props;
+  const { category, tags } = props;
 
   return (
     <div className="my-4">
       <span className="text-base font-bold capitalize text-orange-700">
-        {label}
+        {category}
       </span>
       :{" "}
-      {tags.map((tag: TagType) => (
+      {tags.map((tag: Tag) => (
         <TagCategory key={tag} tag={tag} {...props} />
       ))}
     </div>

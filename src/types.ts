@@ -1,12 +1,14 @@
-export type TagsCategoryLabel = string;
+export type Category = string;
 
-export type TagType = string;
+export type Tag = string;
 
-export type CompType = () => JSX.Element;
+export type Comp = () => JSX.Element;
 
-export type ActiveTagType = TagType | null;
+export type ActiveTag = Tag | null;
+
+export type ActiveCategory = Category | null;
 
 export interface TagsContextShape {
-  compTags: TagType[];
-  setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
+  compTags: Tag[];
+  setActiveTag: React.Dispatch<React.SetStateAction<ActiveTag>>;
 }
