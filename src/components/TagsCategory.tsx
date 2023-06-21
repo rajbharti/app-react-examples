@@ -37,7 +37,7 @@ function TagCategory({
     <button
       onClick={() => handleTagClick(tag)}
       className={clsx(
-        "cursor-pointer rounded-full  border px-2 py-1 no-underline hover:border-orange-600 hover:bg-orange-200 hover:bg-orange-200 hover:text-orange-900 active:bg-orange-300 active:bg-orange-300 active:text-orange-950",
+        "cursor-pointer rounded-full border px-2 py-1 leading-4 no-underline hover:border-orange-600 hover:bg-orange-200 hover:text-orange-900 active:bg-orange-300 active:text-orange-950",
         activeTag === tag
           ? "border-orange-600 bg-orange-200 text-orange-900"
           : "border-slate-300 bg-slate-100"
@@ -52,7 +52,7 @@ export default function TagsCategory(props: Props) {
   const { category, tags } = props;
 
   return (
-    <div className="my-4">
+    <div className="my-2.5">
       <span className="text-base font-bold capitalize text-orange-700">
         {category}
       </span>

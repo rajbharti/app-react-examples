@@ -9,6 +9,9 @@ export type ActiveTag = Tag | null;
 export type ActiveCategory = Category | null;
 
 export interface TagsContextShape {
-  compTags: Tag[];
+  compTags: { category: string; tag: string }[];
+  setActiveCategory: React.Dispatch<React.SetStateAction<ActiveCategory>>;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTag>>;
 }
+
+export type CompCategoryAndTags = TagsContextShape["compTags"][number];

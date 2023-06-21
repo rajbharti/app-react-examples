@@ -1,9 +1,10 @@
-import type { Tag, Comp, Category } from "./types";
+import type { Tag, Comp, Category, CompCategoryAndTags } from "./types";
 import { mapTagToComps } from "./App";
 
-export function getCompTags(Comp: Comp, activeTag: Tag): Tag[] {
-  const list = [];
-
+export function* getCompTags(
+  Comp: Comp,
+  activeTag: Tag
+): Iterable<CompCategoryAndTags> {
   for (const category in mapTagToComps) {
     const tags = mapTagToComps[category];
 
@@ -12,16 +13,11 @@ export function getCompTags(Comp: Comp, activeTag: Tag): Tag[] {
         // insert all other tags except activeTag
         console.log(`[${category.toUpperCase()}: ${tag}]`);
         if (tag !== activeTag) {
-          list.push(tag);
+          yield { category, tag };
         }
       }
     }
   }
-
-  // insert activeTag at the end
-  list.push(activeTag);
-
-  return list;
 }
 
 export function getActiveTagCompsCount(category: Category, tag: Tag) {
@@ -40,7 +36,7 @@ export function getSumOfSquareAndCube(square: number, cube: number) {
   return square + cube;
 }
 
-export function* getEvenNumbers() {
+export function* getEvenNumbers(): Iterable<number> {
   console.log("getEvenNumbers is invoked");
 
   for (let i = 1; i <= 10; i++) {

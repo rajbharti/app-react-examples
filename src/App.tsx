@@ -67,7 +67,7 @@ export default function App() {
         );
       })}
 
-      <hr />
+      <hr className="mt-4" />
 
       {activeTag &&
         activeCategory &&
@@ -76,6 +76,7 @@ export default function App() {
             <RenderComp
               key={activeTag + i.toString()}
               Comp={Comp}
+              setActiveCategory={setActiveCategory}
               activeTag={activeTag}
               setActiveTag={setActiveTag}
             />
