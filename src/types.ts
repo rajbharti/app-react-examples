@@ -1,4 +1,4 @@
-export type TagsCateoryLabel = string;
+export type TagsCategoryLabel = string;
 
 export type TagType = string;
 

@@ -1,4 +1,4 @@
-import type { TagType, CompType, TagsCateoryLabel } from "./types";
+import type { TagType, CompType, TagsCategoryLabel } from "./types";
 import { mapTagToComps } from "./App";
 
 export function getCompTags(Comp: CompType, activeTag: TagType): TagType[] {
@@ -10,7 +10,7 @@ export function getCompTags(Comp: CompType, activeTag: TagType): TagType[] {
     for (const tag in tags) {
       if (tags[tag].find((c: CompType) => c === Comp)) {
         // insert all other tags except activeTag
-        console.log(category, tag);
+        console.log(`[${category.toUpperCase()}: ${tag}]`);
         if (tag !== activeTag) {
           list.push(tag);
         }
@@ -18,13 +18,13 @@ export function getCompTags(Comp: CompType, activeTag: TagType): TagType[] {
     }
   }
 
-  // insert activeTag at beginning
-  list.unshift(activeTag);
+  // insert activeTag at the end
+  list.push(activeTag);
 
   return list;
 }
 
-export function getActiveTagCompsCount(label: TagsCateoryLabel, tag: TagType) {
+export function getActiveTagCompsCount(label: TagsCategoryLabel, tag: TagType) {
   return mapTagToComps[label][tag]?.length || 0;
 }
 

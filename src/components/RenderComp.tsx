@@ -25,11 +25,10 @@ export default function RenderComp({
   );
 
   return (
-    <section>
+    <section className="pb-2">
       <TagsContext.Provider value={value}>
         <Comp />
       </TagsContext.Provider>
-      <hr />
     </section>
   );
 }

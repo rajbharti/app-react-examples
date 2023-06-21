@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import clsx from "clsx";
-import type { TagType, ActiveTagType, TagsCateoryLabel } from "../types";
+import type { TagType, ActiveTagType, TagsCategoryLabel } from "../types";
 import { getActiveTagCompsCount } from "../utils";
 
 interface Props {
-  label: TagsCateoryLabel;
+  label: TagsCategoryLabel;
   tags: TagType[];
   activeTag: ActiveTagType;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTagType>>;
@@ -27,9 +27,9 @@ function TagCategory({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
     <button
       onClick={() => handleTagClick(tag)}
       className={clsx(
-        "cursor-pointer rounded-full border  px-2 py-1 no-underline hover:border-orange-600 hover:bg-orange-500 hover:text-white",
+        "hover:text-orange-900hover:border-orange-600 cursor-pointer rounded-full  border px-2 py-1 no-underline hover:border-orange-600 hover:bg-orange-200 hover:bg-orange-200 hover:text-orange-900",
         activeTag === tag
-          ? "border-orange-600 bg-orange-500 text-white"
+          ? "border-orange-600 bg-orange-200 text-orange-900"
           : "border-slate-300 bg-slate-100"
       )}
     >
@@ -38,23 +38,17 @@ function TagCategory({ label, tag, activeTag, setActiveTag }: TagFilterProps) {
   );
 }
 
-export default function TagsCategory({
-  label,
-  tags,
-  activeTag,
-  setActiveTag,
-}: Props) {
+export default function TagsCategory(props: Props) {
+  const { label, tags } = props;
+
   return (
     <div className="my-4">
-      <span className="text-base font-bold capitalize">{label}</span>:{" "}
+      <span className="text-base font-bold capitalize text-orange-700">
+        {label}
+      </span>
+      :{" "}
       {tags.map((tag: TagType) => (
-        <TagCategory
-          key={tag}
-          label={label}
-          tag={tag}
-          activeTag={activeTag}
-          setActiveTag={setActiveTag}
-        />
+        <TagCategory key={tag} tag={tag} {...props} />
       ))}
     </div>
   );

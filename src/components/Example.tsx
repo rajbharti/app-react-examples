@@ -14,7 +14,7 @@ type HeaderProps = Required<Pick<Props, "title">>;
 
 function Header({ title }: HeaderProps) {
   return (
-    <h3>
+    <h3 className="text-slate-700">
       {title} <Tags />
     </h3>
   );
@@ -26,30 +26,28 @@ export default function Example({
   comments,
   children,
 }: Props) {
-  const RenderOnlyParent = (
-    <>
-      {comments && (
-        <>
-          <Comments>{comments}</Comments>
-          <br />
-        </>
-      )}
-
-      {children}
-    </>
+  const WithOrWithoutHeading = hasNestedComp ? (
+    <h4 className="text-lime-700">
+      {isChild ? "Child" : "Parent"}
+      {comments && <Comments>{comments}</Comments>}
+    </h4>
+  ) : (
+    comments && (
+      <>
+        <Comments>{comments}</Comments>
+        <br />
+      </>
+    )
   );
 
   const RenderParentOrChild = (
     <div
       className={clsx(
-        "border border-gray-300 px-1.5 py-2.5",
-        isChild ? "m-2.5 bg-white" : "bg-[#fafad2]"
+        "border border-lime-600 px-2.5 py-2.5",
+        isChild ? "m-2.5 bg-white" : "bg-lime-100"
       )}
     >
-      <h4>
-        {isChild ? "Child" : "Parent"}
-        {comments && <Comments>{comments}</Comments>}
-      </h4>
+      {WithOrWithoutHeading}
       {children}
     </div>
   );
@@ -59,7 +57,7 @@ export default function Example({
   ) : (
     <section>
       {title && <Header title={title} />}
-      {hasNestedComp ? RenderParentOrChild : RenderOnlyParent}
+      {RenderParentOrChild}
     </section>
   );
 }

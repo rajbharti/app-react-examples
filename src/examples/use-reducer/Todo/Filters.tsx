@@ -1,17 +1,17 @@
 import { useMemo } from "react";
 import clsx from "clsx";
 import { filtersLogic, getFilterCount } from "./utils";
-import type { FilterUnion, TodoShape } from "./types";
+import type { TodosFilter, TodoShape } from "./types";
 
 interface FilterProps extends Props {
-  filter: FilterUnion;
+  filter: TodosFilter;
 }
 
 function Filter({ todos, filter, activeFilter, setActiveFilter }: FilterProps) {
   const count = useMemo(() => getFilterCount(todos, filter), [todos]);
 
-  function handleClick(clickedFilter: FilterUnion) {
-    setActiveFilter((prevState: FilterUnion) =>
+  function handleClick(clickedFilter: TodosFilter) {
+    setActiveFilter((prevState: TodosFilter) =>
       prevState === clickedFilter ? null : clickedFilter
     );
   }
@@ -20,8 +20,9 @@ function Filter({ todos, filter, activeFilter, setActiveFilter }: FilterProps) {
     <button
       onClick={() => handleClick(filter)}
       className={clsx(
-        "capitalize",
-        activeFilter === filter && "bg-[#7fff00] hover:bg-[#7fff00]"
+        "capitalize hover:border-yellow-700 hover:bg-yellow-300 hover:text-yellow-900",
+        activeFilter === filter &&
+          "border-yellow-700 bg-yellow-300 text-yellow-900"
       )}
     >
       {filter} ({count})
@@ -31,8 +32,8 @@ function Filter({ todos, filter, activeFilter, setActiveFilter }: FilterProps) {
 
 interface Props {
   todos: TodoShape[];
-  activeFilter: FilterUnion;
-  setActiveFilter: React.Dispatch<React.SetStateAction<FilterUnion>>;
+  activeFilter: TodosFilter;
+  setActiveFilter: React.Dispatch<React.SetStateAction<TodosFilter>>;
 }
 
 export default function Filters(props: Props) {
@@ -40,7 +41,7 @@ export default function Filters(props: Props) {
     <div className="mb-2 mt-1 text-sm">
       Filters:{" "}
       {Object.keys(filtersLogic).map((filter: string) => (
-        <Filter key={filter} {...props} filter={filter as FilterUnion} />
+        <Filter key={filter} {...props} filter={filter as TodosFilter} />
       ))}
     </div>
   );

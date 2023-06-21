@@ -12,11 +12,11 @@
   }
 
   h3 {
-    @apply my-3 text-lg font-bold;
+    @apply my-3 text-xl font-bold;
   }
 
   h4 {
-    @apply font-bold;
+    @apply text-base font-bold;
   }
 
   input,
@@ -44,6 +44,6 @@
   }
 
   hr {
-    @apply mx-0 my-2.5 border-0 border-t border-gray-300;
+    @apply my-2.5 border-0 border-t border-gray-300;
   }
 }

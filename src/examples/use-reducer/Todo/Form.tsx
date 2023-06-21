@@ -71,7 +71,7 @@ export default function AddTodo({
         value={text}
         onChange={handleChange}
         ref={inputRef}
-        className={clsx(hasError && "border-red-500")}
+        className={clsx(hasError && "border-red-500 focus:outline-red-500")}
       />
 
       {formOperationType === "add" ? (

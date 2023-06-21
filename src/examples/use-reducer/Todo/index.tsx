@@ -3,15 +3,18 @@ import Example from "src/components/Example";
 import Form from "./Form";
 import Filters from "./Filters";
 import Todos from "./Todos";
-import { type TodoShape, FilterUnion } from "./types";
+import { type TodoShape, TodosFilter } from "./types";
 import { reducer } from "./reducer";
 import { filtersLogic } from "./utils";
 
 const initialState: TodoShape[] = [];
 
 export default function App() {
+  // example with complete arguments. createInitialState(username)
+  // const [state, dispatch] = useReducer(reducer, username, createInitialState);
+
   const [todos, dispatch] = useReducer(reducer, initialState);
-  const [activeFilter, setActiveFilter] = useState<FilterUnion>(null);
+  const [activeFilter, setActiveFilter] = useState<TodosFilter>(null);
 
   const filteredTodos = todos.filter(
     activeFilter ? filtersLogic[activeFilter] : Boolean

@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ["Arial", "Helvetica", "sans-serif"],
+      sans: ["Arial", "Helvetica", "sans"],
     },
     minWidth: {
       "30px": "30px",

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type {
-  TagsCateoryLabel,
+  TagsCategoryLabel,
   TagType,
   ActiveTagType,
   CompType,
@@ -25,7 +25,7 @@ import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
 import ReduxCounter from "./examples/redux/Counter";
 
 interface MapTagToComps {
-  [key: TagsCateoryLabel]: Record<string, CompType[]>;
+  [key: TagsCategoryLabel]: Record<string, CompType[]>;
 }
 
 export const mapTagToComps: MapTagToComps = {

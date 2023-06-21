@@ -1,14 +1,17 @@
 import { nanoid } from "nanoid";
 import type { TodoShape, Action } from "./types";
 
-export function reducer(state: TodoShape[], action: Action): TodoShape[] {
-  switch (action.type) {
+export function reducer(
+  state: TodoShape[],
+  { type, payload }: Action
+): TodoShape[] {
+  switch (type) {
     case "add":
       return [
         ...state,
         {
           id: nanoid(),
-          text: action.payload.text as string,
+          text: payload.text as string,
           isCompleted: false,
         },
       ];
@@ -16,22 +19,20 @@ export function reducer(state: TodoShape[], action: Action): TodoShape[] {
     case "edit":
       return [
         ...state.map((todo: TodoShape) => {
-          if (todo.id === action.payload.id) {
-            return { ...todo, text: action.payload.text as string };
+          if (todo.id === payload.id) {
+            return { ...todo, text: payload.text as string };
           }
           return todo;
         }),
       ];
 
     case "delete":
-      return [
-        ...state.filter((todo: TodoShape) => todo.id !== action.payload.id),
-      ];
+      return [...state.filter((todo: TodoShape) => todo.id !== payload.id)];
 
     case "toggle":
       return [
         ...state.map((todo: TodoShape) => {
-          if (todo.id === action.payload.id) {
+          if (todo.id === payload.id) {
             return { ...todo, isCompleted: !todo.isCompleted };
           }
           return todo;

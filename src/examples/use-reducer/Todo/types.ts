@@ -11,4 +11,4 @@ export interface Action {
 
 export type FormOperationType = "add" | "edit";
 
-export type FilterUnion = "all" | "active" | "completed" | null;
+export type TodosFilter = "all" | "active" | "completed" | null;

@@ -1,7 +1,7 @@
-import { TodoShape, FilterUnion } from "./types";
+import { TodoShape, TodosFilter } from "./types";
 
 type FiltersLogic = Record<
-  NonNullable<FilterUnion>,
+  NonNullable<TodosFilter>,
   (todo: TodoShape) => TodoShape[] | boolean
 >;
 
@@ -11,6 +11,6 @@ export const filtersLogic: FiltersLogic = {
   completed: (todo: TodoShape) => todo.isCompleted,
 };
 
-export function getFilterCount(todos: TodoShape[], filter: FilterUnion) {
+export function getFilterCount(todos: TodoShape[], filter: TodosFilter) {
   return filter ? todos.filter(filtersLogic[filter]).length : 0;
 }
