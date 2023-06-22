@@ -9,8 +9,10 @@ type Filter = (typeof filters)[number];
 export default function UseStateButtonToggle() {
   const [activeFilter, setActiveFilter] = useState<Filter | null>(null);
 
-  function handleClick(filter: Filter) {
-    setActiveFilter((prevState) => (prevState === filter ? null : filter));
+  function handleClick(selectedFilter: Filter) {
+    setActiveFilter((prevActiveFilter) =>
+      prevActiveFilter === selectedFilter ? null : selectedFilter
+    );
   }
 
   return (

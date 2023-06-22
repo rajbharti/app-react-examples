@@ -1,10 +1,17 @@
+import clsx from "clsx";
 interface Props {
+  noLeftMargin?: boolean;
   children: React.ReactNode;
 }
 
-export default function Comments({ children }: Props) {
+export default function Comments({ noLeftMargin, children }: Props) {
   return (
-    <span className="ml-2 font-normal text-gray-500 before:pr-1 before:content-['//']">
+    <span
+      className={clsx(
+        "font-normal text-gray-500 before:pr-1 before:content-['//']",
+        !noLeftMargin && "ml-2"
+      )}
+    >
       {children}
     </span>
   );

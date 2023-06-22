@@ -26,10 +26,11 @@ function TagCategory({
     () => getActiveTagCompsCount(category, tag),
     [category, tag]
   );
-  function handleTagClick(clickedTag: Tag) {
+
+  function handleTagClick(selectedTag: Tag) {
     setActiveCategory(category);
-    setActiveTag((prevState: ActiveTag) =>
-      prevState === clickedTag ? null : clickedTag
+    setActiveTag((prevActiveTag: ActiveTag) =>
+      prevActiveTag === selectedTag ? null : selectedTag
     );
   }
 

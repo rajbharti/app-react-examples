@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useState, useReducer, useRef } from "react";
 import Example from "src/components/Example";
 import Form from "./Form";
 import Filters from "./Filters";
@@ -10,11 +10,12 @@ import { filtersLogic } from "./utils";
 const initialState: TodoShape[] = [];
 
 export default function App() {
-  // example with complete arguments. createInitialState(username)
-  // const [state, dispatch] = useReducer(reducer, username, createInitialState);
+  // example with complete arguments
+  // const [state, dispatch] = useReducer(reducer, username, createInitialState); // createInitialState(username)
 
   const [todos, dispatch] = useReducer(reducer, initialState);
   const [activeFilter, setActiveFilter] = useState<TodosFilter>(null);
+  const todosElRef = useRef<HTMLUListElement>(null);
 
   const filteredTodos = todos.filter(
     activeFilter ? filtersLogic[activeFilter] : Boolean
@@ -22,13 +23,17 @@ export default function App() {
 
   return (
     <Example hasNestedComp={false} title="Todo">
-      <Form formOperationType="add" dispatch={dispatch} />
+      <Form
+        formOperationType="add"
+        dispatch={dispatch}
+        todosElRef={todosElRef}
+      />
       <Filters
         activeFilter={activeFilter}
         setActiveFilter={setActiveFilter}
         todos={todos}
       />
-      <Todos todos={filteredTodos} dispatch={dispatch} />
+      <Todos todos={filteredTodos} dispatch={dispatch} ref={todosElRef} />
     </Example>
   );
 }

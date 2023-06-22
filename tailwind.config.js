@@ -10,6 +10,7 @@ export default {
     },
     maxHeight: {
       "253px": "253px",
+      "500px": "500px",
     },
     extend: {},
   },

@@ -34,10 +34,10 @@ export default function Todo({ task, dispatch }: Props) {
     <li className="cursor-default list-disc">
       {toggleForm ? (
         <Form
-          dispatch={dispatch}
           formOperationType="edit"
           setToggleForm={setToggleForm}
           task={task}
+          dispatch={dispatch}
         />
       ) : (
         <>

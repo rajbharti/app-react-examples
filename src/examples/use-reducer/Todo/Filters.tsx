@@ -10,9 +10,9 @@ interface FilterProps extends Props {
 function Filter({ todos, filter, activeFilter, setActiveFilter }: FilterProps) {
   const count = useMemo(() => getFilterCount(todos, filter), [todos]);
 
-  function handleClick(clickedFilter: TodosFilter) {
-    setActiveFilter((prevState: TodosFilter) =>
-      prevState === clickedFilter ? null : clickedFilter
+  function handleClick(selectedFilter: TodosFilter) {
+    setActiveFilter((prevActiveFilter: TodosFilter) =>
+      prevActiveFilter === selectedFilter ? null : selectedFilter
     );
   }
 
@@ -20,7 +20,7 @@ function Filter({ todos, filter, activeFilter, setActiveFilter }: FilterProps) {
     <button
       onClick={() => handleClick(filter)}
       className={clsx(
-        "capitalize hover:border-yellow-700 hover:bg-yellow-300 hover:text-yellow-900",
+        "capitalize hover:border-yellow-700 hover:bg-yellow-300 hover:text-yellow-900 active:border-yellow-800 active:bg-yellow-400 active:text-yellow-950",
         activeFilter === filter &&
           "border-yellow-700 bg-yellow-300 text-yellow-900"
       )}
@@ -39,7 +39,7 @@ interface Props {
 export default function Filters(props: Props) {
   return (
     <div className="mb-2 mt-1 text-sm">
-      Filters:{" "}
+      <span className="mr-1 font-bold">Filters:</span>
       {Object.keys(filtersLogic).map((filter: string) => (
         <Filter key={filter} {...props} filter={filter as TodosFilter} />
       ))}

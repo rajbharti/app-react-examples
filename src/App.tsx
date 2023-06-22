@@ -26,7 +26,7 @@ interface MapTagToComps {
 
 export const mapTagToComps: MapTagToComps = {
   hooks: {
-    useState: [UseStateChange, UseStateButtonToggle],
+    useState: [UseStateButtonToggle, UseStateChange],
     useReducer: [UseReducerCounter, UseReducerTodo],
     useEffect: [UseEffectFetchAPIAndLifeCycleMethods],
     useRef: [UseRefInputChangeButtonClick, MemoButtonClick],
@@ -36,6 +36,7 @@ export const mapTagToComps: MapTagToComps = {
   },
   apis: {
     memo: [MemoButtonClick, MemoInputChange, UseCallbackInputChange],
+    forwardRef: [UseReducerTodo],
   },
   components: {},
   redux: {

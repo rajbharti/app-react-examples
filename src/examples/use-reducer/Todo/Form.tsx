@@ -7,13 +7,15 @@ interface Props {
   dispatch: React.Dispatch<Action>;
   setToggleForm?: (toggle: boolean) => void;
   task?: TodoShape;
+  todosElRef?: React.RefObject<HTMLUListElement>;
 }
 
-export default function AddTodo({
+export default function Form({
   formOperationType,
   dispatch,
   setToggleForm,
   task,
+  todosElRef,
 }: Props) {
   const [hasError, setHasError] = useState(false);
   const [text, setText] = useState(
@@ -48,6 +50,12 @@ export default function AddTodo({
     }
 
     setText("");
+
+    // scroll to added todo
+    const el = todosElRef?.current as HTMLUListElement;
+    if (formOperationType === "add" && el.scrollHeight > 253) {
+      el.scrollTo(0, el.scrollHeight);
+    }
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {

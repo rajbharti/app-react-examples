@@ -7,6 +7,7 @@ interface Props {
   hasNestedComp?: boolean;
   title?: string;
   comments?: string;
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -19,11 +20,13 @@ function Header({ title }: HeaderProps) {
     </h3>
   );
 }
+
 export default function Example({
-  isChild = false,
+  isChild,
   hasNestedComp = true,
   title,
   comments,
+  className,
   children,
 }: Props) {
   const WithOrWithoutHeading = hasNestedComp ? (
@@ -34,7 +37,7 @@ export default function Example({
   ) : (
     comments && (
       <>
-        <Comments>{comments}</Comments>
+        <Comments noLeftMargin>{comments}</Comments>
         <br />
       </>
     )
@@ -44,7 +47,8 @@ export default function Example({
     <div
       className={clsx(
         "border border-lime-600 px-2.5 py-2.5",
-        isChild ? "m-2.5 bg-white" : "bg-lime-100"
+        isChild ? "m-2.5 bg-white" : "bg-lime-100",
+        className
       )}
     >
       {WithOrWithoutHeading}
