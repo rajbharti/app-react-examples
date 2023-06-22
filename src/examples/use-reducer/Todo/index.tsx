@@ -1,4 +1,4 @@
-import { useState, useReducer, useRef } from "react";
+import { useState, useReducer, useEffect, useRef } from "react";
 import Example from "src/components/Example";
 import Form from "./Form";
 import Filters from "./Filters";
@@ -15,7 +15,17 @@ export default function App() {
 
   const [todos, dispatch] = useReducer(reducer, initialState);
   const [activeFilter, setActiveFilter] = useState<TodosFilter>(null);
+  const [isTodoAdded, setIsTodoAdded] = useState(false);
   const todosElRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    // scroll to added todo
+    const el = todosElRef?.current as HTMLUListElement;
+    if (isTodoAdded && el.scrollHeight > el.clientHeight) {
+      el.scrollTo(0, el.scrollHeight);
+      setIsTodoAdded(false);
+    }
+  });
 
   const filteredTodos = todos.filter(
     activeFilter ? filtersLogic[activeFilter] : Boolean
@@ -26,7 +36,7 @@ export default function App() {
       <Form
         formOperationType="add"
         dispatch={dispatch}
-        todosElRef={todosElRef}
+        setIsTodoAdded={setIsTodoAdded}
       />
       <Filters
         activeFilter={activeFilter}

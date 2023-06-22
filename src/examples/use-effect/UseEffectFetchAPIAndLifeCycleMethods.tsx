@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Example from "src/components/Example";
 import ButtonToggle from "src/components/ButtonToggle";
+import { getTitleCase } from "src/utils";
 
 type ResourceType = string | null;
 type Response = Record<string, any>;
@@ -21,16 +22,14 @@ const labels: readonly string[] = [
 
 export default function UseEffectFetchAPIAndLifeCycleMethods() {
   const [resourceType, setResourceType] = useState<ResourceType>(null);
-  const [apiQuery, setApiQuery] = useState<APIQuery>({
+  const [query, setQuery] = useState<APIQuery>({
     isLoading: false,
     hasError: false,
     data: null,
   });
 
   const dataElRef = useRef<HTMLDivElement>(null);
-
-  const controller = new AbortController();
-  const { signal } = controller;
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     console.log("onRender");
@@ -49,17 +48,23 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
   useEffect(() => {
     console.log("onMount and onUpdate"); // componentDidMount and componentDidUpdate
 
-    dataElRef.current?.scrollTo(0, 0);
+    const el = dataElRef.current as HTMLDivElement;
+    if (el?.scrollHeight > el?.clientHeight) {
+      el?.scrollTo(0, 0);
+    }
 
     if (resourceType !== null) {
       (async () => {
-        setApiQuery((prevState) => ({
+        setQuery((prevState) => ({
           ...prevState,
           isLoading: true,
           hasError: false,
         }));
 
         try {
+          abortControllerRef.current = new AbortController();
+          const signal = abortControllerRef.current?.signal;
+
           let response = await fetch(
             `https://jsonplaceholder.typicode.com/${resourceType}`,
             {
@@ -67,7 +72,7 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
             }
           );
           response = await response.json();
-          setApiQuery((prevState) => ({
+          setQuery((prevState) => ({
             ...prevState,
             data: response,
           }));
@@ -76,7 +81,7 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
             console.error(`request aborted for "${resourceType}"`);
           }
 
-          setApiQuery((prevState) => ({
+          setQuery((prevState) => ({
             ...prevState,
             ...(e.name === "AbortError"
               ? { data: null }
@@ -84,13 +89,13 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
           }));
         }
 
-        setApiQuery((prevState) => ({
+        setQuery((prevState) => ({
           ...prevState,
           isLoading: false,
         }));
       })();
-    } else if (apiQuery.hasError) {
-      setApiQuery((prevState) => ({
+    } else if (query.hasError) {
+      setQuery((prevState) => ({
         ...prevState,
         hasError: false,
       }));
@@ -98,10 +103,8 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
   }, [resourceType]);
 
   const handleClick = useCallback(function (label: string | null) {
-    // TODO: abort not working
-    console.log("---", label);
-    controller.abort();
-    setResourceType(label === null ? label : label!.toLocaleLowerCase());
+    abortControllerRef.current?.abort();
+    setResourceType(label === null ? null : label.toLocaleLowerCase());
   }, []);
 
   return (
@@ -112,17 +115,22 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
     >
       <ButtonToggle labels={labels} onClick={handleClick} />
 
-      {apiQuery.isLoading && <div className="my-2 font-bold">Loading...</div>}
+      {query.isLoading && (
+        <span className="mx-1 font-bold">
+          Loading {getTitleCase(resourceType as string)}
+          ...
+        </span>
+      )}
 
-      {apiQuery.hasError && (
+      {query.hasError && (
         <div className="mt-2 text-red-500">
           Something went wrong. Try again!
         </div>
       )}
 
-      {apiQuery.data && resourceType && (
+      {query.data && resourceType && (
         <div className="mt-2 max-h-500px overflow-auto" ref={dataElRef}>
-          <pre>{JSON.stringify(apiQuery.data, null, 2)}</pre>
+          <pre>{JSON.stringify(query.data, null, 2)}</pre>
         </div>
       )}
     </Example>

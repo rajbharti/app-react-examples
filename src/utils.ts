@@ -74,3 +74,7 @@ export function fetchCount(amount = 1) {
     setTimeout(() => resolve({ data: amount }), 1000)
   );
 }
+
+export function getTitleCase(value: string) {
+  return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+}

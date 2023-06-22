@@ -10,12 +10,12 @@ export default function Tags() {
   }
 
   return compTags.length > 0 ? (
-    <span className="font-mono text-sm font-normal leading-4 text-purple-500">
+    <span className="font-mono text-sm font-normal leading-4 ">
       {compTags.map(({ category, tag }: CompCategoryAndTags) => (
         <span
           key={tag}
           onClick={() => handleClick(category, tag)}
-          className="mr-1.5 inline-block cursor-pointer rounded-full border border-purple-300 bg-purple-50 px-1.5 py-0.5 hover:border-purple-400 hover:bg-purple-200 hover:text-purple-700"
+          className="mr-1.5 inline-block cursor-pointer rounded-full border border-purple-300 bg-purple-50 px-1.5 py-0.5 text-purple-500 hover:border-purple-400 hover:bg-purple-100 hover:text-purple-600 active:border-purple-500 active:bg-purple-200 active:text-purple-700"
         >
           {tag}
         </span>

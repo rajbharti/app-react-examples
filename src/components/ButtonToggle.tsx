@@ -18,6 +18,7 @@ export default memo(function ButtonToggle({ labels, onClick }: Props) {
     setActiveLabel(value);
   }
 
+  // TODO: tailwindcss: for hover and active create custom function
   return (
     <>
       {labels.map((label: Label) => (
