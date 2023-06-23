@@ -1,3 +1,4 @@
+import { memo } from "react";
 import clsx from "clsx";
 import Tags from "./Tags";
 import Comments from "./Comments";
@@ -13,13 +14,13 @@ interface Props {
 
 type HeaderProps = Required<Pick<Props, "title">>;
 
-function Header({ title }: HeaderProps) {
+const Header = memo(function Header({ title }: HeaderProps) {
   return (
-    <h3 className="text-slate-700">
+    <h3>
       {title} <Tags />
     </h3>
   );
-}
+});
 
 export default function Example({
   isChild,

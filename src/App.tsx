@@ -20,22 +20,30 @@ import MemoButtonClick from "./examples/memo/MemoButtonClick";
 import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
 import ReduxCounter from "./examples/redux/Counter";
 
+// TODO: instead of `any` type can be `[...Comp[], Comp[]]`, but getting error
 interface MapTagToComps {
-  [key: Category]: Record<string, Comp[]>;
+  [key: Category]: Record<string, any>;
 }
+/**
+ * mapTagToComps = {
+ *  category: {
+ *    tag: [own tag functionality component, [other component contains current tag functionality]]
+ *  }
+ * }
+ */
 
 export const mapTagToComps: MapTagToComps = {
   hooks: {
     useState: [UseStateButtonToggle, UseStateChange],
     useReducer: [UseReducerCounter, UseReducerTodo],
     useEffect: [UseEffectFetchAPIAndLifeCycleMethods],
-    useRef: [UseRefInputChangeButtonClick, MemoButtonClick],
+    useRef: [UseRefInputChangeButtonClick, [MemoButtonClick]],
     useMemo: [UseMemoInputChange],
     useCallback: [UseCallbackInputChange],
     useTransition: [UseTransitionTabs],
   },
   apis: {
-    memo: [MemoButtonClick, MemoInputChange, UseCallbackInputChange],
+    memo: [MemoButtonClick, MemoInputChange, [UseCallbackInputChange]],
     forwardRef: [UseReducerTodo],
   },
   components: {},
@@ -52,7 +60,7 @@ export default function App() {
 
   return (
     <main>
-      <h1>React Examples</h1>
+      <h1 className="mb-5 text-3xl font-bold">TypeScript React Examples</h1>
       {categories.map((category: string) => {
         const tags: Tag[] = Object.keys(mapTagToComps[category]);
 
@@ -72,17 +80,18 @@ export default function App() {
 
       {activeTag &&
         activeCategory &&
-        mapTagToComps[activeCategory][activeTag]?.map(
-          (Comp: Comp, i: number) => (
+        mapTagToComps[activeCategory][activeTag]
+          .flat()
+          ?.map((Comp: Comp, i: number) => (
             <RenderComp
               key={activeTag + i.toString()}
               Comp={Comp}
+              activeCategory={activeCategory}
               setActiveCategory={setActiveCategory}
               activeTag={activeTag}
               setActiveTag={setActiveTag}
             />
-          )
-        )}
+          ))}
     </main>
   );
 }

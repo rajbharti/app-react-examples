@@ -10,6 +10,7 @@ import { TagsContext } from "../context";
 
 interface RenderCompProps {
   Comp: Comp;
+  activeCategory: NonNullable<ActiveCategory>;
   setActiveCategory: React.Dispatch<React.SetStateAction<ActiveCategory>>;
   activeTag: NonNullable<ActiveTag>;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTag>>;
@@ -17,19 +18,25 @@ interface RenderCompProps {
 
 export default function RenderComp({
   Comp,
+  activeCategory,
   setActiveCategory,
   activeTag,
   setActiveTag,
 }: RenderCompProps) {
-  const compTags: CompCategoryAndTags[] = [...getCompTags(Comp, activeTag)];
+  const compTags: CompCategoryAndTags[] = getCompTags(
+    Comp,
+    activeCategory,
+    activeTag
+  );
 
   const value = useMemo(
     () => ({
       compTags,
+      activeCategory,
       setActiveCategory,
       setActiveTag,
     }),
-    [compTags, setActiveCategory, setActiveTag]
+    [compTags, activeCategory, setActiveCategory, setActiveTag]
   );
 
   return (

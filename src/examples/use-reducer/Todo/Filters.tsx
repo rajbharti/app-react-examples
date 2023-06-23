@@ -19,11 +19,7 @@ function Filter({ todos, filter, activeFilter, setActiveFilter }: FilterProps) {
   return (
     <button
       onClick={() => handleClick(filter)}
-      className={clsx(
-        "capitalize hover:border-yellow-700 hover:bg-yellow-300 hover:text-yellow-900 active:border-yellow-800 active:bg-yellow-400 active:text-yellow-950",
-        activeFilter === filter &&
-          "border-yellow-700 bg-yellow-300 text-yellow-900"
-      )}
+      className={clsx("btn-primary", activeFilter === filter && "active")}
     >
       {filter} ({count})
     </button>

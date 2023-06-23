@@ -1,27 +1,32 @@
-import type { Tag, Comp, Category, CompCategoryAndTags } from "./types";
 import { mapTagToComps } from "./App";
+import type { Tag, Comp, Category, CompCategoryAndTags } from "./types";
 
-export function* getCompTags(
+export function getCompTags(
   Comp: Comp,
+  activeCategory: Category,
   activeTag: Tag
-): Iterable<CompCategoryAndTags> {
+): CompCategoryAndTags[] {
+  const result = [];
+
   for (const category in mapTagToComps) {
     const tags = mapTagToComps[category];
 
     for (const tag in tags) {
-      if (tags[tag].find((c: Comp) => c === Comp)) {
-        // insert all other tags except activeTag
+      if (tags[tag].flat().find((c: Comp) => c === Comp)) {
         console.log(`[${category.toUpperCase()}: ${tag}]`);
         if (tag !== activeTag) {
-          yield { category, tag };
+          result.push({ category, tag });
         }
       }
     }
   }
+
+  result.unshift({ category: activeCategory, tag: activeTag });
+  return result;
 }
 
 export function getActiveTagCompsCount(category: Category, tag: Tag) {
-  return mapTagToComps[category][tag]?.length || 0;
+  return mapTagToComps[category][tag]?.flat().length || 0;
 }
 
 export function squareCal(value: number) {
