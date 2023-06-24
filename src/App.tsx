@@ -20,14 +20,13 @@ import MemoButtonClick from "./examples/memo/MemoButtonClick";
 import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
 import ReduxCounter from "./examples/redux/Counter";
 
-// TODO: instead of `any` type can be `[...Comp[], Comp[]]`, but getting error
 interface MapTagToComps {
-  [key: Category]: Record<string, any>;
+  [key: Category]: Record<string, (Comp | Comp[])[]>;
 }
 /**
  * mapTagToComps = {
  *  category: {
- *    tag: [own tag functionality component, [other component contains current tag functionality]]
+ *    tag: [own tag component, [other component contains current tag functionality]]
  *  }
  * }
  */
@@ -37,7 +36,10 @@ export const mapTagToComps: MapTagToComps = {
     useState: [UseStateButtonToggle, UseStateChange],
     useReducer: [UseReducerCounter, UseReducerTodo],
     useEffect: [UseEffectFetchAPIAndLifeCycleMethods],
-    useRef: [UseRefInputChangeButtonClick, [MemoButtonClick]],
+    useRef: [
+      UseRefInputChangeButtonClick,
+      [UseEffectFetchAPIAndLifeCycleMethods, MemoButtonClick],
+    ],
     useMemo: [UseMemoInputChange],
     useCallback: [UseCallbackInputChange],
     useTransition: [UseTransitionTabs],

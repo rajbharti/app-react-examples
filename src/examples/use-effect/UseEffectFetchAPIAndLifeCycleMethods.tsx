@@ -3,8 +3,6 @@ import Example from "src/components/Example";
 import ButtonToggle from "src/components/ButtonToggle";
 import { getTitleCase } from "src/utils";
 
-type ResourceType = string | null;
-type Response = Record<string, any>;
 interface APIQuery {
   isLoading?: boolean;
   hasError?: boolean;
@@ -21,7 +19,7 @@ const labels: readonly string[] = [
 ];
 
 export default function UseEffectFetchAPIAndLifeCycleMethods() {
-  const [resourceType, setResourceType] = useState<ResourceType>(null);
+  const [resourceType, setResourceType] = useState<string | null>(null);
   const [query, setQuery] = useState<APIQuery>({
     isLoading: false,
     hasError: false,
