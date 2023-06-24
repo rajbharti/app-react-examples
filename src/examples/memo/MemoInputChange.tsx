@@ -1,14 +1,12 @@
-import { useState, useEffect, useCallback, useRef, memo } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import Example from "src/components/Example";
 import { squareCal, getPrimeNums } from "src/utils";
 
 const ChildComp = memo(function ChildComp() {
-  const showPrimeNums = useCallback(getPrimeNums, []);
-
   return (
     <Example isChild comments="memoized component">
       <p>Prime numbers from 1 to 10</p>
-      {showPrimeNums().join(", ")}
+      {getPrimeNums().join(", ")}
     </Example>
   );
 });

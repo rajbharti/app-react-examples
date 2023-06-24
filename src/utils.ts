@@ -1,28 +1,33 @@
 import { mapTagToComps } from "./App";
 import type { Tag, Comp, Category, CompCategoryAndTags } from "./types";
 
-export function getCompTags(
-  Comp: Comp,
-  activeCategory: Category,
-  activeTag: Tag
-): CompCategoryAndTags[] {
-  const result = [];
+export function* getCompTags(Comp: Comp): Iterable<CompCategoryAndTags> {
+  for (const [category, tags] of Object.entries(mapTagToComps)) {
+    for (const [tag, compArray] of Object.entries(tags)) {
+      // own tag comp
+      if (compArray.find((comp) => comp === Comp)) {
+        yield {
+          category,
+          tag,
+          ownTagComp: true,
+        };
+      }
 
-  for (const category in mapTagToComps) {
-    const tags = mapTagToComps[category];
+      // ref comp
+      const otherCompArray = compArray.find((comp) => Array.isArray(comp));
 
-    for (const tag in tags) {
-      if (tags[tag].flat().find((c: Comp) => c === Comp)) {
-        console.log(`[${category.toUpperCase()}: ${tag}]`);
-        if (tag !== activeTag) {
-          result.push({ category, tag });
-        }
+      if (
+        otherCompArray &&
+        (otherCompArray as Comp[]).find((comp) => comp === Comp)
+      ) {
+        yield {
+          category,
+          tag,
+          ownTagComp: false,
+        };
       }
     }
   }
-
-  result.unshift({ category: activeCategory, tag: activeTag });
-  return result;
 }
 
 export function getActiveTagCompsCount(category: Category, tag: Tag) {

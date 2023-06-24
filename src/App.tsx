@@ -26,7 +26,10 @@ interface MapTagToComps {
 /**
  * mapTagToComps = {
  *  category: {
- *    tag: [own tag component, [other component contains current tag functionality]]
+ *    tag: [
+ *      tag functionality occurs in own file component (actual component(s)),
+ *      [ tag functionality occurs in other file component (ref components(s)) ]
+ *    ]
  *  }
  * }
  */
@@ -41,12 +44,15 @@ export const mapTagToComps: MapTagToComps = {
       [UseEffectFetchAPIAndLifeCycleMethods, MemoButtonClick],
     ],
     useMemo: [UseMemoInputChange],
-    useCallback: [UseCallbackInputChange],
+    useCallback: [
+      UseCallbackInputChange,
+      [UseEffectFetchAPIAndLifeCycleMethods],
+    ],
     useTransition: [UseTransitionTabs],
   },
   apis: {
     memo: [MemoButtonClick, MemoInputChange, [UseCallbackInputChange]],
-    forwardRef: [UseReducerTodo],
+    forwardRef: [[UseReducerTodo]],
   },
   components: {},
   redux: {
@@ -62,7 +68,7 @@ export default function App() {
 
   return (
     <main>
-      <h1 className="mb-5 text-3xl font-bold">TypeScript React Examples</h1>
+      <h1 className="mb-5 text-3xl font-bold ">TypeScript React Examples</h1>
       {categories.map((category: string) => {
         const tags: Tag[] = Object.keys(mapTagToComps[category]);
 
@@ -88,7 +94,6 @@ export default function App() {
             <RenderComp
               key={activeTag + i.toString()}
               Comp={Comp}
-              activeCategory={activeCategory}
               setActiveCategory={setActiveCategory}
               activeTag={activeTag}
               setActiveTag={setActiveTag}
