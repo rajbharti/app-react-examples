@@ -38,7 +38,7 @@ export default function Example({
   ) : (
     comments && (
       <>
-        <Comments noLeftMargin>{comments}</Comments>
+        <Comments noSpacing>{comments}</Comments>
         <br />
       </>
     )

@@ -34,6 +34,11 @@ interface MapTagToComps {
  * }
  */
 
+/* 
+TODO: Restructure it to display
+1. only show own tag components
+2. on ui shows, current components contains which all tag
+*/
 export const mapTagToComps: MapTagToComps = {
   hooks: {
     useState: [UseStateButtonToggle, UseStateChange],
@@ -46,12 +51,16 @@ export const mapTagToComps: MapTagToComps = {
     useMemo: [UseMemoInputChange],
     useCallback: [
       UseCallbackInputChange,
-      [UseEffectFetchAPIAndLifeCycleMethods],
+      [UseEffectFetchAPIAndLifeCycleMethods, UseStateChange],
     ],
     useTransition: [UseTransitionTabs],
   },
   apis: {
-    memo: [MemoButtonClick, MemoInputChange, [UseCallbackInputChange]],
+    memo: [
+      MemoButtonClick,
+      MemoInputChange,
+      [UseCallbackInputChange, UseStateChange],
+    ],
     forwardRef: [[UseReducerTodo]],
   },
   components: {},

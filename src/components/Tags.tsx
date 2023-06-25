@@ -18,6 +18,7 @@ export default function Tags() {
           tag !== activeTag
             ? {
                 onClick: () => handleClick(category, tag),
+                title: `This example contains ref of ${tag}`,
               }
             : null;
 
