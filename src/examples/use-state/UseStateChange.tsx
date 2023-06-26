@@ -51,7 +51,7 @@ const Todos = memo(function Todos({ handleReset }: TodosProps) {
         </button>
       </form>
 
-      <Comments>array</Comments>
+      <Comments noSpacing>array</Comments>
       <pre>{JSON.stringify(todos, null, 2)}</pre>
     </div>
   );

@@ -28,6 +28,7 @@ function TagCategory({
   );
 
   function handleTagClick(selectedTag: Tag) {
+    console.log(`[${category.toUpperCase()}: ${selectedTag}]`);
     setActiveCategory(category);
     setActiveTag((prevActiveTag: ActiveTag) =>
       prevActiveTag === selectedTag ? null : selectedTag

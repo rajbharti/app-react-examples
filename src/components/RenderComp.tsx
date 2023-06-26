@@ -1,15 +1,10 @@
 import { useMemo } from "react";
-import type {
-  ActiveTag,
-  Comp,
-  ActiveCategory,
-  CompCategoryAndTags,
-} from "../types";
-import { getCompTags } from "../utils";
+import type { ActiveTag, Comp, ActiveCategory, TagList } from "../types";
 import { TagsContext } from "../context";
 
 interface RenderCompProps {
   Comp: Comp;
+  tags: TagList[];
   setActiveCategory: React.Dispatch<React.SetStateAction<ActiveCategory>>;
   activeTag: NonNullable<ActiveTag>;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTag>>;
@@ -17,21 +12,19 @@ interface RenderCompProps {
 
 export default function RenderComp({
   Comp,
+  tags,
   setActiveCategory,
   activeTag,
   setActiveTag,
 }: RenderCompProps) {
-  // TODO: sort tags by active tag
-  const compTags: CompCategoryAndTags[] = [...getCompTags(Comp)];
-
   const value = useMemo(
     () => ({
-      compTags,
+      tags,
       activeTag,
       setActiveCategory,
       setActiveTag,
     }),
-    [compTags, activeTag, setActiveCategory, setActiveTag]
+    [tags, activeTag, setActiveCategory, setActiveTag]
   );
 
   return (

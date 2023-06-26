@@ -1,3 +1,16 @@
+export type TagList =
+  | "useState"
+  | "useReducer"
+  | "useEffect"
+  | "useRef"
+  | "useMemo"
+  | "useCallback"
+  | "useTransition"
+  | "memo"
+  | "forwardRef"
+  | "Redux Toolkit"
+  | "Redux";
+
 export type Category = string;
 
 export type Tag = string;
@@ -9,10 +22,8 @@ export type ActiveTag = Tag | null;
 export type ActiveCategory = Category | null;
 
 export interface TagsContextShape {
-  compTags: { category: string; tag: string; ownTagComp: boolean }[];
+  tags: TagList[];
   activeTag: ActiveTag;
   setActiveCategory: React.Dispatch<React.SetStateAction<ActiveCategory>>;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTag>>;
 }
-
-export type CompCategoryAndTags = TagsContextShape["compTags"][number];

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { Category, Tag, ActiveTag, ActiveCategory, Comp } from "./types";
 import TagsCategory from "./components/TagsCategory";
 import RenderComp from "./components/RenderComp";
 // Hooks
@@ -20,53 +19,63 @@ import MemoButtonClick from "./examples/memo/MemoButtonClick";
 import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
 import ReduxCounter from "./examples/redux/Counter";
 
+import type {
+  TagList,
+  Category,
+  Tag,
+  ActiveTag,
+  ActiveCategory,
+  Comp,
+} from "./types";
+
 interface MapTagToComps {
-  [key: Category]: Record<string, (Comp | Comp[])[]>;
+  [key: Category]: Record<string, [Comp, TagList[]][]>;
 }
+
 /**
  * mapTagToComps = {
  *  category: {
- *    tag: [
- *      tag functionality occurs in own file component (actual component(s)),
- *      [ tag functionality occurs in other file component (ref components(s)) ]
- *    ]
+ *    tag: [ [Component, [this Component also uses tags]] ]
  *  }
  * }
  */
 
-/* 
-TODO: Restructure it to display
-1. only show own tag components
-2. on ui shows, current components contains which all tag
-*/
 export const mapTagToComps: MapTagToComps = {
   hooks: {
-    useState: [UseStateButtonToggle, UseStateChange],
-    useReducer: [UseReducerCounter, UseReducerTodo],
-    useEffect: [UseEffectFetchAPIAndLifeCycleMethods],
-    useRef: [
-      UseRefInputChangeButtonClick,
-      [UseEffectFetchAPIAndLifeCycleMethods, MemoButtonClick],
+    useState: [
+      [UseStateButtonToggle, []],
+      [UseStateChange, ["useCallback", "memo"]],
     ],
-    useMemo: [UseMemoInputChange],
+    useReducer: [
+      [UseReducerCounter, []],
+      [
+        UseReducerTodo,
+        ["useState", "useRef", "useEffect", "useMemo", "forwardRef"],
+      ],
+    ],
+    useEffect: [
+      [
+        UseEffectFetchAPIAndLifeCycleMethods,
+        ["useState", "useRef", "useCallback"],
+      ],
+    ],
+    useRef: [[UseRefInputChangeButtonClick, ["useState", "useEffect"]]],
+    useMemo: [[UseMemoInputChange, ["useState", "useRef", "useEffect"]]],
     useCallback: [
-      UseCallbackInputChange,
-      [UseEffectFetchAPIAndLifeCycleMethods, UseStateChange],
+      [UseCallbackInputChange, ["useState", "useRef", "useEffect", "memo"]],
     ],
-    useTransition: [UseTransitionTabs],
+    useTransition: [[UseTransitionTabs, ["useState"]]],
   },
   apis: {
     memo: [
-      MemoButtonClick,
-      MemoInputChange,
-      [UseCallbackInputChange, UseStateChange],
+      [MemoButtonClick, ["useState", "useRef"]],
+      [MemoInputChange, ["useState", "useRef", "useEffect"]],
     ],
-    forwardRef: [[UseReducerTodo]],
+    forwardRef: [],
   },
-  components: {},
   redux: {
-    "Redux Toolkit": [ReduxToolkitCounter],
-    Redux: [ReduxCounter],
+    "Redux Toolkit": [[ReduxToolkitCounter, []]],
+    Redux: [[ReduxCounter, []]],
   },
 };
 
@@ -97,17 +106,18 @@ export default function App() {
 
       {activeTag &&
         activeCategory &&
-        mapTagToComps[activeCategory][activeTag]
-          .flat()
-          ?.map((Comp: Comp, i: number) => (
+        mapTagToComps[activeCategory][activeTag].map(
+          ([Comp, tags], i: number) => (
             <RenderComp
               key={activeTag + i.toString()}
               Comp={Comp}
+              tags={tags}
               setActiveCategory={setActiveCategory}
               activeTag={activeTag}
               setActiveTag={setActiveTag}
             />
-          ))}
+          )
+        )}
     </main>
   );
 }
