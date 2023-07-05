@@ -29,7 +29,7 @@ import type {
 } from "./types";
 
 interface MapTagToComps {
-  [key: Category]: Record<string, [Comp, TagList[]][]>;
+  [key: Category]: Record<string, [Comp, TagList[]?][]>;
 }
 
 /**
@@ -43,11 +43,11 @@ interface MapTagToComps {
 export const mapTagToComps: MapTagToComps = {
   hooks: {
     useState: [
-      [UseStateButtonToggle, []],
-      [UseStateChange, ["useCallback", "memo"]],
+      [UseStateButtonToggle],
+      [UseStateChange, ["useCallback", "memo", "useEffect", "useRef"]],
     ],
     useReducer: [
-      [UseReducerCounter, []],
+      [UseReducerCounter],
       [
         UseReducerTodo,
         ["useState", "useRef", "useEffect", "useMemo", "forwardRef"],
@@ -74,8 +74,8 @@ export const mapTagToComps: MapTagToComps = {
     forwardRef: [],
   },
   redux: {
-    "Redux Toolkit": [[ReduxToolkitCounter, []]],
-    Redux: [[ReduxCounter, []]],
+    "Redux Toolkit": [[ReduxToolkitCounter]],
+    Redux: [[ReduxCounter]],
   },
 };
 
