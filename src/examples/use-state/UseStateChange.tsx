@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { nanoid } from "nanoid";
 import Example from "src/components/Example";
 import Comments from "src/components/Comments";
@@ -25,6 +25,12 @@ interface TodosProps {
 const Todos = memo(function Todos({ handleReset }: TodosProps) {
   const [task, setTask] = useState(""); // initial state
   const [todos, setTodos] = useState<Todo[]>([]); // initial state
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     // setting next state
     setTask(event.currentTarget.value);
@@ -44,9 +50,14 @@ const Todos = memo(function Todos({ handleReset }: TodosProps) {
     <div className="mb-2">
       <h4>Set Todos</h4>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={task} onChange={handleInputChange} />
+        <input
+          type="text"
+          value={task}
+          onChange={handleInputChange}
+          ref={inputRef}
+        />
         <button type="submit">Add</button>
-        <button onClick={handleReset}>
+        <button type="button" onClick={handleReset}>
           Reset <b>state</b> of this component
         </button>
       </form>
@@ -95,9 +106,12 @@ export default function UseStateChange() {
     });
   }
 
-  const handleReset = useCallback(function () {
-    setResetCompKey(resetCompKey + 1);
-  }, []);
+  const handleReset = useCallback(
+    function () {
+      setResetCompKey(resetCompKey + 1);
+    },
+    [resetCompKey]
+  );
 
   return (
     <Example
