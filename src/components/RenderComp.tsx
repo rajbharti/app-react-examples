@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import type { ActiveTag, Comp, ActiveCategory, TagList } from "../types";
 import { TagsContext } from "../context";
 
-interface RenderCompProps {
+interface Props {
   Comp: Comp;
   tags: TagList[];
   setActiveCategory: React.Dispatch<React.SetStateAction<ActiveCategory>>;
@@ -16,7 +16,7 @@ export default function RenderComp({
   setActiveCategory,
   activeTag,
   setActiveTag,
-}: RenderCompProps) {
+}: Props) {
   const value = useMemo(
     () => ({
       tags,

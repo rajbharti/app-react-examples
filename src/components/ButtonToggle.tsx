@@ -12,7 +12,6 @@ export default memo(function ButtonToggle({ labels, onClick }: Props) {
   const [activeLabel, setActiveLabel] = useState<Label | null>(null);
 
   function handleClick(selectedLabel: Label) {
-    // following means that (prevActiveLabel === selectedLabel ? null : selectedLabel)
     const value = activeLabel === selectedLabel ? null : selectedLabel;
     onClick(value);
     setActiveLabel(value);
