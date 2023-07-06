@@ -11,6 +11,7 @@ export default function Tags() {
   function handleClick(selectedTag: Tag) {
     const selectedCategory = getSelectedTagCategory(selectedTag);
     console.log(`[${selectedCategory?.toUpperCase()}: ${selectedTag}]`);
+
     setActiveCategory(selectedCategory);
     setActiveTag(selectedTag);
   }

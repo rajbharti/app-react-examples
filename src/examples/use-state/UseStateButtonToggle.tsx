@@ -10,9 +10,7 @@ export default function UseStateButtonToggle() {
   const [activeFilter, setActiveFilter] = useState<Filter | null>(null);
 
   function handleClick(selectedFilter: Filter) {
-    setActiveFilter((prevActiveFilter) =>
-      prevActiveFilter === selectedFilter ? null : selectedFilter
-    );
+    setActiveFilter(activeFilter === selectedFilter ? null : selectedFilter);
   }
 
   return (
