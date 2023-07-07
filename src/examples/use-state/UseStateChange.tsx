@@ -25,7 +25,7 @@ const StoreInfoFromPreviousRender = memo(function StoreInfoFromPreviousRender({
   value,
 }: StoreInfoFromPreviousRenderProps) {
   const [prevValue, setPrevValue] = useState(value);
-  const [isGreater, setIsGreater] = useState(false);
+  const [isGreater, setIsGreater] = useState<boolean | null>(null);
 
   if (value !== prevValue) {
     setIsGreater(value > prevValue);
@@ -35,11 +35,16 @@ const StoreInfoFromPreviousRender = memo(function StoreInfoFromPreviousRender({
   return (
     <div className="mb-2">
       <h4>Store information from previous render</h4>
-      {isGreater ? (
-        <>Random number {value} is greater</>
-      ) : (
-        <>Random number {value} is less</>
-      )}
+      <Comments noSpacing>
+        Click on &quot;Generate Random Number and Id&quot; button
+      </Comments>
+      <br />
+      {isGreater !== null &&
+        (isGreater ? (
+          <>Random number {value} is greater</>
+        ) : (
+          <>Random number {value} is less</>
+        ))}
     </div>
   );
 });
