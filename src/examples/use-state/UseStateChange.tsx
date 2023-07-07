@@ -18,6 +18,37 @@ function getRandomId() {
   return Math.random().toString(36).substring(2);
 }
 
+interface StoreInfoFromPreviousRenderProps {
+  value: number;
+}
+const StoreInfoFromPreviousRender = memo(function StoreInfoFromPreviousRender({
+  value,
+}: StoreInfoFromPreviousRenderProps) {
+  const [prevValue, setPrevValue] = useState(value);
+  const [isGreater, setIsGreater] = useState<boolean | null>(null);
+
+  if (value !== prevValue) {
+    setIsGreater(value > prevValue);
+    setPrevValue(value);
+  }
+
+  return (
+    <div className="mb-2">
+      <h4>Store information from previous render</h4>
+      <Comments noSpacing>
+        Click on &quot;Generate Random Number and Id&quot; button
+      </Comments>
+      <br />
+      {isGreater !== null &&
+        (isGreater ? (
+          <>Random number {value} is greater</>
+        ) : (
+          <>Random number {value} is less</>
+        ))}
+    </div>
+  );
+});
+
 interface TodosProps {
   handleReset: () => void;
 }
@@ -140,6 +171,8 @@ export default function UseStateChange() {
 
       <hr />
       <Todos key={resetCompKey} handleReset={handleReset} />
+      <hr />
+      <StoreInfoFromPreviousRender value={randomNumAndId.num} />
     </Example>
   );
 }
