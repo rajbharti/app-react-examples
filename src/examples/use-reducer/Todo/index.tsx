@@ -1,19 +1,35 @@
 import { useState, useReducer, useEffect, useRef } from "react";
+import { nanoid } from "nanoid";
 import Example from "src/components/Example";
 import Form from "./Form";
 import Filters from "./Filters";
 import Todos from "./Todos";
-import { type TodoShape, TodosFilter } from "./types";
+import type { TodosFilter } from "./types";
 import { reducer } from "./reducer";
 import { filtersLogic } from "./utils";
 
-const initialState: TodoShape[] = [];
+function createInitialState() {
+  return [
+    {
+      id: nanoid(),
+      text: "Complete React",
+      isCompleted: false,
+    },
+    {
+      id: nanoid(),
+      text: "Complete Redux",
+      isCompleted: false,
+    },
+  ];
+}
 
 export default function App() {
-  // example with complete arguments
-  // const [state, dispatch] = useReducer(reducer, username, createInitialState); // createInitialState(username)
+  /* 
+    example with complete arguments
+    const [state, dispatch] = useReducer(reducer, username, createInitialState); // createInitialState(username)
+  */
 
-  const [todos, dispatch] = useReducer(reducer, initialState);
+  const [todos, dispatch] = useReducer(reducer, null, createInitialState);
   const [activeFilter, setActiveFilter] = useState<TodosFilter>(null);
   const [isTodoAdded, setIsTodoAdded] = useState(false);
   const todosElRef = useRef<HTMLUListElement>(null);
