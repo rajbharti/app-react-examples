@@ -1,12 +1,18 @@
 import { useMemo } from "react";
 import clsx from "clsx";
-import type { Tag, ActiveTag, Category, ActiveCategory } from "../types";
+import type {
+  Tag,
+  ActiveTag,
+  Category,
+  ActiveCategory,
+  TagList,
+} from "../types";
 import { getActiveTagCompsCount } from "../utils";
 
 interface Props {
   category: Category;
   setActiveCategory: React.Dispatch<React.SetStateAction<ActiveTag>>;
-  tags: Tag[];
+  tags: TagList[];
   activeTag: ActiveTag;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveCategory>>;
 }

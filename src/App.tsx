@@ -28,6 +28,12 @@ import type {
   Comp,
 } from "./types";
 
+/* TODO: following type can be, but require lot of refactoring
+interface MapTagToComps {
+  [key: Category]: Partial<Record<TagList, [Comp, TagList[]?][]>>;
+}
+*/
+
 interface MapTagToComps {
   [key: Category]: Record<string, [Comp, TagList[]?][]>;
 }
@@ -88,7 +94,9 @@ export default function App() {
     <main>
       <h1 className="mb-5 text-3xl font-bold ">TypeScript React Examples</h1>
       {categories.map((category: string) => {
-        const tags: Tag[] = Object.keys(mapTagToComps[category]);
+        const tags: TagList[] = Object.keys(
+          mapTagToComps[category]
+        ) as TagList[];
 
         return (
           <TagsCategory
@@ -111,7 +119,7 @@ export default function App() {
             <RenderComp
               key={activeTag + i.toString()}
               Comp={Comp}
-              tags={tags}
+              tags={tags ?? []}
               setActiveCategory={setActiveCategory}
               activeTag={activeTag}
               setActiveTag={setActiveTag}
