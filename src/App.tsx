@@ -26,6 +26,7 @@ import type {
   ActiveCategory,
   Comp,
 } from "./types";
+import UseEffectListeningToGlobalEvents from "./examples/use-effect/UseEffectListeningToGlobalEvents";
 
 /* TODO: following type can be, but require lot of refactoring
 interface MapTagToComps {
@@ -59,6 +60,7 @@ export const mapTagToComps: MapTagToComps = {
       ],
     ],
     useEffect: [
+      [UseEffectListeningToGlobalEvents, ["useState"]],
       [
         UseEffectFetchAPIAndLifeCycleMethods,
         ["useState", "useReducer", "useRef", "useCallback"],
