@@ -24,11 +24,6 @@ function createInitialState() {
 }
 
 export default function App() {
-  /* 
-    example with complete arguments
-    const [state, dispatch] = useReducer(reducer, username, createInitialState); // createInitialState(username)
-  */
-
   const [todos, dispatch] = useReducer(reducer, null, createInitialState);
   const [activeFilter, setActiveFilter] = useState<TodosFilter>(null);
   const [isTodoAdded, setIsTodoAdded] = useState(false);

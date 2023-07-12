@@ -22,7 +22,6 @@ import ReduxCounter from "./examples/redux/Counter";
 import type {
   TagList,
   Category,
-  Tag,
   ActiveTag,
   ActiveCategory,
   Comp,
@@ -62,7 +61,7 @@ export const mapTagToComps: MapTagToComps = {
     useEffect: [
       [
         UseEffectFetchAPIAndLifeCycleMethods,
-        ["useState", "useRef", "useCallback"],
+        ["useState", "useReducer", "useRef", "useCallback"],
       ],
     ],
     useRef: [[UseRefInputChangeButtonClick, ["useState", "useEffect"]]],
