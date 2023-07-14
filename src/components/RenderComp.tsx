@@ -26,6 +26,7 @@ export default function RenderComp({
     }),
     [tags, activeTag, setActiveCategory, setActiveTag]
   );
+  // console.log(`> [COMPONENT: ${Comp.displayName}]`);
 
   return (
     <section className="pb-2">

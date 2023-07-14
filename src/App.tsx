@@ -60,7 +60,7 @@ export const mapTagToComps: MapTagToComps = {
       ],
     ],
     useEffect: [
-      [UseEffectListeningToGlobalEvents, ["useState"]],
+      [UseEffectListeningToGlobalEvents, ["useState", "useRef"]],
       [
         UseEffectFetchAPIAndLifeCycleMethods,
         ["useState", "useReducer", "useRef", "useCallback"],

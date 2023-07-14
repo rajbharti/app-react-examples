@@ -1,7 +1,9 @@
-import { memo } from "react";
+import { memo, forwardRef } from "react";
 import clsx from "clsx";
 import Tags from "./Tags";
 import Comments from "./Comments";
+
+type Ref = HTMLDivElement;
 
 interface Props {
   isChild?: boolean;
@@ -22,14 +24,10 @@ const Header = memo(function Header({ title }: HeaderProps) {
   );
 });
 
-export default function Example({
-  isChild,
-  hasNestedComp = true,
-  title,
-  comments,
-  className,
-  children,
-}: Props) {
+export default forwardRef<Ref, Props>(function Example(
+  { isChild, hasNestedComp = true, title, comments, className, children },
+  ref
+) {
   const WithOrWithoutHeading = hasNestedComp ? (
     <h4 className="text-lime-700">
       {isChild ? "Child" : "Parent"}
@@ -51,6 +49,7 @@ export default function Example({
         isChild ? "m-2.5 bg-white" : "bg-lime-100",
         className
       )}
+      ref={ref}
     >
       {WithOrWithoutHeading}
       {children}
@@ -65,4 +64,4 @@ export default function Example({
       {RenderParentOrChild}
     </section>
   );
-}
+});

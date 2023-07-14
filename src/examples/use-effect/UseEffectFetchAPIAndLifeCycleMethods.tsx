@@ -10,12 +10,7 @@ interface State {
 }
 
 interface Action {
-  type:
-    | "FETCH_API_START"
-    | "FETCH_API_END"
-    | "FETCH_API_ERROR"
-    | "FETCH_API_ABORT"
-    | "FETCH_API_RESET";
+  type: "API_START" | "API_END" | "API_ERROR" | "API_ABORT" | "API_RESET";
   payload?: Response | null;
 }
 
@@ -26,17 +21,16 @@ const initialState = {
 };
 
 function reducer(state: State, action: Action): State {
-  console.log(action.type);
   switch (action.type) {
-    case "FETCH_API_START":
+    case "API_START":
       return { ...state, isLoading: true, hasError: false };
-    case "FETCH_API_END":
+    case "API_END":
       return { ...state, isLoading: false, data: action.payload };
-    case "FETCH_API_ERROR":
+    case "API_ERROR":
       return { ...state, isLoading: false, hasError: true, data: null };
-    case "FETCH_API_ABORT":
+    case "API_ABORT":
       return { ...state, data: null };
-    case "FETCH_API_RESET":
+    case "API_RESET":
       return initialState;
     default:
       return state;
@@ -81,7 +75,7 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
     if (resourceType !== null) {
       (async () => {
         try {
-          dispatch({ type: "FETCH_API_START" });
+          dispatch({ type: "API_START" });
           let response = await fetch(
             `https://jsonplaceholder.typicode.com/${resourceType}`,
             {
@@ -89,7 +83,7 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
             }
           );
           response = await response.json();
-          dispatch({ type: "FETCH_API_END", payload: response });
+          dispatch({ type: "API_END", payload: response });
 
           const el = dataElRef.current as HTMLDivElement;
           if (el?.scrollHeight > el?.clientHeight) {
@@ -98,14 +92,14 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
         } catch (e: any) {
           if (e.name === "AbortError") {
             console.error(`request aborted for "${resourceType}"`);
-            dispatch({ type: "FETCH_API_ABORT" });
+            dispatch({ type: "API_ABORT" });
           } else {
-            dispatch({ type: "FETCH_API_ERROR" });
+            dispatch({ type: "API_ERROR" });
           }
         }
       })();
     } else {
-      dispatch({ type: "FETCH_API_RESET" });
+      dispatch({ type: "API_RESET" });
     }
 
     return () => {
