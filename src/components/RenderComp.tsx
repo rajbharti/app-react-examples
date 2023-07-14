@@ -26,6 +26,7 @@ export default function RenderComp({
     }),
     [tags, activeTag, setActiveCategory, setActiveTag]
   );
+  // TODO: add displayName to every component same as title prop of Example component
   // console.log(`> [COMPONENT: ${Comp.displayName}]`);
 
   return (

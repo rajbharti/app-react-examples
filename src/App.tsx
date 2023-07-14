@@ -8,6 +8,7 @@ import UseReducerCounter from "./examples/use-reducer/Counter";
 import UseReducerTodo from "./examples/use-reducer/Todo";
 import UseEffectFetchAPIAndLifeCycleMethods from "./examples/use-effect/UseEffectFetchAPIAndLifeCycleMethods";
 import UseRefInputChangeButtonClick from "./examples/use-ref/UseRefInputChangeButtonClick";
+import UseRefStopWatch from "./examples/use-ref/UseRefStopWatch";
 import UseMemoInputChange from "./examples/use-memo/UseMemoInputChange";
 import UseCallbackInputChange from "./examples/use-callback/UseCallbackInputChange";
 import UseTransitionTabs from "./examples/use-transition/UseTransitionTabs";
@@ -66,7 +67,10 @@ export const mapTagToComps: MapTagToComps = {
         ["useState", "useReducer", "useRef", "useCallback"],
       ],
     ],
-    useRef: [[UseRefInputChangeButtonClick, ["useState", "useEffect"]]],
+    useRef: [
+      [UseRefInputChangeButtonClick, ["useState", "useEffect"]],
+      [UseRefStopWatch, ["useState"]],
+    ],
     useMemo: [[UseMemoInputChange, ["useState", "useRef", "useEffect"]]],
     useCallback: [
       [UseCallbackInputChange, ["useState", "useRef", "useEffect", "memo"]],
