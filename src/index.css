@@ -30,6 +30,11 @@
     @apply rounded-sm bg-slate-100 hover:bg-slate-200 active:bg-slate-300;
   }
 
+  input[disabled],
+  button[disabled] {
+    @apply bg-slate-300 text-slate-500;
+  }
+
   ul,
   ol {
     @apply pl-4;

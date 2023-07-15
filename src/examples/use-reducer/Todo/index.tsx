@@ -17,8 +17,8 @@ function createInitialState() {
     },
     {
       id: nanoid(),
-      text: "Complete Redux",
-      isCompleted: false,
+      text: "Complete Docker",
+      isCompleted: true,
     },
   ];
 }
@@ -34,9 +34,10 @@ export default function App() {
     const el = todosElRef?.current as HTMLUListElement;
     if (isTodoAdded && el.scrollHeight > el.clientHeight) {
       el.scrollTo(0, el.scrollHeight);
-      setIsTodoAdded(false);
     }
-  });
+
+    return () => setIsTodoAdded(false);
+  }, [isTodoAdded]);
 
   const filteredTodos = todos.filter(
     activeFilter ? filtersLogic[activeFilter] : Boolean
