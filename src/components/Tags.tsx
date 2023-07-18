@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useTagsContext } from "../context";
+import { useTagsContext } from "../hooks";
 import type { Tag } from "../types";
 import { getSelectedTagCategory } from "src/utils";
 

@@ -27,3 +27,5 @@ export interface TagsContextShape {
   setActiveCategory: React.Dispatch<React.SetStateAction<ActiveCategory>>;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTag>>;
 }
+
+export type ExampleLevel = number;

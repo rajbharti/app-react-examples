@@ -16,7 +16,7 @@ function ChildComp({ square, cube }: ChildCompProps) {
   const sum = getSumOfSquareAndCube(square, cube);
 
   return (
-    <Example isChild>
+    <Example>
       <p>Even numbers from 1 to 10</p>
       {evenNums.join(", ")} <Comments>memoized value</Comments>
       <hr />

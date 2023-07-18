@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Layout from "./components/Layout";
 import TagsCategory from "./components/TagsCategory";
 import RenderComp from "./components/RenderComp";
 // Hooks
@@ -96,8 +97,7 @@ export default function App() {
   const categories: readonly string[] = Object.keys(mapTagToComps);
 
   return (
-    <main>
-      <h1 className="mb-5 text-3xl font-bold ">TypeScript React Examples</h1>
+    <Layout>
       {categories.map((category: string) => {
         const tags: TagList[] = Object.keys(
           mapTagToComps[category]
@@ -131,6 +131,6 @@ export default function App() {
             />
           )
         )}
-    </main>
+    </Layout>
   );
 }

@@ -44,7 +44,7 @@ export default function App() {
   );
 
   return (
-    <Example hasNestedComp={false} title="Todo">
+    <Example hideParentCompLabel title="Todo">
       <Form
         formOperationType="add"
         dispatch={dispatch}

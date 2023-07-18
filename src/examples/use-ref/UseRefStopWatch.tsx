@@ -51,7 +51,7 @@ export default function UseRefStopWatch() {
   }
 
   return (
-    <Example hasNestedComp={false} title="Stop Watch">
+    <Example hideParentCompLabel title="Stop Watch">
       <span className="pr-2 text-lg font-bold">
         Elapsed Time: {secondsPassed.toFixed(3)}
       </span>
@@ -74,7 +74,7 @@ export default function UseRefStopWatch() {
 
       <ul className="max-h-253px overflow-y-auto pl-0" ref={ulRef}>
         {recordedTime.map((time, i) => (
-          <li key={i}>{time}</li>
+          <li key={i.toString()}>{time}</li>
         ))}
       </ul>
     </Example>

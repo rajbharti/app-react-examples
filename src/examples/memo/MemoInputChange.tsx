@@ -4,7 +4,7 @@ import { squareCal, getPrimeNums } from "src/utils";
 
 const ChildComp = memo(function ChildComp() {
   return (
-    <Example isChild comments="memoized component">
+    <Example comments="memoized component">
       <p>Prime numbers from 1 to 10</p>
       {getPrimeNums().join(", ")}
     </Example>

@@ -146,7 +146,7 @@ export default function UseStateChange() {
 
   return (
     <Example
-      hasNestedComp={false}
+      hideParentCompLabel
       title="State change for primitive and non-primitive"
     >
       <div className="mb-2">

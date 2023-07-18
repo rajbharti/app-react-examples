@@ -6,11 +6,7 @@ interface ChildCompProps {
 }
 const ChildComp = memo(function Child({ num }: ChildCompProps) {
   console.log("Child render");
-  return (
-    <Example isChild comments="memoized component">
-      {num}
-    </Example>
-  );
+  return <Example comments="memoized component">{num}</Example>;
 });
 
 export default function MemoButtonClick() {

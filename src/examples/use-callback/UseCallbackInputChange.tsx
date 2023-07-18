@@ -7,7 +7,7 @@ interface ChildCompProps {
 }
 const ChildComp = memo(function ChildComp({ showPrimeNums }: ChildCompProps) {
   return (
-    <Example isChild comments="memoized component">
+    <Example comments="memoized component">
       <p>Prime numbers from 1 to 10</p>
       {showPrimeNums().join(", ")}
     </Example>

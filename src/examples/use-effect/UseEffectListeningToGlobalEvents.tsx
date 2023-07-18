@@ -24,7 +24,7 @@ export default function UseEffectListeningToGlobalEvents() {
 
   return (
     <Example
-      hasNestedComp={false}
+      hideParentCompLabel
       title="Browser API: add/remove event listener"
       className="relative h-52"
       ref={divRef}

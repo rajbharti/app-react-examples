@@ -113,7 +113,7 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
 
   return (
     <Example
-      hasNestedComp={false}
+      hideParentCompLabel
       title="Fetching APIs and Life Cycle Methods"
       comments="check console and network tab"
     >

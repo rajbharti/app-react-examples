@@ -32,7 +32,7 @@ export default function UseRefInputChangeButtonClick() {
   }
 
   return (
-    <Example hasNestedComp={false} title="Input Change and Button Click">
+    <Example hideParentCompLabel title="Input Change and Button Click">
       <input
         type="text"
         value={name}

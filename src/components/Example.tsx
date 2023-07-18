@@ -2,12 +2,13 @@ import { memo, forwardRef } from "react";
 import clsx from "clsx";
 import Tags from "./Tags";
 import Comments from "./Comments";
+import { ExampleContext } from "../context";
+import { useExampleContext } from "src/hooks";
 
 type Ref = HTMLDivElement;
 
 interface Props {
-  isChild?: boolean;
-  hasNestedComp?: boolean;
+  hideParentCompLabel?: boolean;
   title?: string;
   comments?: string;
   className?: string;
@@ -25,22 +26,12 @@ const Header = memo(function Header({ title }: HeaderProps) {
 });
 
 export default forwardRef<Ref, Props>(function Example(
-  { isChild, hasNestedComp = true, title, comments, className, children },
+  { hideParentCompLabel = false, title, comments, className, children },
   ref
 ) {
-  const WithOrWithoutHeading = hasNestedComp ? (
-    <h4 className="text-lime-700">
-      {isChild ? "Child" : "Parent"}
-      {comments && <Comments>{comments}</Comments>}
-    </h4>
-  ) : (
-    comments && (
-      <>
-        <Comments noSpacing>{comments}</Comments>
-        <br />
-      </>
-    )
-  );
+  const level = useExampleContext();
+
+  const isChild = level > 1;
 
   const RenderParentOrChild = (
     <div
@@ -51,17 +42,33 @@ export default forwardRef<Ref, Props>(function Example(
       )}
       ref={ref}
     >
-      {WithOrWithoutHeading}
+      {!hideParentCompLabel ? (
+        <h4 className="mb-2 text-lime-700">
+          {isChild ? "Child Component" : "Parent Component"}
+          {comments && <Comments>{comments}</Comments>}
+        </h4>
+      ) : (
+        comments && (
+          <>
+            <Comments>{comments}</Comments>
+            <br />
+          </>
+        )
+      )}
       {children}
     </div>
   );
 
-  return isChild ? (
-    RenderParentOrChild
-  ) : (
-    <section>
-      {title && <Header title={title} />}
-      {RenderParentOrChild}
-    </section>
+  return (
+    <ExampleContext.Provider value={level + 1}>
+      {!isChild ? (
+        <section>
+          {title && <Header title={title} />}
+          {RenderParentOrChild}
+        </section>
+      ) : (
+        RenderParentOrChild
+      )}
+    </ExampleContext.Provider>
   );
 });
