@@ -9,6 +9,7 @@ export default function UseEffectListeningToGlobalEvents() {
 
   useEffect(() => {
     function handleMove(event: PointerEvent) {
+      // TODO: bug in calculating position when user scroll the window
       setPosition({
         x: event.clientX - (divRef.current?.offsetLeft ?? 0) - circleSize / 2,
         y: event.clientY - (divRef.current?.offsetTop ?? 0) - circleSize / 2,

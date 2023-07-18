@@ -103,6 +103,7 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
     }
 
     return () => {
+      console.log("onUnmount");
       abortControllerRef.abort();
     };
   }, [resourceType]);

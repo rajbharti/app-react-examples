@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useRef, useMemo } from "react";
 import Example from "src/components/Example";
 import Comments from "src/components/Comments";
+import { useSetFocus } from "src/hooks";
 import { squareCal, getEvenNumbers, getSumOfSquareAndCube } from "src/utils";
 
 interface ChildCompProps {
@@ -35,9 +36,7 @@ export default function UseMemoInputChange() {
   // not on also when setCubeResult() set the state
   const squareResult = useMemo(() => squareCal(num), [num]);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  useSetFocus(inputRef);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const input = event.currentTarget.value;

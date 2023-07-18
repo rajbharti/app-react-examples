@@ -62,11 +62,11 @@ export const mapTagToComps: MapTagToComps = {
       ],
     ],
     useEffect: [
-      [UseEffectListeningToGlobalEvents, ["useState", "useRef"]],
       [
         UseEffectFetchAPIAndLifeCycleMethods,
         ["useState", "useReducer", "useRef", "useCallback"],
       ],
+      [UseEffectListeningToGlobalEvents, ["useState", "useRef"]],
     ],
     useRef: [
       [UseRefInputChangeButtonClick, ["useState", "useEffect"]],

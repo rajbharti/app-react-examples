@@ -1,7 +1,8 @@
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useRef, useState } from "react";
 import { nanoid } from "nanoid";
 import Example from "src/components/Example";
 import Comments from "src/components/Comments";
+import { useSetFocus } from "src/hooks";
 
 interface Todo {
   id: string;
@@ -58,9 +59,7 @@ const Todos = memo(function Todos({ handleReset }: TodosProps) {
   const [todos, setTodos] = useState<Todo[]>([]); // initial state
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  useSetFocus(inputRef);
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     // setting next state
