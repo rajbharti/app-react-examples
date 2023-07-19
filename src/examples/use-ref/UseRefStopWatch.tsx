@@ -74,7 +74,7 @@ export default function UseRefStopWatch() {
 
       <ul className="max-h-253px overflow-y-auto pl-0" ref={ulRef}>
         {recordedTime.map((time, i) => (
-          <li key={i.toString()}>{time}</li>
+          <li key={(i + time).toString()}>{time}</li>
         ))}
       </ul>
     </Example>

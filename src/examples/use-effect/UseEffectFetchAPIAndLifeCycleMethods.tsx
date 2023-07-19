@@ -89,8 +89,8 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
           if (el?.scrollHeight > el?.clientHeight) {
             el?.scrollTo(0, 0);
           }
-        } catch (e: any) {
-          if (e.name === "AbortError") {
+        } catch (e: unknown) {
+          if ((e as Error).name === "AbortError") {
             console.error(`request aborted for "${resourceType}"`);
             dispatch({ type: "API_ABORT" });
           } else {
@@ -122,7 +122,7 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
 
       {state.isLoading && resourceType && (
         <span className="mx-1 font-bold">
-          Loading {getTitleCase(resourceType as string)}
+          Loading {getTitleCase(resourceType)}
           ...
         </span>
       )}

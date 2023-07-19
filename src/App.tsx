@@ -8,11 +8,14 @@ import UseStateButtonToggle from "./examples/use-state/UseStateButtonToggle";
 import UseReducerCounter from "./examples/use-reducer/Counter";
 import UseReducerTodo from "./examples/use-reducer/Todo";
 import UseEffectFetchAPIAndLifeCycleMethods from "./examples/use-effect/UseEffectFetchAPIAndLifeCycleMethods";
+import UseEffectListeningToGlobalEvents from "./examples/use-effect/UseEffectListeningToGlobalEvents";
 import UseRefInputChangeButtonClick from "./examples/use-ref/UseRefInputChangeButtonClick";
 import UseRefStopWatch from "./examples/use-ref/UseRefStopWatch";
 import UseMemoInputChange from "./examples/use-memo/UseMemoInputChange";
 import UseCallbackInputChange from "./examples/use-callback/UseCallbackInputChange";
 import UseTransitionTabs from "./examples/use-transition/UseTransitionTabs";
+import UseIdAccessibility from "./examples/use-id/UseIdAccessibility";
+import UseIdRelatedElements from "./examples/use-id/UseIdRelatedElements";
 // APIs
 import MemoInputChange from "./examples/memo/MemoInputChange";
 import MemoButtonClick from "./examples/memo/MemoButtonClick";
@@ -28,7 +31,6 @@ import type {
   ActiveCategory,
   Comp,
 } from "./types";
-import UseEffectListeningToGlobalEvents from "./examples/use-effect/UseEffectListeningToGlobalEvents";
 
 /* TODO: following type can be, but require lot of refactoring
 interface MapTagToComps {
@@ -77,6 +79,7 @@ export const mapTagToComps: MapTagToComps = {
       [UseCallbackInputChange, ["useState", "useRef", "useEffect", "memo"]],
     ],
     useTransition: [[UseTransitionTabs, ["useState"]]],
+    useId: [[UseIdAccessibility], [UseIdRelatedElements]],
   },
   apis: {
     memo: [
