@@ -13,6 +13,7 @@ import UseContextPassingDataDeeply from "./examples/use-context/UseContextPassin
 import UseContextOverridingContext from "./examples/use-context/UseContextOverridingContext";
 import UseRefInputChangeButtonClick from "./examples/use-ref/UseRefInputChangeButtonClick";
 import UseRefStopWatch from "./examples/use-ref/UseRefStopWatch";
+import UseImperativeHandleCustomRef from "./examples/use-imperative-handle/UseImperativeHandleCustomRef";
 import UseMemoInputChange from "./examples/use-memo/UseMemoInputChange";
 import UseCallbackInputChange from "./examples/use-callback/UseCallbackInputChange";
 import UseTransitionTabs from "./examples/use-transition/UseTransitionTabs";
@@ -65,6 +66,17 @@ export const mapTagToComps: MapTagToComps = {
         ["useState", "useRef", "useEffect", "useMemo", "forwardRef"],
       ],
     ],
+    useContext: [
+      [UseContextPassingDataDeeply, ["useState"]],
+      [UseContextOverridingContext],
+    ],
+    useRef: [
+      [UseRefInputChangeButtonClick, ["useState", "useEffect"]],
+      [UseRefStopWatch, ["useState"]],
+    ],
+    useImperativeHandle: [
+      [UseImperativeHandleCustomRef, ["useState", "useRef"]],
+    ],
     useEffect: [
       [
         UseEffectFetchAPIAndLifeCycleMethods,
@@ -72,16 +84,15 @@ export const mapTagToComps: MapTagToComps = {
       ],
       [UseEffectListeningToGlobalEvents, ["useState", "useRef"]],
     ],
-    useContext: [[UseContextPassingDataDeeply], [UseContextOverridingContext]],
-    useRef: [
-      [UseRefInputChangeButtonClick, ["useState", "useEffect"]],
-      [UseRefStopWatch, ["useState"]],
-    ],
+    // useLayoutEffect: [],
+    // useInsertionEffect: [],
     useMemo: [[UseMemoInputChange, ["useState", "useRef", "useEffect"]]],
     useCallback: [
       [UseCallbackInputChange, ["useState", "useRef", "useEffect", "memo"]],
     ],
     useTransition: [[UseTransitionTabs, ["useState"]]],
+    // useDeferredValue: [],
+    // useDebugValue: [],
     useId: [[UseIdAccessibility], [UseIdRelatedElements]],
   },
   apis: {
@@ -89,7 +100,7 @@ export const mapTagToComps: MapTagToComps = {
       [MemoButtonClick, ["useState", "useRef"]],
       [MemoInputChange, ["useState", "useRef", "useEffect"]],
     ],
-    forwardRef: [],
+    // forwardRef: [],
   },
   redux: {
     "Redux Toolkit": [[ReduxToolkitCounter]],
