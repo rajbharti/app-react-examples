@@ -9,6 +9,8 @@ import UseReducerCounter from "./examples/use-reducer/Counter";
 import UseReducerTodo from "./examples/use-reducer/Todo";
 import UseEffectFetchAPIAndLifeCycleMethods from "./examples/use-effect/UseEffectFetchAPIAndLifeCycleMethods";
 import UseEffectListeningToGlobalEvents from "./examples/use-effect/UseEffectListeningToGlobalEvents";
+import UseContextPassingDataDeeply from "./examples/use-context/UseContextPassingDataDeeply";
+import UseContextOverridingContext from "./examples/use-context/UseContextOverridingContext";
 import UseRefInputChangeButtonClick from "./examples/use-ref/UseRefInputChangeButtonClick";
 import UseRefStopWatch from "./examples/use-ref/UseRefStopWatch";
 import UseMemoInputChange from "./examples/use-memo/UseMemoInputChange";
@@ -70,6 +72,7 @@ export const mapTagToComps: MapTagToComps = {
       ],
       [UseEffectListeningToGlobalEvents, ["useState", "useRef"]],
     ],
+    useContext: [[UseContextPassingDataDeeply], [UseContextOverridingContext]],
     useRef: [
       [UseRefInputChangeButtonClick, ["useState", "useEffect"]],
       [UseRefStopWatch, ["useState"]],
