@@ -5,7 +5,7 @@ export default function UseIdRelatedElements() {
   const id = useId();
 
   return (
-    <Example hideParentCompLabel title="Generating keys for related elements">
+    <Example hideParentTitle title="Generating keys for related elements">
       <form>
         <label htmlFor={id + "-firstName"} className="mr-2">
           First Name:

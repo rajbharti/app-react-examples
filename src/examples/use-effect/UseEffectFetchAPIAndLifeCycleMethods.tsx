@@ -114,7 +114,7 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
 
   return (
     <Example
-      hideParentCompLabel
+      hideParentTitle
       title="Fetching APIs and Life Cycle Methods"
       comments="check console and network tab"
     >

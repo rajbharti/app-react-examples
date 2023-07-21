@@ -8,10 +8,11 @@ import { useExampleContext } from "src/hooks";
 type Ref = HTMLDivElement;
 
 interface Props {
-  hideParentCompLabel?: boolean;
   title?: string;
   comments?: string;
   className?: string;
+  hideParentTitle?: boolean;
+  showChildLabelling?: boolean;
   children: React.ReactNode;
 }
 
@@ -26,12 +27,24 @@ const Header = memo(function Header({ title }: HeaderProps) {
 });
 
 export default forwardRef<Ref, Props>(function Example(
-  { hideParentCompLabel = false, title, comments, className, children },
+  {
+    title,
+    comments,
+    className,
+    hideParentTitle = false,
+    showChildLabelling = false,
+    children,
+  },
   ref
 ) {
   const level = useExampleContext();
 
   const isChild = level > 1;
+  const childTitle =
+    "Child" +
+    (isChild && showChildLabelling
+      ? " " + String.fromCharCode(63 + level)
+      : "");
 
   const RenderParentOrChild = (
     <div
@@ -42,9 +55,9 @@ export default forwardRef<Ref, Props>(function Example(
       )}
       ref={ref}
     >
-      {!hideParentCompLabel ? (
+      {!hideParentTitle ? (
         <h4 className="mb-2 text-lime-700">
-          {isChild ? "Child Component" : "Parent Component"}
+          {isChild ? childTitle : "Parent"}
           {comments && <Comments>{comments}</Comments>}
         </h4>
       ) : (

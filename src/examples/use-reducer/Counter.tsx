@@ -27,7 +27,7 @@ export default function Counter() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <Example hideParentCompLabel title="Counter">
+    <Example hideParentTitle title="Counter">
       Count: {state.count}{" "}
       <button onClick={() => dispatch({ type: "increment" })}>+</button>
       <button onClick={() => dispatch({ type: "decrement" })}>-</button>

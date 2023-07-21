@@ -51,7 +51,7 @@ export default function UseTransitionTabs() {
   const [tab, setTab] = useState<TabLabel>("About");
 
   return (
-    <Example hideParentCompLabel title="Tabs">
+    <Example hideParentTitle title="Tabs">
       {tabLabels.map((label: TabLabel) => (
         <TabButton
           key={label}

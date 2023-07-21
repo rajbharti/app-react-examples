@@ -13,7 +13,7 @@ export default function Counter() {
   const dispatch = useAppDispatch();
 
   return (
-    <Example hideParentCompLabel title="Counter">
+    <Example hideParentTitle title="Counter">
       Count {count} <button onClick={() => dispatch(decrement())}>-</button>
       <button onClick={() => dispatch(increment())}>+</button>
       <button onClick={() => dispatch(incrementAsync(2))}>

@@ -8,16 +8,16 @@ interface ChildProps {
 }
 
 function CompA({ children }: ChildProps) {
-  return <Example>{children}</Example>;
+  return <Example showChildLabelling>{children}</Example>;
 }
 
 function CompB({ children }: ChildProps) {
-  return <Example>{children}</Example>;
+  return <Example showChildLabelling>{children}</Example>;
 }
 
 function CompC() {
   const count = useContext(CountContext);
-  return <Example>Count: {count}</Example>;
+  return <Example showChildLabelling>Count: {count}</Example>;
 }
 
 export default function UseContextPassingDataDeeply() {

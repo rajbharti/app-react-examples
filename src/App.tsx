@@ -11,7 +11,9 @@ import UseEffectFetchAPIAndLifeCycleMethods from "./examples/use-effect/UseEffec
 import UseEffectListeningToGlobalEvents from "./examples/use-effect/UseEffectListeningToGlobalEvents";
 import UseContextPassingDataDeeply from "./examples/use-context/UseContextPassingDataDeeply";
 import UseContextOverridingContext from "./examples/use-context/UseContextOverridingContext";
-import UseRefInputChangeButtonClick from "./examples/use-ref/UseRefInputChangeButtonClick";
+import UseRefInputFocusButtonClick from "./examples/use-ref/UseRefInputFocusButtonClick";
+import UseRefPassingParentRefToChild from "./examples/use-ref/UseRefPassingParentRefToChild";
+import UseRefPassingChildRefToParent from "./examples/use-ref/UseRefPassingChildRefToParent";
 import UseRefStopWatch from "./examples/use-ref/UseRefStopWatch";
 import UseImperativeHandleCustomRef from "./examples/use-imperative-handle/UseImperativeHandleCustomRef";
 import UseMemoInputChange from "./examples/use-memo/UseMemoInputChange";
@@ -53,6 +55,8 @@ interface MapTagToComps {
  * }
  */
 
+// TODO: now tags contain custom hooks so, add custom hooks and remove useRef and useEffect
+
 export const mapTagToComps: MapTagToComps = {
   hooks: {
     useState: [
@@ -71,7 +75,9 @@ export const mapTagToComps: MapTagToComps = {
       [UseContextOverridingContext],
     ],
     useRef: [
-      [UseRefInputChangeButtonClick, ["useState", "useEffect"]],
+      [UseRefInputFocusButtonClick, ["useState", "useEffect"]],
+      [UseRefPassingParentRefToChild],
+      [UseRefPassingChildRefToParent, ["forwardRef"]],
       [UseRefStopWatch, ["useState"]],
     ],
     useImperativeHandle: [

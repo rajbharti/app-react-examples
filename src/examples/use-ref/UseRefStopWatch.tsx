@@ -51,7 +51,7 @@ export default function UseRefStopWatch() {
   }
 
   return (
-    <Example hideParentCompLabel title="Stop Watch">
+    <Example hideParentTitle title="Stop Watch">
       <span className="pr-2 text-lg font-bold">
         Elapsed Time: {secondsPassed.toFixed(3)}
       </span>

@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, memo } from "react";
 import Example from "src/components/Example";
-import { useSetFocus } from "src/hooks";
+import { useFocus } from "src/hooks";
 import { squareCal, getPrimeNums } from "src/utils";
 
 interface ChildCompProps {
@@ -19,7 +19,7 @@ export default function UseCallbackInputChange() {
   const [num, setNum] = useState<number>(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useSetFocus(inputRef);
+  useFocus(inputRef);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const input = event.currentTarget.value;

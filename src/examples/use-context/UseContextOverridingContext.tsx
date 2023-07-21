@@ -9,9 +9,9 @@ const ThemeContext = createContext("light");
 function Buttons() {
   const theme = useContext(ThemeContext);
   let primaryClassName =
-    "text-orange-600 bg-white hover:bg-orange-200 border-orange-600";
+    "text-orange-600 bg-white hover:bg-orange-200 border-orange-500";
   let secondaryClassName =
-    "text-gray-600 bg-white hover:bg-gray-200 border-gray-600";
+    "text-gray-500 bg-white hover:bg-gray-200 border-gray-400";
 
   if (theme === "dark") {
     primaryClassName =
@@ -47,7 +47,7 @@ function Buttons() {
 
 export default function UseContextOverridingContext() {
   return (
-    <Example hideParentCompLabel title="Overriding Context">
+    <Example hideParentTitle title="Overriding Context">
       <ThemeContext.Provider value="light">
         <Buttons />
         <hr />

@@ -44,7 +44,7 @@ export default function App() {
   );
 
   return (
-    <Example hideParentCompLabel title="Todo">
+    <Example hideParentTitle title="Todo">
       <Form
         formOperationType="add"
         dispatch={dispatch}

@@ -25,7 +25,7 @@ export default function UseEffectListeningToGlobalEvents() {
 
   return (
     <Example
-      hideParentCompLabel
+      hideParentTitle
       title="Browser API: add/remove event listener"
       className="relative h-52"
       ref={divRef}

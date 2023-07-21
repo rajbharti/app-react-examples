@@ -11,7 +11,7 @@ export function useExampleContext() {
 
 type SetFocusRef = React.RefObject<HTMLElement>;
 
-export function useSetFocus(ref: SetFocusRef) {
+export function useFocus(ref: SetFocusRef) {
   useEffect(() => {
     ref.current?.focus();
   }, []);

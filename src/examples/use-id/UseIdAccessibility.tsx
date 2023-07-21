@@ -22,7 +22,7 @@ function PasswordField() {
 
 export default function UseIdAccessibility() {
   return (
-    <Example hideParentCompLabel title="Accessibility">
+    <Example hideParentTitle title="Accessibility">
       <h4>Choose password</h4>
       <PasswordField />
       <h4>Confirm password</h4>

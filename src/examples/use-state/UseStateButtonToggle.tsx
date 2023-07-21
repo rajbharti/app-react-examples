@@ -14,7 +14,7 @@ export default function UseStateButtonToggle() {
   }
 
   return (
-    <Example hideParentCompLabel title="Button Toggle">
+    <Example hideParentTitle title="Button Toggle">
       <div className="mb-2">
         {filters.map((filter) => (
           <button
