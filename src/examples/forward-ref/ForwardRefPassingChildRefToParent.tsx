@@ -11,7 +11,7 @@ const Child = forwardRef<Ref>(function Child(props, ref) {
   );
 });
 
-export default function UseRefPassingChildRefToParent() {
+export default function ForwardRefPassingChildRefToParent() {
   const childInputRef = useRef<HTMLInputElement>(null);
 
   function handleClick() {

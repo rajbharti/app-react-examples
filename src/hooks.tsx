@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useDebugValue, useEffect } from "react";
 import { ExampleContext, TagsContext } from "./context";
 
 export function useTagsContext() {
@@ -12,6 +12,7 @@ export function useExampleContext() {
 type SetFocusRef = React.RefObject<HTMLElement>;
 
 export function useFocus(ref: SetFocusRef) {
+  useDebugValue(ref, () => Date.now());
   useEffect(() => {
     ref.current?.focus();
   }, []);

@@ -13,7 +13,6 @@ import UseContextPassingDataDeeply from "./examples/use-context/UseContextPassin
 import UseContextOverridingContext from "./examples/use-context/UseContextOverridingContext";
 import UseRefInputFocusButtonClick from "./examples/use-ref/UseRefInputFocusButtonClick";
 import UseRefPassingParentRefToChild from "./examples/use-ref/UseRefPassingParentRefToChild";
-import UseRefPassingChildRefToParent from "./examples/use-ref/UseRefPassingChildRefToParent";
 import UseRefStopWatch from "./examples/use-ref/UseRefStopWatch";
 import UseImperativeHandleCustomRef from "./examples/use-imperative-handle/UseImperativeHandleCustomRef";
 import UseMemoInputChange from "./examples/use-memo/UseMemoInputChange";
@@ -24,6 +23,7 @@ import UseIdRelatedElements from "./examples/use-id/UseIdRelatedElements";
 // APIs
 import MemoInputChange from "./examples/memo/MemoInputChange";
 import MemoButtonClick from "./examples/memo/MemoButtonClick";
+import ForwardRefPassingChildRefToParent from "./examples/forward-ref/ForwardRefPassingChildRefToParent";
 // Components
 // Redux
 import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
@@ -77,7 +77,7 @@ export const mapTagToComps: MapTagToComps = {
     useRef: [
       [UseRefInputFocusButtonClick, ["useState", "useEffect"]],
       [UseRefPassingParentRefToChild],
-      [UseRefPassingChildRefToParent, ["forwardRef"]],
+      [ForwardRefPassingChildRefToParent, ["forwardRef"]],
       [UseRefStopWatch, ["useState"]],
     ],
     useImperativeHandle: [
@@ -91,22 +91,21 @@ export const mapTagToComps: MapTagToComps = {
       [UseEffectListeningToGlobalEvents, ["useState", "useRef"]],
     ],
     // useLayoutEffect: [],
-    // useInsertionEffect: [],
     useMemo: [[UseMemoInputChange, ["useState", "useRef", "useEffect"]]],
     useCallback: [
       [UseCallbackInputChange, ["useState", "useRef", "useEffect", "memo"]],
     ],
     useTransition: [[UseTransitionTabs, ["useState"]]],
     // useDeferredValue: [],
-    // useDebugValue: [],
     useId: [[UseIdAccessibility], [UseIdRelatedElements]],
+    // useSyncExternalStore: [],
   },
   apis: {
     memo: [
       [MemoButtonClick, ["useState", "useRef"]],
       [MemoInputChange, ["useState", "useRef", "useEffect"]],
     ],
-    // forwardRef: [],
+    forwardRef: [[ForwardRefPassingChildRefToParent, ["useRef"]]],
   },
   redux: {
     "Redux Toolkit": [[ReduxToolkitCounter]],
