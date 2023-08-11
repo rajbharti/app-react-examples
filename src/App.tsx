@@ -62,7 +62,7 @@ export const mapTagToComps: MapTagToComps = {
   hooks: {
     useState: [
       [UseStateButtonToggle],
-      [UseStateChange, ["useCallback", "memo", "useEffect", "useRef"]],
+      [UseStateChange, ["useCallback", "memo"]],
     ],
     useReducer: [
       [UseReducerCounter],
