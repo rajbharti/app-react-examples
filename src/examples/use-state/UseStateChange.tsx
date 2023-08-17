@@ -2,7 +2,6 @@ import { memo, useCallback, useState } from "react";
 import { nanoid } from "nanoid";
 import Example from "src/components/Example";
 import Comments from "src/components/Comments";
-import { useFocus } from "src/hooks";
 
 interface Todo {
   id: string;
@@ -22,6 +21,7 @@ function getRandomId() {
 interface StoreInfoFromPreviousRenderProps {
   value: number;
 }
+
 const StoreInfoFromPreviousRender = memo(function StoreInfoFromPreviousRender({
   value,
 }: StoreInfoFromPreviousRenderProps) {

@@ -15,14 +15,20 @@ function AboutContent() {
 }
 
 function PostsContent() {
-  for (let i = 0; i < 1000; i++) {
-    const startTime = performance.now();
-    while (performance.now() - startTime < 1) {
-      // Do nothing for 1 ms per loop to emulate extremely slow code
-    }
+  const items = [];
+  for (let i = 0; i < 500; i++) {
+    items.push(<SlowPost key={i} index={i} />);
+  }
+  return <ul className="items">{items}</ul>;
+}
+
+function SlowPost({ index }: { index: number }) {
+  const startTime = performance.now();
+  while (performance.now() - startTime < 1) {
+    // Do nothing for 1 ms per item to emulate extremely slow code
   }
 
-  return <p>Post content</p>;
+  return <li className="item">Post #{index + 1}</li>;
 }
 
 function ContactUsContent() {
@@ -49,6 +55,7 @@ function TabButton({ children, isActive, onClick }: TabButtonProps) {
 
 export default function UseTransitionTabs() {
   const [tab, setTab] = useState<TabLabel>("About");
+  console.log(tab);
 
   return (
     <Example hideParentTitle title="Tabs">
