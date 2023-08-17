@@ -2,11 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import Example from "src/components/Example";
 import Comments from "src/components/Comments";
 
-export default function UseRefInputChangeButtonClick() {
+export default function UseRefInputFocusButtonClick() {
   const [name, setName] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLParagraphElement>(null);
   const countRef = useRef(0);
-  const COLORS = ["red", "blue", "green", "yellow", "pink", "purple"];
+  const COLORS = ["red", "blue", "green", "orange", "pink", "purple"];
 
   useEffect(() => {
     setFocus();
@@ -18,21 +19,27 @@ export default function UseRefInputChangeButtonClick() {
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setName(event.currentTarget.value);
-
-    if (countRef.current > 1 && countRef.current % 2 === 0) {
-      const randomIndex = Math.floor(Math.random() * COLORS.length);
-      (inputRef.current as HTMLInputElement).style.color = COLORS[randomIndex];
-    }
   }
 
   function handleClick() {
     countRef.current = countRef.current + 1;
     // this value is persisted between renders
     console.log(`Button clicked ${countRef.current} times`);
+
+    if (countRef.current % 2 === 0) {
+      const randomIndex = Math.floor(Math.random() * COLORS.length);
+      (nameRef.current as HTMLParagraphElement).style.color =
+        COLORS[randomIndex];
+    }
   }
 
   return (
-    <Example hasNestedComp={false} title="Input Change and Button Click">
+    <Example hideParentTitle title="Input Focus and Button Click">
+      <Comments noSpacing>
+        Display name color will change randomly when &quot;Click me&quot;
+        clicked counts are a Even number
+      </Comments>
+      <br />
       <input
         type="text"
         value={name}
@@ -40,14 +47,11 @@ export default function UseRefInputChangeButtonClick() {
         ref={inputRef}
         onChange={handleInputChange}
       />
-      <p>Your Name: {name}</p>
-      <button onClick={setFocus}>Set input Focus</button>
-      <br />
+      <p>
+        Your Name: <span ref={nameRef}>{name}</span>
+      </p>
+      <button onClick={setFocus}>Set input focus</button>
       <button onClick={handleClick}>Click me</button>
-      <Comments>
-        Input color will display randomly while typing when the number of clicks
-        are a Even number
-      </Comments>
     </Example>
   );
 }

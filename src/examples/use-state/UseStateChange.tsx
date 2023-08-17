@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { nanoid } from "nanoid";
 import Example from "src/components/Example";
 import Comments from "src/components/Comments";
@@ -21,6 +21,7 @@ function getRandomId() {
 interface StoreInfoFromPreviousRenderProps {
   value: number;
 }
+
 const StoreInfoFromPreviousRender = memo(function StoreInfoFromPreviousRender({
   value,
 }: StoreInfoFromPreviousRenderProps) {
@@ -56,11 +57,6 @@ interface TodosProps {
 const Todos = memo(function Todos({ handleReset }: TodosProps) {
   const [task, setTask] = useState(""); // initial state
   const [todos, setTodos] = useState<Todo[]>([]); // initial state
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     // setting next state
@@ -81,12 +77,7 @@ const Todos = memo(function Todos({ handleReset }: TodosProps) {
     <div className="mb-2">
       <h4>Set Todos</h4>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={task}
-          onChange={handleInputChange}
-          ref={inputRef}
-        />
+        <input type="text" value={task} onChange={handleInputChange} />
         <button type="submit">Add</button>
         <button type="button" onClick={handleReset}>
           Reset <b>state</b> of this component
@@ -146,7 +137,7 @@ export default function UseStateChange() {
 
   return (
     <Example
-      hasNestedComp={false}
+      hideParentTitle
       title="State change for primitive and non-primitive"
     >
       <div className="mb-2">

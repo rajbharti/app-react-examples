@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import clsx from "clsx";
+import { useFocus } from "src/hooks";
 import type { TodoShape, Action, FormOperationType } from "./types";
 
 interface Props {
@@ -24,9 +25,7 @@ export default function Form({
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  useFocus(inputRef);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

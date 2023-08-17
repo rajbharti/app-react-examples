@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useRef, useMemo } from "react";
 import Example from "src/components/Example";
 import Comments from "src/components/Comments";
+import { useFocus } from "src/hooks";
 import { squareCal, getEvenNumbers, getSumOfSquareAndCube } from "src/utils";
 
 interface ChildCompProps {
@@ -16,7 +17,7 @@ function ChildComp({ square, cube }: ChildCompProps) {
   const sum = getSumOfSquareAndCube(square, cube);
 
   return (
-    <Example isChild>
+    <Example>
       <p>Even numbers from 1 to 10</p>
       {evenNums.join(", ")} <Comments>memoized value</Comments>
       <hr />
@@ -35,9 +36,7 @@ export default function UseMemoInputChange() {
   // not on also when setCubeResult() set the state
   const squareResult = useMemo(() => squareCal(num), [num]);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  useFocus(inputRef);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const input = event.currentTarget.value;

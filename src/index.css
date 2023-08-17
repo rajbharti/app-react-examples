@@ -16,7 +16,8 @@
   }
 
   input,
-  button {
+  button,
+  textarea {
     @apply my-0.5 ml-0 mr-1.5 min-w-30px border border-gray-400 px-1 py-0.5 focus:outline-1 focus:outline-gray-400;
   }
 
@@ -28,6 +29,11 @@
   button[type="reset"],
   button[type="submit"] {
     @apply rounded-sm bg-slate-100 hover:bg-slate-200 active:bg-slate-300;
+  }
+
+  input[disabled],
+  button[disabled] {
+    @apply bg-slate-300 text-slate-500;
   }
 
   ul,

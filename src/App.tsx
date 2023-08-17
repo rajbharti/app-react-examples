@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Layout from "./components/Layout";
 import TagsCategory from "./components/TagsCategory";
 import RenderComp from "./components/RenderComp";
 // Hooks
@@ -7,13 +8,23 @@ import UseStateButtonToggle from "./examples/use-state/UseStateButtonToggle";
 import UseReducerCounter from "./examples/use-reducer/Counter";
 import UseReducerTodo from "./examples/use-reducer/Todo";
 import UseEffectFetchAPIAndLifeCycleMethods from "./examples/use-effect/UseEffectFetchAPIAndLifeCycleMethods";
-import UseRefInputChangeButtonClick from "./examples/use-ref/UseRefInputChangeButtonClick";
+import UseEffectListeningToGlobalEvents from "./examples/use-effect/UseEffectListeningToGlobalEvents";
+import UseLayoutEffectTooltip from "./examples/use-layout-effect/UseLayoutEffectTooltip";
+import UseContextPassingDataDeeply from "./examples/use-context/UseContextPassingDataDeeply";
+import UseContextOverridingContext from "./examples/use-context/UseContextOverridingContext";
+import UseRefInputFocusButtonClick from "./examples/use-ref/UseRefInputFocusButtonClick";
+import UseRefPassingParentRefToChild from "./examples/use-ref/UseRefPassingParentRefToChild";
+import UseRefStopWatch from "./examples/use-ref/UseRefStopWatch";
+import UseImperativeHandleCustomRef from "./examples/use-imperative-handle/UseImperativeHandleCustomRef";
 import UseMemoInputChange from "./examples/use-memo/UseMemoInputChange";
 import UseCallbackInputChange from "./examples/use-callback/UseCallbackInputChange";
 import UseTransitionTabs from "./examples/use-transition/UseTransitionTabs";
+import UseIdAccessibility from "./examples/use-id/UseIdAccessibility";
+import UseIdRelatedElements from "./examples/use-id/UseIdRelatedElements";
 // APIs
 import MemoInputChange from "./examples/memo/MemoInputChange";
 import MemoButtonClick from "./examples/memo/MemoButtonClick";
+import ForwardRefPassingChildRefToParent from "./examples/forward-ref/ForwardRefPassingChildRefToParent";
 // Components
 // Redux
 import ReduxToolkitCounter from "./examples/redux-toolkit/CounterApp";
@@ -22,7 +33,6 @@ import ReduxCounter from "./examples/redux/Counter";
 import type {
   TagList,
   Category,
-  Tag,
   ActiveTag,
   ActiveCategory,
   Comp,
@@ -46,11 +56,13 @@ interface MapTagToComps {
  * }
  */
 
+// TODO: now tags contain custom hooks so, add custom hooks and remove useRef and useEffect
+
 export const mapTagToComps: MapTagToComps = {
   hooks: {
     useState: [
       [UseStateButtonToggle],
-      [UseStateChange, ["useCallback", "memo", "useEffect", "useRef"]],
+      [UseStateChange, ["useCallback", "memo"]],
     ],
     useReducer: [
       [UseReducerCounter],
@@ -59,25 +71,42 @@ export const mapTagToComps: MapTagToComps = {
         ["useState", "useRef", "useEffect", "useMemo", "forwardRef"],
       ],
     ],
+    useContext: [
+      [UseContextPassingDataDeeply, ["useState"]],
+      [UseContextOverridingContext],
+    ],
+    useRef: [
+      [UseRefInputFocusButtonClick, ["useState", "useEffect"]],
+      [UseRefPassingParentRefToChild],
+      [ForwardRefPassingChildRefToParent, ["forwardRef"]],
+      [UseRefStopWatch, ["useState"]],
+    ],
+    useImperativeHandle: [
+      [UseImperativeHandleCustomRef, ["useState", "useRef"]],
+    ],
     useEffect: [
       [
         UseEffectFetchAPIAndLifeCycleMethods,
-        ["useState", "useRef", "useCallback"],
+        ["useState", "useReducer", "useRef", "useCallback"],
       ],
+      [UseEffectListeningToGlobalEvents, ["useState", "useRef"]],
     ],
-    useRef: [[UseRefInputChangeButtonClick, ["useState", "useEffect"]]],
+    useLayoutEffect: [[UseLayoutEffectTooltip]],
     useMemo: [[UseMemoInputChange, ["useState", "useRef", "useEffect"]]],
     useCallback: [
       [UseCallbackInputChange, ["useState", "useRef", "useEffect", "memo"]],
     ],
     useTransition: [[UseTransitionTabs, ["useState"]]],
+    // useDeferredValue: [],
+    useId: [[UseIdAccessibility], [UseIdRelatedElements]],
+    // useSyncExternalStore: [],
   },
   apis: {
     memo: [
       [MemoButtonClick, ["useState", "useRef"]],
       [MemoInputChange, ["useState", "useRef", "useEffect"]],
     ],
-    forwardRef: [],
+    forwardRef: [[ForwardRefPassingChildRefToParent, ["useRef"]]],
   },
   redux: {
     "Redux Toolkit": [[ReduxToolkitCounter]],
@@ -91,8 +120,7 @@ export default function App() {
   const categories: readonly string[] = Object.keys(mapTagToComps);
 
   return (
-    <main>
-      <h1 className="mb-5 text-3xl font-bold ">TypeScript React Examples</h1>
+    <Layout>
       {categories.map((category: string) => {
         const tags: TagList[] = Object.keys(
           mapTagToComps[category]
@@ -126,6 +154,6 @@ export default function App() {
             />
           )
         )}
-    </main>
+    </Layout>
   );
 }

@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef, useCallback, memo } from "react";
+import { useState, useRef, useCallback, memo } from "react";
 import Example from "src/components/Example";
+import { useFocus } from "src/hooks";
 import { squareCal, getPrimeNums } from "src/utils";
 
 interface ChildCompProps {
@@ -7,7 +8,7 @@ interface ChildCompProps {
 }
 const ChildComp = memo(function ChildComp({ showPrimeNums }: ChildCompProps) {
   return (
-    <Example isChild comments="memoized component">
+    <Example comments="memoized component">
       <p>Prime numbers from 1 to 10</p>
       {showPrimeNums().join(", ")}
     </Example>
@@ -18,9 +19,7 @@ export default function UseCallbackInputChange() {
   const [num, setNum] = useState<number>(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  useFocus(inputRef);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const input = event.currentTarget.value;

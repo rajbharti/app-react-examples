@@ -2,10 +2,16 @@ export type TagList =
   | "useState"
   | "useReducer"
   | "useEffect"
+  | "useLayoutEffect"
+  | "useContext"
   | "useRef"
+  | "useImperativeHandle"
   | "useMemo"
   | "useCallback"
   | "useTransition"
+  | "useDeferredValue"
+  | "useId"
+  | "useSyncExternalStore"
   | "memo"
   | "forwardRef"
   | "Redux Toolkit"
@@ -27,3 +33,5 @@ export interface TagsContextShape {
   setActiveCategory: React.Dispatch<React.SetStateAction<ActiveCategory>>;
   setActiveTag: React.Dispatch<React.SetStateAction<ActiveTag>>;
 }
+
+export type ExampleLevel = number;

@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef, memo } from "react";
+import { useState, useRef, memo } from "react";
 import Example from "src/components/Example";
+import { useFocus } from "src/hooks";
 import { squareCal, getPrimeNums } from "src/utils";
 
 const ChildComp = memo(function ChildComp() {
   return (
-    <Example isChild comments="memoized component">
+    <Example comments="memoized component">
       <p>Prime numbers from 1 to 10</p>
       {getPrimeNums().join(", ")}
     </Example>
@@ -15,9 +16,7 @@ export default function MemoInputChange() {
   const [num, setNum] = useState<number>(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  useFocus(inputRef);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const input = event.currentTarget.value;

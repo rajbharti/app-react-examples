@@ -29,7 +29,7 @@ store.subscribe(() => console.log(store.getState()));
 
 export default function Counter() {
   return (
-    <Example hasNestedComp={false} title="Counter" comments="check console">
+    <Example hideParentTitle title="Counter" comments="check console">
       {/* Count {count} */}
       <button onClick={() => store.dispatch({ type: "decrement" })}>-</button>
       <button onClick={() => store.dispatch({ type: "increment" })}>+</button>

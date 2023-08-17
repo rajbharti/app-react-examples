@@ -1,14 +1,18 @@
-import { memo } from "react";
+import { memo, forwardRef } from "react";
 import clsx from "clsx";
 import Tags from "./Tags";
 import Comments from "./Comments";
+import { ExampleContext } from "../context";
+import { useExampleContext } from "src/hooks";
+
+type Ref = HTMLDivElement;
 
 interface Props {
-  isChild?: boolean;
-  hasNestedComp?: boolean;
   title?: string;
   comments?: string;
   className?: string;
+  hideParentTitle?: boolean;
+  showChildLabelling?: boolean;
   children: React.ReactNode;
 }
 
@@ -22,27 +26,25 @@ const Header = memo(function Header({ title }: HeaderProps) {
   );
 });
 
-export default function Example({
-  isChild,
-  hasNestedComp = true,
-  title,
-  comments,
-  className,
-  children,
-}: Props) {
-  const WithOrWithoutHeading = hasNestedComp ? (
-    <h4 className="text-lime-700">
-      {isChild ? "Child" : "Parent"}
-      {comments && <Comments>{comments}</Comments>}
-    </h4>
-  ) : (
-    comments && (
-      <>
-        <Comments noSpacing>{comments}</Comments>
-        <br />
-      </>
-    )
-  );
+export default forwardRef<Ref, Props>(function Example(
+  {
+    title,
+    comments,
+    className,
+    hideParentTitle = false,
+    showChildLabelling = false,
+    children,
+  },
+  ref
+) {
+  const level = useExampleContext();
+
+  const isChild = level > 1;
+  const childTitle =
+    "Child" +
+    (isChild && showChildLabelling
+      ? " " + String.fromCharCode(63 + level)
+      : "");
 
   const RenderParentOrChild = (
     <div
@@ -51,18 +53,35 @@ export default function Example({
         isChild ? "m-2.5 bg-white" : "bg-lime-100",
         className
       )}
+      ref={ref}
     >
-      {WithOrWithoutHeading}
+      {!hideParentTitle ? (
+        <h4 className="mb-2 text-lime-700">
+          {isChild ? childTitle : "Parent"}
+          {comments && <Comments>{comments}</Comments>}
+        </h4>
+      ) : (
+        comments && (
+          <>
+            <Comments>{comments}</Comments>
+            <br />
+          </>
+        )
+      )}
       {children}
     </div>
   );
 
-  return isChild ? (
-    RenderParentOrChild
-  ) : (
-    <section>
-      {title && <Header title={title} />}
-      {RenderParentOrChild}
-    </section>
+  return (
+    <ExampleContext.Provider value={level + 1}>
+      {!isChild ? (
+        <section>
+          {title && <Header title={title} />}
+          {RenderParentOrChild}
+        </section>
+      ) : (
+        RenderParentOrChild
+      )}
+    </ExampleContext.Provider>
   );
-}
+});

@@ -1,12 +1,40 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import Example from "src/components/Example";
 import ButtonToggle from "src/components/ButtonToggle";
 import { getTitleCase } from "src/utils";
 
-interface APIQuery {
+interface State {
   isLoading?: boolean;
   hasError?: boolean;
   data?: Response | null;
+}
+
+interface Action {
+  type: "API_START" | "API_END" | "API_ERROR" | "API_ABORT" | "API_RESET";
+  payload?: Response | null;
+}
+
+const initialState = {
+  isLoading: false,
+  hasError: false,
+  data: null,
+};
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case "API_START":
+      return { ...state, isLoading: true, hasError: false };
+    case "API_END":
+      return { ...state, isLoading: false, data: action.payload };
+    case "API_ERROR":
+      return { ...state, isLoading: false, hasError: true, data: null };
+    case "API_ABORT":
+      return { ...state, data: null };
+    case "API_RESET":
+      return initialState;
+    default:
+      return state;
+  }
 }
 
 const labels: readonly string[] = [
@@ -20,14 +48,9 @@ const labels: readonly string[] = [
 
 export default function UseEffectFetchAPIAndLifeCycleMethods() {
   const [resourceType, setResourceType] = useState<string | null>(null);
-  const [query, setQuery] = useState<APIQuery>({
-    isLoading: false,
-    hasError: false,
-    data: null,
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const dataElRef = useRef<HTMLDivElement>(null);
-  const abortControllerRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     console.log("onRender");
@@ -46,23 +69,13 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
   useEffect(() => {
     console.log("onMount and onUpdate"); // componentDidMount and componentDidUpdate
 
-    const el = dataElRef.current as HTMLDivElement;
-    if (el?.scrollHeight > el?.clientHeight) {
-      el?.scrollTo(0, 0);
-    }
+    const abortControllerRef = new AbortController();
+    const signal = abortControllerRef.signal;
 
     if (resourceType !== null) {
       (async () => {
-        setQuery((prevState) => ({
-          ...prevState,
-          isLoading: true,
-          hasError: false,
-        }));
-
         try {
-          abortControllerRef.current = new AbortController();
-          const signal = abortControllerRef.current?.signal;
-
+          dispatch({ type: "API_START" });
           let response = await fetch(
             `https://jsonplaceholder.typicode.com/${resourceType}`,
             {
@@ -70,65 +83,59 @@ export default function UseEffectFetchAPIAndLifeCycleMethods() {
             }
           );
           response = await response.json();
-          setQuery((prevState) => ({
-            ...prevState,
-            data: response,
-          }));
-        } catch (e: any) {
-          if (e.name === "AbortError") {
-            console.error(`request aborted for "${resourceType}"`);
+          dispatch({ type: "API_END", payload: response });
+
+          const el = dataElRef.current as HTMLDivElement;
+          if (el?.scrollHeight > el?.clientHeight) {
+            el?.scrollTo(0, 0);
           }
-
-          setQuery((prevState) => ({
-            ...prevState,
-            ...(e.name === "AbortError"
-              ? { data: null }
-              : { hasError: true, data: null }),
-          }));
+        } catch (e: unknown) {
+          if ((e as Error).name === "AbortError") {
+            console.error(`request aborted for "${resourceType}"`);
+            dispatch({ type: "API_ABORT" });
+          } else {
+            dispatch({ type: "API_ERROR" });
+          }
         }
-
-        setQuery((prevState) => ({
-          ...prevState,
-          isLoading: false,
-        }));
       })();
-    } else if (query.hasError) {
-      setQuery((prevState) => ({
-        ...prevState,
-        hasError: false,
-      }));
+    } else {
+      dispatch({ type: "API_RESET" });
     }
+
+    return () => {
+      console.log("onUnmount");
+      abortControllerRef.abort();
+    };
   }, [resourceType]);
 
   const handleClick = useCallback(function (label: string | null) {
-    abortControllerRef.current?.abort();
     setResourceType(label === null ? null : label.toLocaleLowerCase());
   }, []);
 
   return (
     <Example
-      hasNestedComp={false}
+      hideParentTitle
       title="Fetching APIs and Life Cycle Methods"
       comments="check console and network tab"
     >
       <ButtonToggle labels={labels} onClick={handleClick} />
 
-      {query.isLoading && (
+      {state.isLoading && resourceType && (
         <span className="mx-1 font-bold">
-          Loading {getTitleCase(resourceType as string)}
+          Loading {getTitleCase(resourceType)}
           ...
         </span>
       )}
 
-      {query.hasError && (
+      {state.hasError && (
         <div className="mt-2 text-red-500">
           Something went wrong. Try again!
         </div>
       )}
 
-      {query.data && resourceType && (
+      {state.data && resourceType && (
         <div className="mt-2 max-h-500px overflow-auto" ref={dataElRef}>
-          <pre>{JSON.stringify(query.data, null, 2)}</pre>
+          <pre>{JSON.stringify(state.data, null, 2)}</pre>
         </div>
       )}
     </Example>

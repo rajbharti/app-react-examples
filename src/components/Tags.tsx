@@ -1,7 +1,13 @@
 import clsx from "clsx";
-import { useTagsContext } from "../context";
+import { useTagsContext } from "../hooks";
 import type { Tag } from "../types";
 import { getSelectedTagCategory } from "src/utils";
+
+/* TODO:
+ - If a tag's component is clicked, not only show the tag's component(s)
+ but also the component which uses that tag in collapse manner
+ - In tags count display total ref count
+ */
 
 export default function Tags() {
   const { tags, activeTag, setActiveCategory, setActiveTag } = useTagsContext();
